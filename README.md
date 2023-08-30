@@ -1,4 +1,4 @@
-# Handyman User App
+# Fixit Customer App
 
 A new Flutter project.
 
