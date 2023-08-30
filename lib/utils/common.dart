@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:booking_system_flutter/component/app_common_dialog.dart';
 import 'package:booking_system_flutter/component/html_widget.dart';
@@ -21,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as custom_tabs;
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:html/parser.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -28,7 +30,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'constant.dart';
 
-Future<bool> get isIqonicProduct async => await getPackageName() == appPackageName;
+Future<bool> get isIqonicProduct async =>
+    await getPackageName() == appPackageName;
 
 bool get isUserTypeHandyman => appStore.userType == USER_TYPE_HANDYMAN;
 
@@ -44,19 +47,27 @@ bool get isLoginTypeApple => appStore.loginType == LOGIN_TYPE_APPLE;
 
 bool get isLoginTypeOTP => appStore.loginType == LOGIN_TYPE_OTP;
 
-ThemeMode get appThemeMode => appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light;
+ThemeMode get appThemeMode =>
+    appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light;
 
-bool get isCurrencyPositionLeft => getStringAsync(CURRENCY_POSITION, defaultValue: CURRENCY_POSITION_LEFT) == CURRENCY_POSITION_LEFT;
+bool get isCurrencyPositionLeft =>
+    getStringAsync(CURRENCY_POSITION, defaultValue: CURRENCY_POSITION_LEFT) ==
+    CURRENCY_POSITION_LEFT;
 
-bool get isCurrencyPositionRight => getStringAsync(CURRENCY_POSITION, defaultValue: CURRENCY_POSITION_LEFT) == CURRENCY_POSITION_RIGHT;
+bool get isCurrencyPositionRight =>
+    getStringAsync(CURRENCY_POSITION, defaultValue: CURRENCY_POSITION_LEFT) ==
+    CURRENCY_POSITION_RIGHT;
 
 bool get isRTL => RTL_LanguageS.contains(appStore.selectedLanguageCode);
 
 void initializeOneSignal() async {
   OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
 
-  await OneSignal.shared.setAppId(getStringAsync(ONESIGNAL_API_KEY)).then((value) async {
-    OneSignal.shared.setNotificationWillShowInForegroundHandler((OSNotificationReceivedEvent? event) {
+  await OneSignal.shared
+      .setAppId(getStringAsync(ONESIGNAL_API_KEY))
+      .then((value) async {
+    OneSignal.shared.setNotificationWillShowInForegroundHandler(
+        (OSNotificationReceivedEvent? event) {
       return event?.complete(event.notification);
     });
     OneSignal.shared.disablePush(false);
@@ -66,7 +77,9 @@ void initializeOneSignal() async {
     if (osDeviceState!.hasNotificationPermission) {
       updatePlayerId(playerId: osDeviceState.userId.validate());
     } else {
-      await OneSignal.shared.promptUserForPushNotificationPermission(fallbackToSettings: true).then((value) async {
+      await OneSignal.shared
+          .promptUserForPushNotificationPermission(fallbackToSettings: true)
+          .then((value) async {
         if (value) {
           updatePlayerId(playerId: osDeviceState.userId.validate());
         }
@@ -79,7 +92,8 @@ void initializeOneSignal() async {
   }).catchError(onError);
 }
 
-Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode.inAppWebView}) async {
+Future<void> commonLaunchUrl(String address,
+    {LaunchMode launchMode = LaunchMode.inAppWebView}) async {
   await launchUrl(Uri.parse(address), mode: launchMode).catchError((e) {
     toast('${language.invalidURL}: $address');
   });
@@ -88,15 +102,18 @@ Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode
 void launchCall(String? url) {
   if (url.validate().isNotEmpty) {
     if (isIOS)
-      commonLaunchUrl('tel://' + url!, launchMode: LaunchMode.externalApplication);
+      commonLaunchUrl('tel://' + url!,
+          launchMode: LaunchMode.externalApplication);
     else
-      commonLaunchUrl('tel:' + url!, launchMode: LaunchMode.externalApplication);
+      commonLaunchUrl('tel:' + url!,
+          launchMode: LaunchMode.externalApplication);
   }
 }
 
 void launchMap(String? url) {
   if (url.validate().isNotEmpty) {
-    commonLaunchUrl(GOOGLE_MAP_PREFIX + url!, launchMode: LaunchMode.externalApplication);
+    commonLaunchUrl(GOOGLE_MAP_PREFIX + url!,
+        launchMode: LaunchMode.externalApplication);
   }
 }
 
@@ -145,15 +162,41 @@ void launchUrlCustomTab(String? url) {
 
 List<LanguageDataModel> languageList() {
   return [
-    LanguageDataModel(id: 1, name: 'English', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'assets/flag/ic_us.png'),
-    LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi-IN', flag: 'assets/flag/ic_india.png'),
-    LanguageDataModel(id: 3, name: 'Arabic', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'assets/flag/ic_ar.png'),
-    LanguageDataModel(id: 4, name: 'French', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'assets/flag/ic_fr.png'),
-    LanguageDataModel(id: 5, name: 'German', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'assets/flag/ic_de.png'),
+    LanguageDataModel(
+        id: 1,
+        name: 'English',
+        languageCode: 'en',
+        fullLanguageCode: 'en-US',
+        flag: 'assets/flag/ic_us.png'),
+    LanguageDataModel(
+        id: 2,
+        name: 'Hindi',
+        languageCode: 'hi',
+        fullLanguageCode: 'hi-IN',
+        flag: 'assets/flag/ic_india.png'),
+    LanguageDataModel(
+        id: 3,
+        name: 'Arabic',
+        languageCode: 'ar',
+        fullLanguageCode: 'ar-AR',
+        flag: 'assets/flag/ic_ar.png'),
+    LanguageDataModel(
+        id: 4,
+        name: 'French',
+        languageCode: 'fr',
+        fullLanguageCode: 'fr-FR',
+        flag: 'assets/flag/ic_fr.png'),
+    LanguageDataModel(
+        id: 5,
+        name: 'German',
+        languageCode: 'de',
+        fullLanguageCode: 'de-DE',
+        flag: 'assets/flag/ic_de.png'),
   ];
 }
 
-InputDecoration inputDecoration(BuildContext context, {Widget? prefixIcon, String? labelText, double? borderRadius}) {
+InputDecoration inputDecoration(BuildContext context,
+    {Widget? prefixIcon, String? labelText, double? borderRadius}) {
   return InputDecoration(
     contentPadding: EdgeInsets.only(left: 12, bottom: 10, top: 10, right: 10),
     labelText: labelText,
@@ -195,9 +238,14 @@ String parseHtmlString(String? htmlString) {
   return parse(parse(htmlString).body!.text).documentElement!.text;
 }
 
-String formatDate(String? dateTime, {String format = DATE_FORMAT_1, bool isFromMicrosecondsSinceEpoch = false, bool isLanguageNeeded = true}) {
+String formatDate(String? dateTime,
+    {String format = DATE_FORMAT_1,
+    bool isFromMicrosecondsSinceEpoch = false,
+    bool isLanguageNeeded = true}) {
   final languageCode = isLanguageNeeded ? appStore.selectedLanguageCode : null;
-  final parsedDateTime = isFromMicrosecondsSinceEpoch ? DateTime.fromMicrosecondsSinceEpoch(dateTime.validate().toInt() * 1000) : DateTime.parse(dateTime.validate());
+  final parsedDateTime = isFromMicrosecondsSinceEpoch
+      ? DateTime.fromMicrosecondsSinceEpoch(dateTime.validate().toInt() * 1000)
+      : DateTime.parse(dateTime.validate());
 
   return DateFormat(format, languageCode).format(parsedDateTime);
 }
@@ -270,9 +318,12 @@ String calculateTimer(int secTime) {
 
   seconds = secTime - (hour * 3600) - (minute * 60);
 
-  String hourLeft = hour.toString().length < 2 ? "0" + hour.toString() : hour.toString();
+  String hourLeft =
+      hour.toString().length < 2 ? "0" + hour.toString() : hour.toString();
 
-  String minuteLeft = minute.toString().length < 2 ? "0" + minute.toString() : minute.toString();
+  String minuteLeft = minute.toString().length < 2
+      ? "0" + minute.toString()
+      : minute.toString();
 
   String minutes = minuteLeft == '00' ? '01' : minuteLeft;
 
@@ -286,11 +337,13 @@ String calculateTimer(int secTime) {
 String getPaymentStatusText(String? status, String? method) {
   if (status!.isEmpty) {
     return language.lblPending;
-  } else if (status == SERVICE_PAYMENT_STATUS_PAID || status == PENDING_BY_ADMIN) {
+  } else if (status == SERVICE_PAYMENT_STATUS_PAID ||
+      status == PENDING_BY_ADMIN) {
     return language.paid;
   } else if (status == SERVICE_PAYMENT_STATUS_ADVANCE_PAID) {
     return language.advancePaid;
-  } else if (status == SERVICE_PAYMENT_STATUS_PENDING && method == PAYMENT_METHOD_COD) {
+  } else if (status == SERVICE_PAYMENT_STATUS_PENDING &&
+      method == PAYMENT_METHOD_COD) {
     return language.pendingApproval;
   } else if (status == SERVICE_PAYMENT_STATUS_PENDING) {
     return language.lblPending;
@@ -319,22 +372,29 @@ Future<FirebaseRemoteConfig> setupFirebaseRemoteConfig() async {
   final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
 
   try {
-    remoteConfig.setConfigSettings(RemoteConfigSettings(fetchTimeout: Duration.zero, minimumFetchInterval: Duration.zero));
+    remoteConfig.setConfigSettings(RemoteConfigSettings(
+        fetchTimeout: Duration.zero, minimumFetchInterval: Duration.zero));
     await remoteConfig.fetch();
     await remoteConfig.fetchAndActivate();
   } catch (e) {
     throw language.firebaseRemoteCannotBe;
   }
-  if (remoteConfig.getString(USER_CHANGE_LOG).isNotEmpty) await compareValuesInSharedPreference(USER_CHANGE_LOG, remoteConfig.getString(USER_CHANGE_LOG));
+  if (remoteConfig.getString(USER_CHANGE_LOG).isNotEmpty)
+    await compareValuesInSharedPreference(
+        USER_CHANGE_LOG, remoteConfig.getString(USER_CHANGE_LOG));
   if (remoteConfig.getString(USER_CHANGE_LOG).validate().isNotEmpty) {
-    remoteConfigDataModel = RemoteConfigDataModel.fromJson(jsonDecode(remoteConfig.getString(USER_CHANGE_LOG)));
+    remoteConfigDataModel = RemoteConfigDataModel.fromJson(
+        jsonDecode(remoteConfig.getString(USER_CHANGE_LOG)));
 
-    await compareValuesInSharedPreference(IN_MAINTENANCE_MODE, remoteConfigDataModel.inMaintenanceMode);
+    await compareValuesInSharedPreference(
+        IN_MAINTENANCE_MODE, remoteConfigDataModel.inMaintenanceMode);
 
     if (isIOS) {
-      await compareValuesInSharedPreference(HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_APP_STORE_REVIEW));
+      await compareValuesInSharedPreference(
+          HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_APP_STORE_REVIEW));
     } else if (isAndroid) {
-      await compareValuesInSharedPreference(HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_PLAY_STORE_REVIEW));
+      await compareValuesInSharedPreference(
+          HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_PLAY_STORE_REVIEW));
     }
   }
 
@@ -379,9 +439,15 @@ void showNewUpdateDialog(BuildContext context) async {
 Future<void> showForceUpdateDialog(BuildContext context) async {
   if (getBoolAsync(UPDATE_NOTIFY, defaultValue: true)) {
     getPackageInfo().then((value) {
-      if (isAndroid && remoteConfigDataModel.android != null && remoteConfigDataModel.android!.versionCode.validate().toInt() > value.versionCode.validate().toInt()) {
+      if (isAndroid &&
+          remoteConfigDataModel.android != null &&
+          remoteConfigDataModel.android!.versionCode.validate().toInt() >
+              value.versionCode.validate().toInt()) {
         showNewUpdateDialog(context);
-      } else if (isIOS && remoteConfigDataModel.iOS != null && remoteConfigDataModel.iOS!.versionCode.validate() != value.versionCode.validate()) {
+      } else if (isIOS &&
+          remoteConfigDataModel.iOS != null &&
+          remoteConfigDataModel.iOS!.versionCode.validate() !=
+              value.versionCode.validate()) {
         showNewUpdateDialog(context);
       }
     });
@@ -423,4 +489,15 @@ Future<bool> compareValuesInSharedPreference(String key, dynamic value) async {
     await setValue(key, value);
   }
   return status;
+}
+
+Future<File> getCameraImage({bool isCamera = true}) async {
+  final pickedImage = await ImagePicker()
+      .pickImage(source: isCamera ? ImageSource.camera : ImageSource.gallery);
+  return File(pickedImage!.path);
+}
+
+Future<List<File>> getMultipleImageSource({bool isCamera = true}) async {
+  final pickedImage = await ImagePicker().pickMultiImage();
+  return pickedImage.map((e) => File(e.path)).toList();
 }

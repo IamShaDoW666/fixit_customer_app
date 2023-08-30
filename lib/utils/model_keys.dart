@@ -9,6 +9,7 @@ class CommonKeys {
   static String date = 'date';
   static String status = 'status';
   static String dateTime = 'datetime';
+  static String type = 'type';
   static String txnId = "txn_id";
   static String paymentStatus = "payment_status";
   static String paymentMethod = "payment_type";
