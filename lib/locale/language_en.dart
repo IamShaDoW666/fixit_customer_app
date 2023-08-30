@@ -983,6 +983,9 @@ class LanguageEn extends BaseLanguage {
   String get lblStep3 => "Step 3";
 
   @override
+  String get lblStep4 => "Step 4";
+
+  @override
   String get lblAvailableOnTheseDays => "Available On These Days";
 
   @override

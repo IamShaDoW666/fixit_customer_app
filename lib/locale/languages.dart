@@ -274,6 +274,8 @@ abstract class BaseLanguage {
 
   String get lblStep2;
 
+  String get lblStep4;
+
   String get lblBookingID;
 
   String get lblDate;

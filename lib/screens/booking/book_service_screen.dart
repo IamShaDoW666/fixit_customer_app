@@ -41,17 +41,25 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
   void init() async {
     stepsList = [
       CustomStep(
-        title: language.lblStep1,
+        title: widget.data.serviceDetail!.isSlotAvailable
+            ? language.lblStep2
+            : language.lblStep1,
         page: BookingServiceStep2(
           data: widget.data,
           isSlotAvailable: !widget.data.serviceDetail!.isSlotAvailable,
         ),
       ),
       CustomStep(
-          title: language.lblStep2,
-          page: BookingServiceImage(data: widget.data, isSlotAvailable: !widget.data.serviceDetail!.isSlotAvailable)),
+          title: widget.data.serviceDetail!.isSlotAvailable
+              ? language.lblStep3
+              : language.lblStep2,
+          page: BookingServiceImage(
+              data: widget.data,
+              isSlotAvailable: !widget.data.serviceDetail!.isSlotAvailable)),
       CustomStep(
-        title: language.lblStep3,
+        title: widget.data.serviceDetail!.isSlotAvailable
+            ? language.lblStep4
+            : language.lblStep3,
         page: BookingServiceStep3(
             data: widget.data,
             selectedPackage:

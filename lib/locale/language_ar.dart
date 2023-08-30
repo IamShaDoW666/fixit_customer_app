@@ -287,7 +287,8 @@ class LanguageAr extends BaseLanguage {
   String get msgForLocationOn => "معدل Handymanman.";
 
   @override
-  String get msgForLocationOff => "الموقع قيد التشغيل. يمكن أن يستطيع استخدام تلك الخدمات المتوفرة فقط في موقعك الحالي";
+  String get msgForLocationOff =>
+      "الموقع قيد التشغيل. يمكن أن يستطيع استخدام تلك الخدمات المتوفرة فقط في موقعك الحالي";
 
   @override
   String get lblEnterPhnNumber => "أدخل رقم هاتفك";
@@ -314,10 +315,12 @@ class LanguageAr extends BaseLanguage {
   String get lblAudio => "صوتي";
 
   @override
-  String get lblChangePwdTitle => "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور السابقة المستخدمة";
+  String get lblChangePwdTitle =>
+      "يجب أن تكون كلمة المرور الجديدة مختلفة عن كلمة المرور السابقة المستخدمة";
 
   @override
-  String get lblForgotPwdSubtitle => "سيتم إرسال رابط إعادة تعيين كلمة المرور إلى عنوان البريد الإلكتروني الذي تم إدخاله أعلاه";
+  String get lblForgotPwdSubtitle =>
+      "سيتم إرسال رابط إعادة تعيين كلمة المرور إلى عنوان البريد الإلكتروني الذي تم إدخاله أعلاه";
 
   @override
   String get lblLoginTitle => "مرحبا مجددا ";
@@ -425,13 +428,15 @@ class LanguageAr extends BaseLanguage {
   String get lblDeleteReview => "حذف التقييم";
 
   @override
-  String get lblConfirmReviewSubTitle => "هل أنت متأكد أنك تريد تاكيد هذه المراجعة؟";
+  String get lblConfirmReviewSubTitle =>
+      "هل أنت متأكد أنك تريد تاكيد هذه المراجعة؟";
 
   @override
   String get lblConfirmService => "هل أنت متأكد من أنك تريد تاكيد هذه الخدمة؟";
 
   @override
-  String get lblConFirmResumeService => "هل أنت متأكد أنك تريد استئناف هذه الخدمة؟";
+  String get lblConFirmResumeService =>
+      "هل أنت متأكد أنك تريد استئناف هذه الخدمة؟";
 
   @override
   String get lblEndServicesMsg => "هل ترغب في إنهاء هذه الخدمة؟";
@@ -554,7 +559,8 @@ class LanguageAr extends BaseLanguage {
   String get lblWelcomeToHandyman => "مرحبا بكم في Handymanman.";
 
   @override
-  String get lblWalkThroughSubTitle => "خدمة Handyman - تطبيق خدمات المنزل عند الطلب مع حل كامل";
+  String get lblWalkThroughSubTitle =>
+      "خدمة Handyman - تطبيق خدمات المنزل عند الطلب مع حل كامل";
 
   @override
   String get textHandyman => "Handyman";
@@ -614,7 +620,8 @@ class LanguageAr extends BaseLanguage {
   String get lblTermsOfService => "شروط الخدمة";
 
   @override
-  String get lblWalkThrough0 => "خدمة Handyman - تطبيق الخدمات المنزلية عند الطلب مع حل كامل";
+  String get lblWalkThrough0 =>
+      "خدمة Handyman - تطبيق الخدمات المنزلية عند الطلب مع حل كامل";
 
   @override
   String get lblServiceTotalTime => "إجمالي الخدمة";
@@ -686,7 +693,8 @@ class LanguageAr extends BaseLanguage {
   String get confirmationRequestTxt => "هل أنت متأكد من أن تنفيذ هذا الإجراء؟";
 
   @override
-  String get lblDeleteAccountConformation => "سيتم حذف حسابك بشكل دائم. لن تتم استعادة بياناتك مرة أخرى.";
+  String get lblDeleteAccountConformation =>
+      "سيتم حذف حسابك بشكل دائم. لن تتم استعادة بياناتك مرة أخرى.";
 
   @override
   String get lblAutoSliderStatus => "حالة التمرير التلقائي";
@@ -731,7 +739,8 @@ class LanguageAr extends BaseLanguage {
   String get lblFree => "غير مدفوع الأجر";
 
   @override
-  String get lblAppleSignInNotAvailable => "تسجيل الدخول باستخدام Apple غير متوفرة لجهازك";
+  String get lblAppleSignInNotAvailable =>
+      "تسجيل الدخول باستخدام Apple غير متوفرة لجهازك";
 
   @override
   String get lblTotalExtraCharges => "إجمالي الرسوم الإضافية";
@@ -794,7 +803,8 @@ class LanguageAr extends BaseLanguage {
   String get noNotifications => "لا إشعارات";
 
   @override
-  String get noNotificationsSubTitle => "سنقوم بإعلامك بمجرد أن يكون لدينا شيء لك";
+  String get noNotificationsSubTitle =>
+      "سنقوم بإعلامك بمجرد أن يكون لدينا شيء لك";
 
   @override
   String get noFavouriteSubTitle => "ستظهر خدماتك المفضلة هنا";
@@ -815,7 +825,8 @@ class LanguageAr extends BaseLanguage {
   String get requiredAfterCountryCode => 'مطلوب بعد رمز البلد';
 
   @override
-  String get selectedOtherBookingTime => 'تم تمرير وقت الحجز المحدد بالفعل. الرجاء تحديد وقت آخر.';
+  String get selectedOtherBookingTime =>
+      'تم تمرير وقت الحجز المحدد بالفعل. الرجاء تحديد وقت آخر.';
 
   @override
   String get myServices => 'خدماتي';
@@ -842,7 +853,8 @@ class LanguageAr extends BaseLanguage {
   String get save => 'حفظ';
 
   @override
-  String get createPostJobWithoutSelectService => 'لا يمكنك نشر إنشاء وظيفة دون اختيار الخدمة';
+  String get createPostJobWithoutSelectService =>
+      'لا يمكنك نشر إنشاء وظيفة دون اختيار الخدمة';
 
   @override
   String get selectCategory => 'اختر الفئة';
@@ -851,7 +863,8 @@ class LanguageAr extends BaseLanguage {
   String get pleaseAddImage => 'الرجاء إضافة الصورة';
 
   @override
-  String get selectedBookingTimeIsAlreadyPassed => 'تم تمرير وقت الحجز المحدد بالفعل. الرجاء تحديد وقت آخر.';
+  String get selectedBookingTimeIsAlreadyPassed =>
+      'تم تمرير وقت الحجز المحدد بالفعل. الرجاء تحديد وقت آخر.';
 
   @override
   String get jobPrice => 'سعر الوظيفة';
@@ -887,7 +900,8 @@ class LanguageAr extends BaseLanguage {
   String get noPostJobFound => 'لم يتم العثور على وظيفة بعد';
 
   @override
-  String get noPostJobFoundSubtitle => 'عندما تنشر وظيفتك ، سيتم إخطار كل مزود ، ويمكنك اختيار مزودك المطلوب لإنجاز المهمة.';
+  String get noPostJobFoundSubtitle =>
+      'عندما تنشر وظيفتك ، سيتم إخطار كل مزود ، ويمكنك اختيار مزودك المطلوب لإنجاز المهمة.';
 
   @override
   String get pleaseEnterValidOTP => 'الرجاء إدخال OTP صالح';
@@ -899,7 +913,8 @@ class LanguageAr extends BaseLanguage {
   String get sendingOTP => 'إرسال OTP';
 
   @override
-  String get pleaseSelectDifferentSlotThenPrevious => '""الرجاء تحديد اوقات عمل مختلفة ثم السابق';
+  String get pleaseSelectDifferentSlotThenPrevious =>
+      '""الرجاء تحديد اوقات عمل مختلفة ثم السابق';
 
   @override
   String get pleaseSelectTheSlotsFirst => 'الرجاء تحديد اوقات العمل أولاً';
@@ -926,19 +941,23 @@ class LanguageAr extends BaseLanguage {
   String get clearChat => 'دردشة واضحة';
 
   @override
-  String get jobRequestSubtitle => 'خدمتك غير موجودة في النظام؟ لا تقلق ، يمكنك نشر متطلباتك.';
+  String get jobRequestSubtitle =>
+      'خدمتك غير موجودة في النظام؟ لا تقلق ، يمكنك نشر متطلباتك.';
 
   @override
   String get verified => 'تم التحقق';
 
   @override
-  String get theEnteredCodeIsInvalidPleaseTryAgain => 'الرمز الذي تم إدخاله غير صالح ، يرجى المحاولة مرة أخرى';
+  String get theEnteredCodeIsInvalidPleaseTryAgain =>
+      'الرمز الذي تم إدخاله غير صالح ، يرجى المحاولة مرة أخرى';
 
   @override
-  String get otpCodeIsSentToYourMobileNumber => 'تم إرسال رمز OTP إلى رقم هاتفك المحمول';
+  String get otpCodeIsSentToYourMobileNumber =>
+      'تم إرسال رمز OTP إلى رقم هاتفك المحمول';
 
   @override
-  String get yourPaymentFailedPleaseTryAgain => 'فشلت دفعتك ، يرجى المحاولة مرة أخرى';
+  String get yourPaymentFailedPleaseTryAgain =>
+      'فشلت دفعتك ، يرجى المحاولة مرة أخرى';
 
   @override
   String get yourPaymentHasBeenMadeSuccessfully => 'تم سداد دفعتك بنجاح';
@@ -948,6 +967,9 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get lblStep3 => "الخطوه 3";
+
+  @override
+  String get lblStep4 => "الخطوه 4";
 
   @override
   String get lblAvailableOnTheseDays => "متاح في هذه الأيام";
@@ -968,7 +990,8 @@ class LanguageAr extends BaseLanguage {
   String get package => 'حزمة';
 
   @override
-  String get frequentlyBoughtTogether => 'اشترى في كثير من الأحيان جنبا إلى جنب';
+  String get frequentlyBoughtTogether =>
+      'اشترى في كثير من الأحيان جنبا إلى جنب';
 
   @override
   String get endOn => 'ينتهي';
@@ -986,7 +1009,8 @@ class LanguageAr extends BaseLanguage {
   String get lblInvalidTransaction => 'المعاملة غير صالحة';
 
   @override
-  String get getTheseServiceWithThisPackage => 'ستحصل على هذه الخدمات مع هذه الحزمة';
+  String get getTheseServiceWithThisPackage =>
+      'ستحصل على هذه الخدمات مع هذه الحزمة';
 
   @override
   String get lblNotValidUser => 'مستخدم غير صحيح';
@@ -1031,7 +1055,8 @@ class LanguageAr extends BaseLanguage {
   String get lblLocationPermissionDenied => 'تم رفض أذونات استخدام الموقع.';
 
   @override
-  String get lblLocationPermissionDeniedPermanently => 'يتم رفض أذونات الموقع بشكل دائم ، لا يمكننا طلب الأذونات.';
+  String get lblLocationPermissionDeniedPermanently =>
+      'يتم رفض أذونات الموقع بشكل دائم ، لا يمكننا طلب الأذونات.';
 
   @override
   String get lblEnableLocation => 'يرجى التأكد من تمكين خدمات الموقع.';
@@ -1046,7 +1071,8 @@ class LanguageAr extends BaseLanguage {
   String get lblTokenExpired => 'انتهت صلاحية الرمز';
 
   @override
-  String get lblConfirmationForDeleteMsg => 'هل أنت متأكد من أنك تريد حذف الرسالة؟';
+  String get lblConfirmationForDeleteMsg =>
+      'هل أنت متأكد من أنك تريد حذف الرسالة؟';
 
   @override
   String get favouriteProvider => 'المزود المفضل';
@@ -1079,10 +1105,12 @@ class LanguageAr extends BaseLanguage {
   String get requestInvoice => 'طلب الفاتورة';
 
   @override
-  String get invoiceSubTitle => 'أدخل عنوان البريد الإلكتروني حيث ترغب في تلقي فاتورتك';
+  String get invoiceSubTitle =>
+      'أدخل عنوان البريد الإلكتروني حيث ترغب في تلقي فاتورتك';
 
   @override
-  String get sentInvoiceText => 'يرجى التحقق من بريدك الإلكتروني الذي الرسلنا اليه الفاتورة.';
+  String get sentInvoiceText =>
+      'يرجى التحقق من بريدك الإلكتروني الذي الرسلنا اليه الفاتورة.';
 
   @override
   String get send => 'ارسال';
@@ -1130,7 +1158,8 @@ class LanguageAr extends BaseLanguage {
   String get advancePaid => 'دفع مسبقا';
 
   @override
-  String get insufficientBalanceMessage => 'لا يوجد رصيد كافي في محفظتك. الرجاء اختيار طريقة أخرى.';
+  String get insufficientBalanceMessage =>
+      'لا يوجد رصيد كافي في محفظتك. الرجاء اختيار طريقة أخرى.';
 
   @override
   String get cinetPayNotSupportedMessage => 'CinetPay غير مدعوم من عملاتك';
@@ -1244,10 +1273,12 @@ class LanguageAr extends BaseLanguage {
   String get reload => 'إعادة تحميل';
 
   @override
-  String get lblStripeTestCredential => 'لا يمكن اختبار بيانات الاعتماد أكثر من 500';
+  String get lblStripeTestCredential =>
+      'لا يمكن اختبار بيانات الاعتماد أكثر من 500';
 
   @override
-  String get noDataFoundInFilter => 'اختر أفضل معايير البحث للحصول على أفضل النتائج';
+  String get noDataFoundInFilter =>
+      'اختر أفضل معايير البحث للحصول على أفضل النتائج';
 
   @override
   String get addYourCountryCode => 'أضف رمز بلدك';
@@ -1259,10 +1290,12 @@ class LanguageAr extends BaseLanguage {
   String get couponCantApplied => 'لا يمكن تطبيق هذه القسيمة';
 
   @override
-  String get priceAmountValidationMessage => 'يجب أن يكون مبلغ السعر مبشرة من 0';
+  String get priceAmountValidationMessage =>
+      'يجب أن يكون مبلغ السعر مبشرة من 0';
 
   @override
-  String get pleaseWaitWhileWeLoadChatDetails => 'يرجى الانتظار أثناء تحميل تفاصيل الدردشة';
+  String get pleaseWaitWhileWeLoadChatDetails =>
+      'يرجى الانتظار أثناء تحميل تفاصيل الدردشة';
 
   @override
   String get isNotAvailableForChat => 'غير متوفر للدردشة';
@@ -1280,7 +1313,8 @@ class LanguageAr extends BaseLanguage {
   String get providerRemovedFromFavourite => 'تم إزالته من القائمة المفضلة';
 
   @override
-  String get provideValidCurrentPasswordMessage => 'يجب عليك توفير كلمة مرور الحالية صالحة';
+  String get provideValidCurrentPasswordMessage =>
+      'يجب عليك توفير كلمة مرور الحالية صالحة';
 
   @override
   String get copied => 'نسخ';
@@ -1310,7 +1344,8 @@ class LanguageAr extends BaseLanguage {
   String get paymentMethod => 'طريقة الدفع او السداد';
 
   @override
-  String get selectYourPaymentMethodToAddBalance => 'حدد طريقة الدفع الخاصة بك لإضافة رصيد';
+  String get selectYourPaymentMethodToAddBalance =>
+      'حدد طريقة الدفع الخاصة بك لإضافة رصيد';
 
   @override
   String get proceedToTopUp => 'انتقل إلى أعلى';
@@ -1319,10 +1354,12 @@ class LanguageAr extends BaseLanguage {
   String get serviceAddedToFavourite => 'تمت إضافة الخدمة إلى القائمة المفضلة';
 
   @override
-  String get serviceRemovedFromFavourite => 'تمت إزالة الخدمة من القائمة المفضلة';
+  String get serviceRemovedFromFavourite =>
+      'تمت إزالة الخدمة من القائمة المفضلة';
 
   @override
-  String get firebaseRemoteCannotBe => 'لا يمكن توصيل جهاز التحكم عن بُعد Firebase';
+  String get firebaseRemoteCannotBe =>
+      'لا يمكن توصيل جهاز التحكم عن بُعد Firebase';
 
   @override
   String get search => 'يبحث';
@@ -1331,10 +1368,12 @@ class LanguageAr extends BaseLanguage {
   String get close => 'يغلق';
 
   @override
-  String get totalAmountShouldBeMoreThan => 'يجب أن يكون المبلغ الإجمالي أكثر من';
+  String get totalAmountShouldBeMoreThan =>
+      'يجب أن يكون المبلغ الإجمالي أكثر من';
 
   @override
-  String get totalAmountShouldBeLessThan => 'يجب أن يكون المبلغ الإجمالي أقل من';
+  String get totalAmountShouldBeLessThan =>
+      'يجب أن يكون المبلغ الإجمالي أقل من';
 
   @override
   String get doYouWantToTopUpYourWallet => 'هل تريد أن تسبق محفظتك الآن؟';
@@ -1355,7 +1394,8 @@ class LanguageAr extends BaseLanguage {
   String get appliedTaxes => 'الضرائب التطبيقية';
 
   @override
-  String get accessDeniedContactYourAdmin => 'تم الرفض. اتصل بمسؤولك للحصول على المساعدة.';
+  String get accessDeniedContactYourAdmin =>
+      'تم الرفض. اتصل بمسؤولك للحصول على المساعدة.';
 
   @override
   String get yourWalletIsUpdated => 'تم تحديث محفظتك!';
