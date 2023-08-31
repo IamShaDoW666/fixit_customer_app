@@ -118,7 +118,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           ),
         ),
         16.height,
-        Text(language.lblSelectRating, style: secondaryTextStyle(size: 10)),
+        Text('Images are required!', style: secondaryTextStyle(size: 10)),
         16.height,
         HorizontalList(
           itemCount: imageFiles.length,

@@ -73,7 +73,7 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
                       style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                   20.height,
                   Text("Kindly upload images related to the service",
-                      style: TextStyle(fontSize: 12)),
+                      style: primaryTextStyle(size: 12)),
                   20.height,
                   Padding(
                       padding: EdgeInsets.all(16),
