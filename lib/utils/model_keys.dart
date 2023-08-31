@@ -45,6 +45,8 @@ class BookingServiceKeys {
   static String userPostJob = 'user_post_job';
   static String type = 'type';
   static String bookingPackage = 'booking_package';
+  static String attachmentCount = "attachment_count";
+  static String bookingAttachment = 'booking_attachment_';
 }
 
 class CouponKeys {

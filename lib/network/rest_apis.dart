@@ -36,6 +36,7 @@ import 'package:booking_system_flutter/utils/model_keys.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -761,9 +762,38 @@ Future<BaseResponseModel> updateBooking(Map request) async {
 Future<BookingDetailResponse> saveBooking(Map request) async {
   var res = await handleResponse(await buildHttpResponse('booking-save',
       request: request, method: HttpMethodType.POST));
-
   return await getBookingDetail({
     CommonKeys.bookingId: res[CommonKeys.bookingId],
+    CommonKeys.customerId: appStore.userId,
+  });
+}
+
+Future<BookingDetailResponse> addBookingMultiPart(
+    {required Map<String, dynamic> request, List<File>? imageList}) async {
+  MultipartRequest multiPartRequest = await getMultiPartRequest('booking-save');
+
+  multiPartRequest.fields.addAll(await getMultipartFields(val: request));
+
+  if (imageList.validate().isNotEmpty) {
+    multiPartRequest.files.addAll(await getMultipartImages(
+        files: imageList.validate(),
+        name: BookingServiceKeys.bookingAttachment));
+    multiPartRequest.fields[BookingServiceKeys.attachmentCount] =
+        imageList.validate().length.toString();
+  }
+
+  log("${multiPartRequest.fields}");
+
+  multiPartRequest.headers.addAll(buildHeaderTokens());
+
+  log("Multi Part Request : ${jsonEncode(multiPartRequest.fields)} ${multiPartRequest.files.map((e) => e.field + ": " + e.filename.validate())}");
+
+  appStore.setLoading(true);
+  var response = await handleResponse(
+      await http.Response.fromStream(await multiPartRequest.send()));
+
+  return await getBookingDetail({
+    CommonKeys.bookingId: response[CommonKeys.bookingId],
     CommonKeys.customerId: appStore.userId,
   });
 }
@@ -1104,6 +1134,9 @@ Future<Map<String, String>> getMultipartFields(
   Map<String, String> data = {};
 
   val.forEach((key, value) {
+    if (value == null) {
+      return;
+    }
     data[key] = '$value';
   });
 

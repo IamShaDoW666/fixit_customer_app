@@ -46,8 +46,11 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
   init() async {
     if (widget.data.serviceDetail!.dateTimeVal != null) {
       if (widget.isSlotAvailable.validate()) {
-        dateTimeCont.text = formatDate(widget.data.serviceDetail!.dateTimeVal.validate(), format: DATE_FORMAT_1);
-        selectedDate = DateTime.parse(widget.data.serviceDetail!.dateTimeVal.validate());
+        dateTimeCont.text = formatDate(
+            widget.data.serviceDetail!.dateTimeVal.validate(),
+            format: DATE_FORMAT_1);
+        selectedDate =
+            DateTime.parse(widget.data.serviceDetail!.dateTimeVal.validate());
         pickedTime = TimeOfDay.fromDateTime(selectedDate!);
       }
       addressCont.text = widget.data.serviceDetail!.address.validate();
@@ -79,23 +82,29 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
           confirmText: language.lblOk,
           builder: (_, child) {
             return Theme(
-              data: appStore.isDarkMode ? ThemeData.dark() : AppTheme.lightTheme(),
+              data: appStore.isDarkMode
+                  ? ThemeData.dark()
+                  : AppTheme.lightTheme(),
               child: child!,
             );
           },
         ).then((time) {
           if (time != null) {
-            finalDate = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+            finalDate = DateTime(
+                date.year, date.month, date.day, time.hour, time.minute);
 
             DateTime now = DateTime.now().subtract(1.minutes);
-            if (date.isToday && finalDate!.millisecondsSinceEpoch < now.millisecondsSinceEpoch) {
+            if (date.isToday &&
+                finalDate!.millisecondsSinceEpoch <
+                    now.millisecondsSinceEpoch) {
               return toast(language.selectedOtherBookingTime);
             }
 
             selectedDate = date;
             pickedTime = time;
             widget.data.serviceDetail!.dateTimeVal = finalDate.toString();
-            dateTimeCont.text = "${formatDate(selectedDate.toString(), format: DATE_FORMAT_3)} ${pickedTime!.format(context).toString()}";
+            dateTimeCont.text =
+                "${formatDate(selectedDate.toString(), format: DATE_FORMAT_3)} ${pickedTime!.format(context).toString()}";
           }
         }).catchError((e) {
           toast(e.toString());
@@ -109,7 +118,10 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
       await setValue(PERMISSION_STATUS, value);
 
       if (value) {
-        String? res = await MapScreen(latitude: getDoubleAsync(LATITUDE), latLong: getDoubleAsync(LONGITUDE)).launch(context);
+        String? res = await MapScreen(
+                latitude: getDoubleAsync(LATITUDE),
+                latLong: getDoubleAsync(LONGITUDE))
+            .launch(context);
 
         if (res != null) {
           addressCont.text = res;
@@ -159,7 +171,8 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 8.height,
-                Text(language.lblStepper1Title, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                Text(language.lblStepper1Title,
+                    style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                 20.height,
                 Form(
                   key: formKey,
@@ -174,21 +187,27 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(language.lblDateAndTime, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                              Text(language.lblDateAndTime,
+                                  style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                               8.height,
                               AppTextField(
                                 textFieldType: TextFieldType.OTHER,
                                 controller: dateTimeCont,
                                 isValidationRequired: true,
                                 validator: (value) {
-                                  if (value!.isEmpty) return language.requiredText;
+                                  if (value!.isEmpty)
+                                    return language.requiredText;
                                   return null;
                                 },
                                 readOnly: true,
                                 onTap: () {
                                   selectDateAndTime(context);
                                 },
-                                decoration: inputDecoration(context, prefixIcon: ic_calendar.iconImage(size: 10).paddingAll(14)).copyWith(
+                                decoration: inputDecoration(context,
+                                        prefixIcon: ic_calendar
+                                            .iconImage(size: 10)
+                                            .paddingAll(14))
+                                    .copyWith(
                                   fillColor: context.scaffoldBackgroundColor,
                                   filled: true,
                                   hintText: language.chooseDateAndTime,
@@ -198,7 +217,8 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                               20.height,
                             ],
                           ),
-                        Text(language.lblYourAddress, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                        Text(language.lblYourAddress,
+                            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                         8.height,
                         AppTextField(
                           textFieldType: TextFieldType.MULTILINE,
@@ -214,7 +234,9 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                ic_location.iconImage(size: 22).paddingOnly(top: 8),
+                                ic_location
+                                    .iconImage(size: 22)
+                                    .paddingOnly(top: 8),
                               ],
                             ),
                           ).copyWith(
@@ -229,19 +251,25 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                              child: Text(language.lblChooseFromMap, style: boldTextStyle(color: primaryColor, size: 13)),
+                              child: Text(language.lblChooseFromMap,
+                                  style: boldTextStyle(
+                                      color: primaryColor, size: 13)),
                               onPressed: () {
                                 _handleSetLocationClick();
                               },
                             ).flexible(),
                             TextButton(
                               onPressed: _handleCurrentLocationClick,
-                              child: Text(language.lblUseCurrentLocation, style: boldTextStyle(color: primaryColor, size: 13),textAlign: TextAlign.right),
+                              child: Text(language.lblUseCurrentLocation,
+                                  style: boldTextStyle(
+                                      color: primaryColor, size: 13),
+                                  textAlign: TextAlign.right),
                             ).flexible(),
                           ],
                         ),
                         16.height,
-                        Text("${language.hintDescription}:", style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                        Text("${language.hintDescription}:",
+                            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                         8.height,
                         AppTextField(
                           textFieldType: TextFieldType.MULTILINE,
@@ -275,9 +303,12 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
               children: [
                 if (!widget.isSlotAvailable.validate())
                   AppButton(
-                    shapeBorder: RoundedRectangleBorder(borderRadius: radius(), side: BorderSide(color: context.primaryColor)),
+                    shapeBorder: RoundedRectangleBorder(
+                        borderRadius: radius(),
+                        side: BorderSide(color: context.primaryColor)),
                     onTap: () {
-                      customStepperController.previousPage(duration: 200.milliseconds, curve: Curves.easeInOut);
+                      customStepperController.previousPage(
+                          duration: 200.milliseconds, curve: Curves.easeInOut);
                     },
                     text: language.lblPrevious,
                     textColor: textPrimaryColorGlobal,
@@ -288,9 +319,11 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                     hideKeyboard(context);
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      widget.data.serviceDetail!.bookingDescription = descriptionCont.text;
+                      widget.data.serviceDetail!.bookingDescription =
+                          descriptionCont.text;
                       widget.data.serviceDetail!.address = addressCont.text;
-                      customStepperController.nextPage(duration: 200.milliseconds, curve: Curves.easeOut);
+                      customStepperController.nextPage(
+                          duration: 200.milliseconds, curve: Curves.easeOut);
                     }
                   },
                   text: language.btnNext,
@@ -301,7 +334,8 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
               ],
             ),
           ),
-          Observer(builder: (context) => LoaderWidget().visible(appStore.isLoading))
+          Observer(
+              builder: (context) => LoaderWidget().visible(appStore.isLoading))
         ],
       ),
     );

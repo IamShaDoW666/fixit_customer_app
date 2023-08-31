@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_system_flutter/component/back_widget.dart';
 import 'package:booking_system_flutter/component/custom_stepper.dart';
 import 'package:booking_system_flutter/main.dart';
@@ -22,8 +24,11 @@ class BookServiceScreen extends StatefulWidget {
   final int bookingAddressId;
   final BookingPackage? selectedPackage;
 
-  BookServiceScreen(
-      {required this.data, this.bookingAddressId = 0, this.selectedPackage});
+  BookServiceScreen({
+    required this.data,
+    this.bookingAddressId = 0,
+    this.selectedPackage,
+  });
 
   @override
   _BookServiceScreenState createState() => _BookServiceScreenState();

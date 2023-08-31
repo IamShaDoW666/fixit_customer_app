@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:booking_system_flutter/model/booking_list_model.dart';
 import 'package:booking_system_flutter/model/extra_charges_model.dart';
 import 'package:booking_system_flutter/model/package_data_model.dart';
@@ -63,7 +65,9 @@ class BookingData {
 
   bool get isSlotBooking => bookingSlot != null;
 
-  bool get isProviderAndHandymanSame => handyman.validate().isNotEmpty ? handyman.validate().first.handymanId.validate() == providerId.validate() : false;
+  bool get isProviderAndHandymanSame => handyman.validate().isNotEmpty
+      ? handyman.validate().first.handymanId.validate() == providerId.validate()
+      : false;
 
   bool get isFreeService => type.validate() == SERVICE_TYPE_FREE;
 
@@ -80,7 +84,8 @@ class BookingData {
 
   bool get isAdvancePaymentDone => paidAmount.validate() != 0;
 
-  num get totalExtraChargeAmount => extraCharges.validate().sumByDouble((e) => e.total.validate());
+  num get totalExtraChargeAmount =>
+      extraCharges.validate().sumByDouble((e) => e.total.validate());
 
   BookingData({
     this.address,
@@ -135,7 +140,9 @@ class BookingData {
       amount: json['amount'],
       totalAmount: json['total_amount'],
       bookingAddressId: json['booking_address_id'],
-      couponData: json['coupon_data'] != null ? CouponData.fromJson(json['coupon_data']) : null,
+      couponData: json['coupon_data'] != null
+          ? CouponData.fromJson(json['coupon_data'])
+          : null,
       customerId: json['customer_id'],
       customerName: json['customer_name'],
       date: json['date'],
@@ -143,7 +150,9 @@ class BookingData {
       discount: json['discount'],
       durationDiff: json['duration_diff'],
       durationDiffHour: json['duration_diff_hour'],
-      handyman: json['handyman'] != null ? (json['handyman'] as List).map((i) => Handyman.fromJson(i)).toList() : null,
+      handyman: json['handyman'] != null
+          ? (json['handyman'] as List).map((i) => Handyman.fromJson(i)).toList()
+          : null,
       id: json['id'],
       paymentId: json['payment_id'],
       paymentMethod: json['payment_method'],
@@ -151,21 +160,31 @@ class BookingData {
       providerId: json['provider_id'],
       providerName: json['provider_name'],
       quantity: json['quantity'],
-      serviceAttachments: json['service_attchments'] != null ? new List<String>.from(json['service_attchments']) : null,
+      serviceAttachments: json['service_attchments'] != null
+          ? new List<String>.from(json['service_attchments'])
+          : null,
       serviceId: json['service_id'],
       serviceName: json['service_name'],
       status: json['status'],
       statusLabel: json['status_label'],
-      taxes: json['taxes'] != null ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList() : null,
+      taxes: json['taxes'] != null
+          ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList()
+          : null,
       type: json['type'],
       reason: json['reason'],
       totalReview: json['total_review'],
       totalRating: json['total_rating'],
       startAt: json['start_at'],
       endAt: json['end_at'],
-      extraCharges: json['extra_charges'] != null ? (json['extra_charges'] as List).map((i) => ExtraChargesModel.fromJson(i)).toList() : null,
+      extraCharges: json['extra_charges'] != null
+          ? (json['extra_charges'] as List)
+              .map((i) => ExtraChargesModel.fromJson(i))
+              .toList()
+          : null,
       bookingType: json['booking_type'],
-      bookingPackage: json['booking_package'] != null ? BookingPackage.fromJson(json['booking_package']) : null,
+      bookingPackage: json['booking_package'] != null
+          ? BookingPackage.fromJson(json['booking_package'])
+          : null,
       paidAmount: json[AdvancePaymentKey.advancePaidAmount],
       finalTotalServicePrice: json['final_total_service_price'],
       finalTotalTax: json['final_total_tax'],
@@ -229,7 +248,8 @@ class BookingData {
       data['taxes'] = this.taxes!.map((v) => v.toJson()).toList();
     }
     if (this.extraCharges != null) {
-      data['extra_charges'] = this.extraCharges!.map((v) => v.toJson()).toList();
+      data['extra_charges'] =
+          this.extraCharges!.map((v) => v.toJson()).toList();
     }
     if (bookingPackage != null) {
       data['booking_package'] = this.bookingPackage!.toJson();

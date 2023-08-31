@@ -2,13 +2,14 @@ import 'dart:io';
 
 import 'package:booking_system_flutter/component/custom_image_picker.dart';
 import 'package:booking_system_flutter/component/custom_stepper.dart';
+import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/model_keys.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../model/package_data_model.dart';
@@ -25,6 +26,8 @@ class BookingServiceImage extends StatefulWidget {
 }
 
 class _BookingServiceImageState extends State<BookingServiceImage> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   List<File> imageFiles = [];
   List<Attachments> tempAttachments = [];
   UniqueKey uniqueKey = UniqueKey();
@@ -113,15 +116,14 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
                             );
                           }
                         },
-                        selectedImages: widget.data != null
-                            ? imageFiles
-                                .validate()
-                                .map((e) => e.path.validate())
-                                .toList()
-                            : null,
+                        selectedImages: imageFiles
+                            .validate()
+                            .map((e) => e.path.validate())
+                            .toList(),
                         onFileSelected: (List<File> files) async {
                           setState(() {
                             imageFiles = files;
+                            widget.data.imageList = files;
                           });
                         },
                       ))
@@ -148,6 +150,9 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
                 AppButton(
                   onTap: () {
                     hideKeyboard(context);
+                    if (imageFiles.isEmpty) {
+                      return toast("Please select images");
+                    }
                     customStepperController.nextPage(
                         duration: 200.milliseconds, curve: Curves.easeInOut);
                   },
@@ -159,6 +164,9 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
               ],
             ),
           ),
+          Observer(
+              builder: (_) =>
+                  LoaderWidget().center().visible(appStore.isLoading)),
         ],
       ),
     );
