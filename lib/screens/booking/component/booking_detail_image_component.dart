@@ -1,11 +1,6 @@
 import 'package:booking_system_flutter/component/cached_image_widget.dart';
-import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
-import 'package:booking_system_flutter/model/category_model.dart';
 import 'package:booking_system_flutter/screens/booking/booking_gallery_screen.dart';
-import 'package:booking_system_flutter/screens/category/category_screen.dart';
-import 'package:booking_system_flutter/screens/dashboard/component/category_widget.dart';
-import 'package:booking_system_flutter/screens/service/view_all_service_screen.dart';
 import 'package:booking_system_flutter/screens/zoom_image_screen.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +61,7 @@ class BookingDetailImageComponentState
             return GestureDetector(
               onTap: () {
                 if (widget.imageList![i].isNotEmpty)
-                  ZoomImageScreen(
-                          galleryImages: [widget.imageList![i]], index: 0)
+                  ZoomImageScreen(galleryImages: widget.imageList, index: i)
                       .launch(context);
               },
               child: Container(

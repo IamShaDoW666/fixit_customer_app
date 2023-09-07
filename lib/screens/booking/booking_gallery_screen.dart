@@ -43,8 +43,7 @@ class _BookingGalleryScreenState extends State<BookingGalleryScreen> {
             itemBuilder: (_, i) => GestureDetector(
                   onTap: () {
                     if (widget.imageList![i].isNotEmpty)
-                      ZoomImageScreen(
-                              galleryImages: [widget.imageList![i]], index: 0)
+                      ZoomImageScreen(galleryImages: widget.imageList, index: i)
                           .launch(context);
                   },
                   child: Container(
