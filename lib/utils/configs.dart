@@ -5,7 +5,7 @@ const APP_NAME = 'Fixit';
 const APP_NAME_TAG_LINE = 'On-Demand Services App';
 var defaultPrimaryColor = Color.fromARGB(255, 181, 93, 31);
 
-const DOMAIN_URL = 'https://api.awalpoint.com';
+const DOMAIN_URL = 'https://yallakhedma.com';
 const BASE_URL = '$DOMAIN_URL/api/';
 
 const DEFAULT_LANGUAGE = 'en';
@@ -22,8 +22,8 @@ const IOS_LINK_FOR_USER =
 
 const DASHBOARD_AUTO_SLIDER_SECOND = 5;
 
-const TERMS_CONDITION_URL = 'https://iqonic.design/terms-of-use/';
-const PRIVACY_POLICY_URL = 'https://iqonic.design/privacy-policy/';
+const TERMS_CONDITION_URL = 'https://yallakhedma.com';
+const PRIVACY_POLICY_URL = 'https://yallakhedma.com';
 const INQUIRY_SUPPORT_EMAIL = 'hello@iqonic.design';
 
 /// You can add help line number here for contact. It's demo number
