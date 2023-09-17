@@ -13,7 +13,7 @@ const DEFAULT_LANGUAGE = 'en';
 /// You can change this to your Provider App package name
 /// This will be used in Registered As Partner in Sign In Screen where your users can redirect to the Play/App Store for Provider App
 /// You can specify in Admin Panel, These will be used if you don't specify in Admin Panel
-const PROVIDER_PACKAGE_NAME = 'com.iqonic.provider';
+const PROVIDER_PACKAGE_NAME = 'com.yallakhedma.provider';
 const IOS_LINK_FOR_PARTNER =
     "https://apps.apple.com/in/app/handyman-provider-app/id1596025324";
 
