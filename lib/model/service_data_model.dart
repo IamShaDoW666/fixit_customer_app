@@ -45,6 +45,7 @@ class ServiceData {
   List<ServiceAddressMapping>? serviceAddressMapping;
   List<SlotData>? bookingSlots;
   List<BookingPackage>? servicePackage;
+  List<Option>? options;
 
   //Local
   bool get isSlotAvailable => isSlot.validate() == 1;
@@ -55,47 +56,50 @@ class ServiceData {
 
   bool get isFreeService => price.validate() == 0;
 
-  bool get isAdvancePayment => isEnableAdvancePayment.validate() == 1 && getBoolAsync(IS_ADVANCE_PAYMENT_ALLOWED) && servicePackage.validate().isEmpty;
+  bool get isAdvancePayment =>
+      isEnableAdvancePayment.validate() == 1 &&
+      getBoolAsync(IS_ADVANCE_PAYMENT_ALLOWED) &&
+      servicePackage.validate().isEmpty;
 
-  ServiceData({
-    this.attachments,
-    this.bookingDate,
-    this.bookingSlot,
-    this.categoryId,
-    this.categoryName,
-    this.cityId,
-    this.description,
-    this.bookingDay,
-    this.discount,
-    this.duration,
-    this.isSlot,
-    this.id,
-    this.bookingSlots,
-    this.isFeatured,
-    this.name,
-    this.price,
-    this.providerId,
-    this.providerName,
-    this.status,
-    this.totalRating,
-    this.totalReview,
-    this.providerImage,
-    this.type,
-    this.isFavourite,
-    this.serviceAddressMapping,
-    this.subCategoryName,
-    this.createdAt,
-    this.customerName,
-    this.serviceAttachments,
-    this.serviceId,
-    this.userId,
-    this.dateTimeVal,
-    this.bookingAddressId,
-    this.servicePackage,
-    this.isEnableAdvancePayment,
-    this.advancePaymentPercentage,
-    this.advancePaymentAmount,
-  });
+  ServiceData(
+      {this.attachments,
+      this.bookingDate,
+      this.bookingSlot,
+      this.categoryId,
+      this.categoryName,
+      this.cityId,
+      this.description,
+      this.bookingDay,
+      this.discount,
+      this.duration,
+      this.isSlot,
+      this.id,
+      this.bookingSlots,
+      this.isFeatured,
+      this.name,
+      this.price,
+      this.providerId,
+      this.providerName,
+      this.status,
+      this.totalRating,
+      this.totalReview,
+      this.providerImage,
+      this.type,
+      this.isFavourite,
+      this.serviceAddressMapping,
+      this.subCategoryName,
+      this.createdAt,
+      this.customerName,
+      this.serviceAttachments,
+      this.serviceId,
+      this.userId,
+      this.dateTimeVal,
+      this.bookingAddressId,
+      this.servicePackage,
+      this.isEnableAdvancePayment,
+      this.advancePaymentPercentage,
+      this.advancePaymentAmount,
+      this.options});
 
   factory ServiceData.fromJson(Map<String, dynamic> json) {
     return ServiceData(
@@ -117,20 +121,37 @@ class ServiceData {
       isFeatured: json['is_featured'],
       providerName: json['provider_name'],
       categoryName: json['category_name'],
-      attachments: json['attchments'] != null ? new List<String>.from(json['attchments']) : null,
+      attachments: json['attchments'] != null
+          ? new List<String>.from(json['attchments'])
+          : null,
       totalReview: json['total_review'],
       totalRating: json['total_rating'],
       isFavourite: json['is_favourite'],
       cityId: json['city_id'],
       providerImage: json['provider_image'],
-      serviceAddressMapping: json['service_address_mapping'] != null ? (json['service_address_mapping'] as List).map((i) => ServiceAddressMapping.fromJson(i)).toList() : null,
-      bookingSlots: json['slots'] != null ? (json['slots'] as List).map((i) => SlotData.fromJson(i)).toList() : null,
+      serviceAddressMapping: json['service_address_mapping'] != null
+          ? (json['service_address_mapping'] as List)
+              .map((i) => ServiceAddressMapping.fromJson(i))
+              .toList()
+          : null,
+      bookingSlots: json['slots'] != null
+          ? (json['slots'] as List).map((i) => SlotData.fromJson(i)).toList()
+          : null,
       createdAt: json['created_at'],
       customerName: json['customer_name'],
-      serviceAttachments: json['service_attchments'] != null ? new List<String>.from(json['service_attchments']) : null,
+      serviceAttachments: json['service_attchments'] != null
+          ? new List<String>.from(json['service_attchments'])
+          : null,
       serviceId: json['service_id'],
       userId: json['user_id'],
-      servicePackage: json['servicePackage'] != null ? (json['servicePackage'] as List).map((i) => BookingPackage.fromJson(i)).toList() : null,
+      servicePackage: json['servicePackage'] != null
+          ? (json['servicePackage'] as List)
+              .map((i) => BookingPackage.fromJson(i))
+              .toList()
+          : null,
+      options: json['options'] != null
+          ? (json['options'] as List).map((i) => Option.fromJson(i)).toList()
+          : null,
       isEnableAdvancePayment: json[AdvancePaymentKey.isEnableAdvancePayment],
       advancePaymentPercentage: json[AdvancePaymentKey.advancePaymentAmount],
       advancePaymentAmount: json['advance_payment_amount'],
@@ -175,15 +196,100 @@ class ServiceData {
     }
     data['is_favourite'] = this.isFavourite;
     if (this.serviceAddressMapping != null) {
-      data['service_address_mapping'] = this.serviceAddressMapping!.map((v) => v.toJson()).toList();
+      data['service_address_mapping'] =
+          this.serviceAddressMapping!.map((v) => v.toJson()).toList();
+    }
+
+    if (this.options != null) {
+      data['options'] = this.options!.map((v) => v.toJson()).toList();
     }
 
     if (this.servicePackage != null) {
-      data['servicePackage'] = this.servicePackage!.map((v) => v.toJson()).toList();
+      data['servicePackage'] =
+          this.servicePackage!.map((v) => v.toJson()).toList();
     }
     data[AdvancePaymentKey.isEnableAdvancePayment] = this.isAdvancePayment;
-    data[AdvancePaymentKey.advancePaymentAmount] = this.advancePaymentPercentage;
+    data[AdvancePaymentKey.advancePaymentAmount] =
+        this.advancePaymentPercentage;
     data['advance_payment_amount'] = this.advancePaymentAmount;
+    return data;
+  }
+}
+
+class Option {
+  int? id;
+  String? name;
+  int? multi;
+  String? type;
+  int? typeInt;
+  int? unitPrice;
+  int? area;
+  List<Variant>? variants;
+
+  Option(
+      {this.id,
+      this.name,
+      this.multi,
+      this.type,
+      this.typeInt,
+      this.unitPrice,
+      this.area,
+      this.variants});
+
+  factory Option.fromJson(Map<String, dynamic> json) {
+    return Option(
+        id: json['id'],
+        name: json['name'],
+        multi: json['multi'],
+        type: json['type'],
+        typeInt: json['type_int'],
+        unitPrice: json['unit_price'],
+        area: json['area'],
+        variants: json['variants'] != null
+            ? (json['variants'] as List)
+                .map((i) => Variant.fromJson(i))
+                .toList()
+            : null);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['multi'] = this.multi;
+    data['type'] = this.type;
+    data['type_int'] = this.typeInt;
+    data['unit_price'] = this.unitPrice;
+    data['area'] = this.area;
+    if (this.variants != null) {
+      data['variants'] = this.variants!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Variant {
+  int? id;
+  String? name;
+  int? price;
+  String? priceFormat;
+
+  Variant({this.id, this.name, this.price, this.priceFormat});
+
+  factory Variant.fromJson(Map<String, dynamic> json) {
+    return Variant(
+        id: json['id'],
+        name: json['name'],
+        price: json['price'],
+        priceFormat: json['price_format']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['price'] = this.price;
+    data['price_format'] = this.priceFormat;
     return data;
   }
 }
@@ -196,7 +302,13 @@ class ServiceAddressMapping {
   String? updatedAt;
   ProviderAddressMapping? providerAddressMapping;
 
-  ServiceAddressMapping({this.id, this.serviceId, this.providerAddressId, this.createdAt, this.updatedAt, this.providerAddressMapping});
+  ServiceAddressMapping(
+      {this.id,
+      this.serviceId,
+      this.providerAddressId,
+      this.createdAt,
+      this.updatedAt,
+      this.providerAddressMapping});
 
   ServiceAddressMapping.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -204,7 +316,9 @@ class ServiceAddressMapping {
     providerAddressId = json['provider_address_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    providerAddressMapping = json['provider_address_mapping'] != null ? new ProviderAddressMapping.fromJson(json['provider_address_mapping']) : null;
+    providerAddressMapping = json['provider_address_mapping'] != null
+        ? new ProviderAddressMapping.fromJson(json['provider_address_mapping'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -231,7 +345,15 @@ class ProviderAddressMapping {
   String? createdAt;
   String? updatedAt;
 
-  ProviderAddressMapping({this.id, this.providerId, this.address, this.latitude, this.longitude, this.status, this.createdAt, this.updatedAt});
+  ProviderAddressMapping(
+      {this.id,
+      this.providerId,
+      this.address,
+      this.latitude,
+      this.longitude,
+      this.status,
+      this.createdAt,
+      this.updatedAt});
 
   ProviderAddressMapping.fromJson(Map<String, dynamic> json) {
     id = json['id'];
