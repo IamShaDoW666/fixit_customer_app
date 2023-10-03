@@ -24,7 +24,11 @@ import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../store/booking_store.dart';
+import 'component/multi_option.dart';
+import 'component/quantity_option.dart';
+import 'component/single_option.dart';
 
 class ServiceDetailScreen extends StatefulWidget {
   final int serviceId;
@@ -310,7 +314,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                             style: secondaryTextStyle()),
                   ],
                 ).paddingAll(16),
-                optionsWidget(snap.data!.serviceDetail!.options.validate())
+                OptionsWidget(snap.data!.serviceDetail!.options.validate())
                     .paddingAll(16),
                 slotsAvailable(
                     data: snap.data!.serviceDetail!.bookingSlots.validate(),
@@ -386,190 +390,32 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
       },
     );
   }
+}
 
-  Column optionsWidget(List<Option> options) {
+class OptionsWidget extends StatefulWidget {
+  final List<Option> options;
+  const OptionsWidget(
+    this.options, {
+    super.key,
+  });
+
+  @override
+  State<OptionsWidget> createState() => _OptionsWidgetState();
+}
+
+class _OptionsWidgetState extends State<OptionsWidget> {
+  final selectedOptions = BookingStore();
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
-            options.length,
-            (index) => options[index].typeInt == 0
-                ? options[index].multi == 0
-                    ? SingleOption(options[index]).paddingAll(8)
-                    : MultiOption(options[index]).paddingAll(8)
-                : QuantityOption(options[index]).paddingAll(8)));
-  }
-}
-
-class QuantityOption extends StatefulWidget {
-  final Option option;
-  QuantityOption(
-    this.option, {
-    super.key,
-  });
-
-  @override
-  State<QuantityOption> createState() => _QuantityOptionState();
-}
-
-class _QuantityOptionState extends State<QuantityOption> {
-  int quantity = 1;
-
-  void increment() {
-    setState(() {
-      quantity++;
-    });
-  }
-
-  void decrement() {
-    setState(() {
-      if (quantity != 1) {
-        quantity--;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(widget.option.name.validate(),
-            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            GestureDetector(
-              child: FaIcon(FontAwesomeIcons.minus),
-              onTap: decrement,
-            ),
-            8.width,
-            Text(
-              quantity.toString(),
-              style: boldTextStyle(size: 18),
-            ),
-            8.width,
-            GestureDetector(
-              child: FaIcon(FontAwesomeIcons.plus),
-              onTap: increment,
-            )
-          ],
-        )
-      ],
-    );
-  }
-}
-
-class MultiOption extends StatefulWidget {
-  final Option option;
-
-  MultiOption(
-    this.option, {
-    super.key,
-  });
-
-  @override
-  State<MultiOption> createState() => _MultiOptionState();
-}
-
-class _MultiOptionState extends State<MultiOption> {
-  bool selected = false;
-  List<int> selectedVariants = [];
-
-  bool checkSelected(int id) {
-    return selectedVariants.contains(id);
-  }
-
-  void selectVariant(int id) {
-    setState(() {
-      selectedVariants.contains(id)
-          ? selectedVariants.remove(id)
-          : selectedVariants.add(id);
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        widget.option.name.validate(),
-        style: boldTextStyle(size: LABEL_TEXT_SIZE),
-      ),
-      8.height,
-      Wrap(
-          children: List.generate(
-              widget.option.variants!.length,
-              (idx) => ChoiceChip(
-                    label: Text(widget.option.variants![idx].name.validate()),
-                    labelStyle: boldTextStyle(
-                        color: checkSelected(
-                                widget.option.variants![idx].id.validate())
-                            ? Colors.white
-                            : primaryColor),
-                    showCheckmark: false,
-                    selectedColor: primaryColor,
-                    side: BorderSide(color: primaryColor),
-                    selected: checkSelected(
-                        widget.option.variants![idx].id.validate()),
-                    onSelected: (newValue) {
-                      selectVariant(widget.option.variants![idx].id.validate());
-                    },
-                  ).paddingAll(8)))
-    ]);
-  }
-}
-
-class SingleOption extends StatefulWidget {
-  final Option option;
-
-  SingleOption(
-    this.option, {
-    super.key,
-  });
-
-  @override
-  State<SingleOption> createState() => _SingleOptionState();
-}
-
-class _SingleOptionState extends State<SingleOption> {
-  int selected = 0;
-
-  bool checkSelected(int id) {
-    return (selected == id);
-  }
-
-  void selectVariant(int id) {
-    setState(() {
-      selected = id;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        widget.option.name.validate(),
-        style: boldTextStyle(size: LABEL_TEXT_SIZE),
-      ),
-      8.height,
-      Wrap(
-          children: List.generate(
-              widget.option.variants!.length,
-              (idx) => ChoiceChip(
-                    label: Text(widget.option.variants![idx].name.validate()),
-                    labelStyle: boldTextStyle(
-                        color: checkSelected(
-                                widget.option.variants![idx].id.validate())
-                            ? Colors.white
-                            : primaryColor),
-                    showCheckmark: false,
-                    selectedColor: primaryColor,
-                    side: BorderSide(color: primaryColor),
-                    selected: checkSelected(
-                        widget.option.variants![idx].id.validate()),
-                    onSelected: (newValue) {
-                      selectVariant(widget.option.variants![idx].id.validate());
-                    },
-                  ).paddingAll(8)))
-    ]);
+            widget.options.length.validate(),
+            (index) => widget.options[index].typeInt == 0
+                ? widget.options[index].multi == 0
+                    ? SingleOption(widget.options[index]).paddingAll(8)
+                    : MultiOption(widget.options[index]).paddingAll(8)
+                : QuantityOption(widget.options[index]).paddingAll(8)));
   }
 }
