@@ -21,16 +21,14 @@ class MultiOption extends StatefulWidget {
 
 class _MultiOptionState extends State<MultiOption> {
   bool selected = false;
-  List<int> selectedVariants = [];
   final bookingStore = BookingStore();
 
-  bool checkSelected(int id) {
-    return selectedVariants.contains(id);
-  }
+  bool checkSelected(int id) => bookingStore
+      .optionExists({'option': widget.option.id.validate(), 'variant': id});
 
   void selectVariant(int optionId, int variantId) {
     setState(() {
-      bookingStore.selectVariant(optionId, variantId, null);
+      bookingStore.addMultiOption({'option': optionId, 'variant': variantId});
     });
   }
 
@@ -42,9 +40,6 @@ class _MultiOptionState extends State<MultiOption> {
         style: boldTextStyle(size: LABEL_TEXT_SIZE),
       ),
       8.height,
-      Observer(builder: (_) {
-        return Text(bookingStore.selectedOptions.toString());
-      }),
       Wrap(
           children: List.generate(
               widget.option.variants!.length,

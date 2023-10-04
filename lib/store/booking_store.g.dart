@@ -9,19 +9,28 @@ part of 'booking_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$BookingStore on _BookingStore, Store {
-  late final _$selectedOptionsAtom =
-      Atom(name: '_BookingStore.selectedOptions', context: context);
+  Computed<List<Map<String, dynamic>>>? _$selectedOptionsComputed;
 
   @override
-  List<OptionVariant> get selectedOptions {
-    _$selectedOptionsAtom.reportRead();
-    return super.selectedOptions;
+  List<Map<String, dynamic>> get selectedOptions =>
+      (_$selectedOptionsComputed ??= Computed<List<Map<String, dynamic>>>(
+              () => super.selectedOptions,
+              name: '_BookingStore.selectedOptions'))
+          .value;
+
+  late final _$optionsAtom =
+      Atom(name: '_BookingStore.options', context: context);
+
+  @override
+  ObservableList<Map<String, dynamic>> get options {
+    _$optionsAtom.reportRead();
+    return super.options;
   }
 
   @override
-  set selectedOptions(List<OptionVariant> value) {
-    _$selectedOptionsAtom.reportWrite(value, super.selectedOptions, () {
-      super.selectedOptions = value;
+  set options(ObservableList<Map<String, dynamic>> value) {
+    _$optionsAtom.reportWrite(value, super.options, () {
+      super.options = value;
     });
   }
 
@@ -29,11 +38,66 @@ mixin _$BookingStore on _BookingStore, Store {
       ActionController(name: '_BookingStore', context: context);
 
   @override
-  dynamic selectVariant(int optionId, int? variantId, int? quantity) {
+  void addRadioOption(Map<String, dynamic> option) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
-        name: '_BookingStore.selectVariant');
+        name: '_BookingStore.addRadioOption');
     try {
-      return super.selectVariant(optionId, variantId, quantity);
+      return super.addRadioOption(option);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addMultiOption(Map<String, dynamic> option) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.addMultiOption');
+    try {
+      return super.addMultiOption(option);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeOption(Map<String, dynamic> option) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.removeOption');
+    try {
+      return super.removeOption(option);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeOptionByValues(Map<String, dynamic> targetOption) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.removeOptionByValues');
+    try {
+      return super.removeOptionByValues(targetOption);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeOptionsById(int optionId) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.removeOptionsById');
+    try {
+      return super.removeOptionsById(optionId);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  bool optionExists(Map<String, dynamic> targetOption) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.optionExists');
+    try {
+      return super.optionExists(targetOption);
     } finally {
       _$_BookingStoreActionController.endAction(_$actionInfo);
     }
@@ -42,6 +106,7 @@ mixin _$BookingStore on _BookingStore, Store {
   @override
   String toString() {
     return '''
+options: ${options},
 selectedOptions: ${selectedOptions}
     ''';
   }

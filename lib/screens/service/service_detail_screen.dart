@@ -49,7 +49,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
   int selectedAddressId = 0;
   int selectedBookingAddressId = -1;
   BookingPackage? selectedPackage;
-
+  final bookingStore = BookingStore();
   @override
   void initState() {
     super.initState();
@@ -404,7 +404,7 @@ class OptionsWidget extends StatefulWidget {
 }
 
 class _OptionsWidgetState extends State<OptionsWidget> {
-  final selectedOptions = BookingStore();
+  final bookingStore = BookingStore();
 
   @override
   Widget build(BuildContext context) {
