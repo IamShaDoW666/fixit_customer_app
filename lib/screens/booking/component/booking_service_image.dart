@@ -150,9 +150,6 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
                 AppButton(
                   onTap: () {
                     hideKeyboard(context);
-                    if (imageFiles.isEmpty) {
-                      return toast("Please select images");
-                    }
                     customStepperController.nextPage(
                         duration: 200.milliseconds, curve: Curves.easeInOut);
                   },

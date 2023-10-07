@@ -118,8 +118,6 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
           ),
         ),
         16.height,
-        Text('Images are required!', style: secondaryTextStyle(size: 10)),
-        16.height,
         HorizontalList(
           itemCount: imageFiles.length,
           spacing: 16,
