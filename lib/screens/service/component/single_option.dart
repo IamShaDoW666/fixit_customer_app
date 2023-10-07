@@ -1,7 +1,6 @@
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/store/booking_store.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 
@@ -9,9 +8,11 @@ import '../../../utils/colors.dart';
 
 class SingleOption extends StatefulWidget {
   final Option option;
+  final BookingStore bookingStore;
 
   SingleOption(
-    this.option, {
+    this.option,
+    this.bookingStore, {
     super.key,
   });
 
@@ -20,16 +21,14 @@ class SingleOption extends StatefulWidget {
 }
 
 class _SingleOptionState extends State<SingleOption> {
-  final bookingStore = BookingStore();
-
   bool checkSelected(int id) {
-    return bookingStore
+    return widget.bookingStore
         .optionExists({'option': widget.option.id.validate(), 'variant': id});
   }
 
   void selectVariant(int variantId) {
     setState(() {
-      bookingStore.addRadioOption(
+      widget.bookingStore.addRadioOption(
           {'option': widget.option.id.validate(), 'variant': variantId});
     });
   }

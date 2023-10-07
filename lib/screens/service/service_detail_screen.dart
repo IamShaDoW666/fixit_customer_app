@@ -404,18 +404,26 @@ class OptionsWidget extends StatefulWidget {
 }
 
 class _OptionsWidgetState extends State<OptionsWidget> {
-  final bookingStore = BookingStore();
+  @override
+  void initState() {
+    super.initState();
+    bookingStore.initQuantities(widget.options);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-            widget.options.length.validate(),
-            (index) => widget.options[index].typeInt == 0
-                ? widget.options[index].multi == 0
-                    ? SingleOption(widget.options[index]).paddingAll(8)
-                    : MultiOption(widget.options[index]).paddingAll(8)
-                : QuantityOption(widget.options[index]).paddingAll(8)));
+    return Observer(
+      builder: (context) => Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: List.generate(
+              widget.options.length.validate(),
+              (index) => widget.options[index].typeInt == 0
+                  ? widget.options[index].multi == 0
+                      ? SingleOption(widget.options[index], bookingStore)
+                          .paddingAll(8)
+                      : MultiOption(widget.options[index], bookingStore)
+                          .paddingAll(8)
+                  : QuantityOption(widget.options[index]).paddingAll(8))),
+    );
   }
 }

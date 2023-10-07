@@ -1,27 +1,59 @@
 import 'package:mobx/mobx.dart';
+
+import '../model/service_data_model.dart';
 part 'booking_store.g.dart';
 
 class BookingStore extends _BookingStore with _$BookingStore {}
 
 abstract class _BookingStore with Store {
   @observable
-  ObservableList<Map<String, dynamic>> options =
-      ObservableList<Map<String, dynamic>>();
+  ObservableList<ObservableMap<String, dynamic>> options =
+      ObservableList<ObservableMap<String, dynamic>>();
+
+  @action
+  void initQuantities(List<Option> options) {
+    Iterable<Option> quantityOptions =
+        options.where((option) => option.typeInt == 1);
+    quantityOptions.forEach((option) {
+      addQuantityOption(ObservableMap.of({'option': option.id, 'quantity': 1}));
+    });
+  }
 
   @action
   void addRadioOption(Map<String, dynamic> option) {
     removeOptionsById(option['option']);
     if (!optionExists(option)) {
-      options.add(option);
+      options.add(ObservableMap.of(option));
     }
   }
 
   @action
   void addMultiOption(Map<String, dynamic> option) {
     if (!optionExists(option)) {
-      options.add(option);
+      options.add(ObservableMap.of(option));
     } else {
       removeOptionByValues(option);
+    }
+  }
+
+  @action
+  void addQuantityOption(Map<String, dynamic> option) {
+    if (!optionExists(option)) {
+      options.add(ObservableMap.of(option));
+    } else {
+      increment(option);
+    }
+  }
+
+  @action
+  void increment(Map<String, dynamic> option) {
+    option['quantity']++;
+  }
+
+  @action
+  void decrement(Map<String, dynamic> option) {
+    if (option['quantity'] != 1) {
+      option['quantity']--;
     }
   }
 
@@ -68,8 +100,12 @@ abstract class _BookingStore with Store {
   }
 
   @computed
-  List<Map<String, dynamic>> get selectedOptions => options
+  List<ObservableMap<String, dynamic>> get selectedOptions => options
       .where((option) =>
           option.containsKey('variant') || option.containsKey('quantity'))
       .toList();
+
+  @action
+  ObservableMap<String, dynamic> getOption(int id) =>
+      options.firstWhere((option) => option['option'] == id);
 }

@@ -9,9 +9,10 @@ import '../../../utils/colors.dart';
 
 class MultiOption extends StatefulWidget {
   final Option option;
-
+  final BookingStore bookingStore;
   MultiOption(
-    this.option, {
+    this.option,
+    this.bookingStore, {
     super.key,
   });
 
@@ -21,14 +22,14 @@ class MultiOption extends StatefulWidget {
 
 class _MultiOptionState extends State<MultiOption> {
   bool selected = false;
-  final bookingStore = BookingStore();
 
-  bool checkSelected(int id) => bookingStore
+  bool checkSelected(int id) => widget.bookingStore
       .optionExists({'option': widget.option.id.validate(), 'variant': id});
 
   void selectVariant(int optionId, int variantId) {
     setState(() {
-      bookingStore.addMultiOption({'option': optionId, 'variant': variantId});
+      widget.bookingStore
+          .addMultiOption({'option': optionId, 'variant': variantId});
     });
   }
 
