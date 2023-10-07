@@ -7,7 +7,6 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/slot_data.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
-import 'package:booking_system_flutter/screens/auth/sign_in_screen.dart';
 import 'package:booking_system_flutter/screens/booking/book_service_screen.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_detail_provider_widget.dart';
 import 'package:booking_system_flutter/screens/booking/provider_info_screen.dart';
@@ -23,6 +22,7 @@ import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../store/booking_store.dart';
@@ -49,10 +49,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
   int selectedAddressId = 0;
   int selectedBookingAddressId = -1;
   BookingPackage? selectedPackage;
-  final bookingStore = BookingStore();
   @override
   void initState() {
     super.initState();
+    bookingStore.options = ObservableList.of([]);
     setStatusBarColor(transparentColor);
     init();
   }
@@ -314,7 +314,8 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                             style: secondaryTextStyle()),
                   ],
                 ).paddingAll(16),
-                OptionsWidget(snap.data!.serviceDetail!.options.validate())
+                OptionsWidget(snap.data!.serviceDetail!.options.validate(),
+                        snap.data!.serviceDetail)
                     .paddingAll(16),
                 slotsAvailable(
                     data: snap.data!.serviceDetail!.bookingSlots.validate(),
@@ -350,6 +351,21 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
               ],
             ),
             Positioned(
+                bottom: 88,
+                right: 16,
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: primaryColor,
+                      boxShadow: [BoxShadow()]),
+                  child: Observer(
+                    builder: (_) => Text(
+                      "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${(bookingStore.subTotal.validate() + snap!.data!.serviceDetail!.price.validate()).toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
+                      style: boldTextStyle(color: white, size: 16),
+                    ).paddingAll(16),
+                  ),
+                )),
+            Positioned(
               bottom: 16,
               left: 16,
               right: 16,
@@ -363,7 +379,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                 width: context.width(),
                 textColor: Colors.white,
               ),
-            )
+            ),
           ],
         );
       }
@@ -394,8 +410,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
 
 class OptionsWidget extends StatefulWidget {
   final List<Option> options;
+  final ServiceData? service;
   const OptionsWidget(
-    this.options, {
+    this.options,
+    this.service, {
     super.key,
   });
 
@@ -407,7 +425,8 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   @override
   void initState() {
     super.initState();
-    bookingStore.initQuantities(widget.options);
+    bookingStore.initQuantities(
+        widget.options, widget.service!.pricePerSqft.validate());
   }
 
   @override

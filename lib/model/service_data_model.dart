@@ -14,6 +14,7 @@ class ServiceData {
   int? isFeatured;
   int? bookingAddressId;
   num? price;
+  num? pricePerSqft;
   num? discount;
   num? totalReview;
   num? totalRating;
@@ -78,6 +79,7 @@ class ServiceData {
       this.isFeatured,
       this.name,
       this.price,
+      this.pricePerSqft,
       this.providerId,
       this.providerName,
       this.status,
@@ -108,6 +110,7 @@ class ServiceData {
       categoryId: json['category_id'],
       providerId: json['provider_id'],
       price: json['price'],
+      pricePerSqft: json['price_per_sqft'],
       type: json['type'],
       bookingDate: json['booking_date'],
       bookingSlot: json['booking_slot'],
@@ -174,6 +177,7 @@ class ServiceData {
     data['is_featured'] = this.isFeatured;
     data['name'] = this.name;
     data['price'] = this.price;
+    data['price_per_sqft'] = this.pricePerSqft;
     data['is_slot'] = this.isSlot;
     // data['price_format'] = this.priceFormat;
     data['provider_id'] = this.providerId;

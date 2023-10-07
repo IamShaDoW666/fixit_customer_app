@@ -11,11 +11,22 @@ abstract class _BookingStore with Store {
       ObservableList<ObservableMap<String, dynamic>>();
 
   @action
-  void initQuantities(List<Option> options) {
+  void initQuantities(List<Option> options, num pricePerSqft) {
     Iterable<Option> quantityOptions =
         options.where((option) => option.typeInt == 1);
     quantityOptions.forEach((option) {
-      addQuantityOption(ObservableMap.of({'option': option.id, 'quantity': 1}));
+      if (option.unitPrice! > 0) {
+        addQuantityOption(ObservableMap.of(
+            {'option': option.id, 'quantity': 1, 'price': option.unitPrice}));
+      } else {
+        addQuantityOption(ObservableMap.of({
+          'option': option.id,
+          'quantity': 1,
+          'price': option.area! * pricePerSqft,
+          'area': option.area,
+          'pricePerArea': pricePerSqft
+        }));
+      }
     });
   }
 
@@ -40,20 +51,30 @@ abstract class _BookingStore with Store {
   void addQuantityOption(Map<String, dynamic> option) {
     if (!optionExists(option)) {
       options.add(ObservableMap.of(option));
-    } else {
-      increment(option);
     }
   }
 
   @action
-  void increment(Map<String, dynamic> option) {
+  void increment(ObservableMap<String, dynamic> option) {
     option['quantity']++;
+    if (option['unitPrice'] != null) {
+      option['price'] = option['unitPrice'] * option['quantity'];
+    } else {
+      option['price'] =
+          (option['area'] * option['pricePerArea']) * option['quantity'];
+    }
   }
 
   @action
-  void decrement(Map<String, dynamic> option) {
+  void decrement(ObservableMap<String, dynamic> option) {
     if (option['quantity'] != 1) {
       option['quantity']--;
+      if (option['unitPrice'] != null) {
+        option['price'] = option['unitPrice'] * option['quantity'];
+      } else {
+        option['price'] =
+            (option['area'] * option['pricePerArea']) * option['quantity'];
+      }
     }
   }
 
@@ -99,13 +120,22 @@ abstract class _BookingStore with Store {
     });
   }
 
+  @action
+  ObservableMap<String, dynamic> getOption(int id) =>
+      options.firstWhere((option) => option['option'] == id);
+
   @computed
   List<ObservableMap<String, dynamic>> get selectedOptions => options
       .where((option) =>
           option.containsKey('variant') || option.containsKey('quantity'))
       .toList();
 
-  @action
-  ObservableMap<String, dynamic> getOption(int id) =>
-      options.firstWhere((option) => option['option'] == id);
+  @computed
+  num get subTotal {
+    num total = 0;
+    selectedOptions.forEach((option) {
+      total += option['price'];
+    });
+    return total;
+  }
 }

@@ -32,7 +32,8 @@ class PriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextDecoration? textDecoration() => isLineThroughEnabled ? TextDecoration.lineThrough : null;
+    TextDecoration? textDecoration() =>
+        isLineThroughEnabled ? TextDecoration.lineThrough : null;
 
     TextStyle _textStyle({int? aSize}) {
       return isBoldText
@@ -60,7 +61,7 @@ class PriceWidget extends StatelessWidget {
           children: [
             if (isFreeService)
               Text(language.lblFree, style: _textStyle())
-            else
+            else if (price > 0)
               Text(
                 "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${price.validate().toStringAsFixed(decimalPoint ?? DECIMAL_POINT).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
                 style: _textStyle(),

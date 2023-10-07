@@ -54,13 +54,13 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
 
   void setPrice() {
     bookingAmountModel = finalCalculations(
-      servicePrice: widget.data.serviceDetail!.price.validate(),
-      appliedCouponData: appliedCouponData,
-      discount: widget.data.serviceDetail!.discount.validate(),
-      taxes: widget.data.taxes,
-      quantity: itemCount,
-      selectedPackage: widget.selectedPackage,
-    );
+        servicePrice: widget.data.serviceDetail!.price.validate(),
+        appliedCouponData: appliedCouponData,
+        discount: widget.data.serviceDetail!.discount.validate(),
+        taxes: widget.data.taxes,
+        quantity: itemCount,
+        selectedPackage: widget.selectedPackage,
+        options: bookingStore.selectedOptions);
 
     advancePaymentAmount = (bookingAmountModel.finalGrandTotalAmount *
         (widget.data.serviceDetail!.advancePaymentPercentage.validate() / 100)
@@ -99,127 +99,122 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
   }
 
   Widget priceWidget() {
-    if (!widget.data.serviceDetail!.isFreeService)
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(language.priceDetail,
-              style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-          16.height,
-          Container(
-            padding: EdgeInsets.all(16),
-            width: context.width(),
-            decoration: boxDecorationDefault(color: context.cardColor),
-            child: Column(
-              children: [
-                /// Service or Package Price
-                Row(
+    // if (widget.data.serviceDetail!.isFreeService)
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(language.priceDetail, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+        16.height,
+        Container(
+          padding: EdgeInsets.all(16),
+          width: context.width(),
+          decoration: boxDecorationDefault(color: context.cardColor),
+          child: Column(
+            children: [
+              /// Service or Package Price
+              Row(
+                children: [
+                  Text(language.lblPrice, style: secondaryTextStyle(size: 14))
+                      .expand(),
+                  16.width,
+                  if (widget.selectedPackage != null)
+                    PriceWidget(
+                        price: bookingAmountModel.finalTotalServicePrice,
+                        color: textPrimaryColorGlobal,
+                        isBoldText: true)
+                  else if (!widget.data.serviceDetail!.isHourlyService)
+                    Marquee(
+                      child: Row(
+                        children: [
+                          PriceWidget(
+                              price: bookingStore.subTotal.validate(),
+                              size: 12,
+                              isBoldText: false,
+                              color: textSecondaryColorGlobal),
+                          Text(' * $itemCount  = ',
+                              style: secondaryTextStyle()),
+                          PriceWidget(
+                              price: bookingAmountModel.finalTotalServicePrice,
+                              color: textPrimaryColorGlobal),
+                        ],
+                      ),
+                    )
+                  else
+                    PriceWidget(
+                        price: bookingAmountModel.finalTotalServicePrice,
+                        color: textPrimaryColorGlobal,
+                        isBoldText: true)
+                ],
+              ),
+
+              /// Fix Discount on Base Price
+              if (widget.data.serviceDetail!.discount.validate() != 0 &&
+                  widget.selectedPackage == null)
+                Column(
                   children: [
-                    Text(language.lblPrice, style: secondaryTextStyle(size: 14))
-                        .expand(),
-                    16.width,
-                    if (widget.selectedPackage != null)
-                      PriceWidget(
-                          price: bookingAmountModel.finalTotalServicePrice,
-                          color: textPrimaryColorGlobal,
-                          isBoldText: true)
-                    else if (!widget.data.serviceDetail!.isHourlyService)
-                      Marquee(
-                        child: Row(
-                          children: [
-                            PriceWidget(
-                                price:
-                                    widget.data.serviceDetail!.price.validate(),
-                                size: 12,
-                                isBoldText: false,
-                                color: textSecondaryColorGlobal),
-                            Text(' * $itemCount  = ',
-                                style: secondaryTextStyle()),
-                            PriceWidget(
-                                price:
-                                    bookingAmountModel.finalTotalServicePrice,
-                                color: textPrimaryColorGlobal),
-                          ],
+                    Divider(height: 26, color: context.dividerColor),
+                    Row(
+                      children: [
+                        Text(language.lblDiscount,
+                            style: secondaryTextStyle(size: 14)),
+                        Text(
+                          " (${widget.data.serviceDetail!.discount.validate()}% ${language.lblOff.toLowerCase()})",
+                          style: boldTextStyle(color: Colors.green),
+                        ).expand(),
+                        16.width,
+                        PriceWidget(
+                          price: bookingAmountModel.finalDiscountAmount,
+                          color: Colors.green,
+                          isBoldText: true,
                         ),
-                      )
-                    else
-                      PriceWidget(
-                          price: bookingAmountModel.finalTotalServicePrice,
-                          color: textPrimaryColorGlobal,
-                          isBoldText: true)
+                      ],
+                    ),
                   ],
                 ),
 
-                /// Fix Discount on Base Price
-                if (widget.data.serviceDetail!.discount.validate() != 0 &&
-                    widget.selectedPackage == null)
-                  Column(
-                    children: [
-                      Divider(height: 26, color: context.dividerColor),
+              /// Coupon Discount on Base Price
+              if (widget.selectedPackage == null)
+                Column(
+                  children: [
+                    Divider(height: 26, color: context.dividerColor),
+                    if (appliedCouponData != null)
                       Row(
                         children: [
-                          Text(language.lblDiscount,
-                              style: secondaryTextStyle(size: 14)),
-                          Text(
-                            " (${widget.data.serviceDetail!.discount.validate()}% ${language.lblOff.toLowerCase()})",
-                            style: boldTextStyle(color: Colors.green),
+                          Row(
+                            children: [
+                              Text(language.lblCoupon,
+                                  style: secondaryTextStyle(size: 14)),
+                              Text(
+                                " (${appliedCouponData!.code})",
+                                style: boldTextStyle(
+                                    color: primaryColor, size: 14),
+                              ).onTap(() {
+                                applyCoupon();
+                              }).expand(),
+                            ],
                           ).expand(),
-                          16.width,
                           PriceWidget(
-                            price: bookingAmountModel.finalDiscountAmount,
+                            price: bookingAmountModel.finalCouponDiscountAmount,
                             color: Colors.green,
                             isBoldText: true,
                           ),
                         ],
                       ),
-                    ],
-                  ),
-
-                /// Coupon Discount on Base Price
-                if (widget.selectedPackage == null)
-                  Column(
-                    children: [
-                      Divider(height: 26, color: context.dividerColor),
-                      if (appliedCouponData != null)
-                        Row(
-                          children: [
-                            Row(
-                              children: [
-                                Text(language.lblCoupon,
-                                    style: secondaryTextStyle(size: 14)),
-                                Text(
-                                  " (${appliedCouponData!.code})",
-                                  style: boldTextStyle(
-                                      color: primaryColor, size: 14),
-                                ).onTap(() {
-                                  applyCoupon();
-                                }).expand(),
-                              ],
-                            ).expand(),
-                            PriceWidget(
-                              price:
-                                  bookingAmountModel.finalCouponDiscountAmount,
-                              color: Colors.green,
-                              isBoldText: true,
-                            ),
-                          ],
-                        ),
-                      if (appliedCouponData == null)
-                        Row(
-                          children: [
-                            Text(language.lblCoupon,
-                                    style: secondaryTextStyle(size: 14))
-                                .expand(),
-                            Text(
-                              language.applyCoupon,
-                              style:
-                                  boldTextStyle(color: primaryColor, size: 14),
-                            ).onTap(() {
-                              applyCoupon();
-                            }),
-                          ],
-                        ),
-                      /*Row(
+                    if (appliedCouponData == null)
+                      Row(
+                        children: [
+                          Text(language.lblCoupon,
+                                  style: secondaryTextStyle(size: 14))
+                              .expand(),
+                          Text(
+                            language.applyCoupon,
+                            style: boldTextStyle(color: primaryColor, size: 14),
+                          ).onTap(() {
+                            applyCoupon();
+                          }),
+                        ],
+                      ),
+                    /*Row(
                       children: [
                         if (appliedCouponData != null) Text(language.lblCoupon, style: secondaryTextStyle(size: 14)) else Text(language.lblCoupon, style: secondaryTextStyle(size: 14)).expand(),
                         if (appliedCouponData != null)
@@ -243,116 +238,116 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                           ),
                       ],
                     ),*/
-                    ],
-                  ),
-
-                /// Show Subtotal, Total Amount and Apply Discount, Coupon if service is Fixed or Hourly
-                if (widget.selectedPackage == null)
-                  if (!widget.data.serviceDetail!.isHourlyService)
-                    Column(
-                      children: [
-                        Divider(height: 26, color: context.dividerColor),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(language.lblSubTotal,
-                                    style: secondaryTextStyle(size: 14))
-                                .flexible(fit: FlexFit.loose),
-                            16.width,
-                            PriceWidget(
-                                price: bookingAmountModel.finalSubTotal,
-                                color: textPrimaryColorGlobal)
-                          ],
-                        ),
-                      ],
-                    ),
-
-                /// Tax Amount Applied on Price
-                Column(
-                  children: [
-                    Divider(height: 26, color: context.dividerColor),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            Text(language.lblTax,
-                                    style: secondaryTextStyle(size: 14))
-                                .expand(),
-                            Icon(Icons.info_outline_rounded,
-                                    size: 20, color: context.primaryColor)
-                                .onTap(
-                              () {
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (_) {
-                                    return AppliedTaxListBottomSheet(
-                                        taxes: widget.data.taxes.validate(),
-                                        subTotal:
-                                            bookingAmountModel.finalSubTotal);
-                                  },
-                                );
-                              },
-                            ),
-                          ],
-                        ).expand(),
-                        16.width,
-                        PriceWidget(
-                            price: bookingAmountModel.finalTotalTax,
-                            color: Colors.red,
-                            isBoldText: true),
-                      ],
-                    ),
                   ],
                 ),
 
-                /// Final Amount
-                Column(
-                  children: [
-                    Divider(height: 26, color: context.dividerColor),
-                    Row(
-                      children: [
-                        Text(language.totalAmount,
-                                style: secondaryTextStyle(size: 14))
-                            .expand(),
-                        PriceWidget(
-                          price: bookingAmountModel.finalGrandTotalAmount,
-                          color: primaryColor,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-
-                /// Advance Payable Amount if it is required by Service Provider
-                if (widget.data.serviceDetail!.isAdvancePayment)
+              /// Show Subtotal, Total Amount and Apply Discount, Coupon if service is Fixed or Hourly
+              if (widget.selectedPackage == null)
+                if (!widget.data.serviceDetail!.isHourlyService)
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Divider(height: 26, color: context.dividerColor),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text(language.advancePayAmount,
-                                  style: secondaryTextStyle(size: 14)),
-                              Text(
-                                  " (${widget.data.serviceDetail!.advancePaymentPercentage.validate().toString()}%)  ",
-                                  style: boldTextStyle(color: Colors.green)),
-                            ],
-                          ).expand(),
+                          Text(language.lblSubTotal,
+                                  style: secondaryTextStyle(size: 14))
+                              .flexible(fit: FlexFit.loose),
+                          16.width,
                           PriceWidget(
-                              price: advancePaymentAmount, color: primaryColor),
+                              price: bookingAmountModel.finalSubTotal,
+                              color: textPrimaryColorGlobal)
                         ],
                       ),
                     ],
                   ),
-              ],
-            ),
-          )
-        ],
-      );
 
-    return Offstage();
+              /// Tax Amount Applied on Price
+              Column(
+                children: [
+                  Divider(height: 26, color: context.dividerColor),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          Text(language.lblTax,
+                                  style: secondaryTextStyle(size: 14))
+                              .expand(),
+                          Icon(Icons.info_outline_rounded,
+                                  size: 20, color: context.primaryColor)
+                              .onTap(
+                            () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (_) {
+                                  return AppliedTaxListBottomSheet(
+                                      taxes: widget.data.taxes.validate(),
+                                      subTotal:
+                                          bookingAmountModel.finalSubTotal);
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ).expand(),
+                      16.width,
+                      PriceWidget(
+                          price: bookingAmountModel.finalTotalTax,
+                          color: Colors.red,
+                          isBoldText: true),
+                    ],
+                  ),
+                ],
+              ),
+
+              /// Final Amount
+              Column(
+                children: [
+                  Divider(height: 26, color: context.dividerColor),
+                  Row(
+                    children: [
+                      Text(language.totalAmount,
+                              style: secondaryTextStyle(size: 14))
+                          .expand(),
+                      PriceWidget(
+                        price: bookingAmountModel.finalGrandTotalAmount,
+                        color: primaryColor,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+
+              /// Advance Payable Amount if it is required by Service Provider
+              if (widget.data.serviceDetail!.isAdvancePayment)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Divider(height: 26, color: context.dividerColor),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text(language.advancePayAmount,
+                                style: secondaryTextStyle(size: 14)),
+                            Text(
+                                " (${widget.data.serviceDetail!.advancePaymentPercentage.validate().toString()}%)  ",
+                                style: boldTextStyle(color: Colors.green)),
+                          ],
+                        ).expand(),
+                        PriceWidget(
+                            price: advancePaymentAmount, color: primaryColor),
+                      ],
+                    ),
+                  ],
+                ),
+            ],
+          ),
+        )
+      ],
+    );
+
+    // return Offstage();
   }
 
   Widget buildDateWidget() {

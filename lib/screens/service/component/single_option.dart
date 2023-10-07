@@ -28,8 +28,13 @@ class _SingleOptionState extends State<SingleOption> {
 
   void selectVariant(int variantId) {
     setState(() {
-      widget.bookingStore.addRadioOption(
-          {'option': widget.option.id.validate(), 'variant': variantId});
+      widget.bookingStore.addRadioOption({
+        'option': widget.option.id.validate(),
+        'variant': variantId,
+        'price': widget.option.variants!
+            .firstWhere((element) => element.id == variantId)
+            .price
+      });
     });
   }
 

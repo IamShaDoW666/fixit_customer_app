@@ -28,8 +28,13 @@ class _MultiOptionState extends State<MultiOption> {
 
   void selectVariant(int optionId, int variantId) {
     setState(() {
-      widget.bookingStore
-          .addMultiOption({'option': optionId, 'variant': variantId});
+      widget.bookingStore.addMultiOption({
+        'option': optionId,
+        'variant': variantId,
+        'price': widget.option.variants!
+            .firstWhere((element) => element.id == variantId)
+            .price
+      });
     });
   }
 

@@ -1,3 +1,4 @@
+import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/extra_charges_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -12,6 +13,7 @@ BookingAmountModel finalCalculations({
   int durationDiff = 0,
   int quantity = 1,
   List<TaxData>? taxes,
+  List<Map<String, dynamic>>? options,
   CouponData? appliedCouponData,
   List<ExtraChargesModel>? extraCharges,
   BookingPackage? selectedPackage,
@@ -23,31 +25,57 @@ BookingAmountModel finalCalculations({
   BookingAmountModel data = BookingAmountModel();
 
   if (selectedPackage != null) {
-    data.finalTotalServicePrice = selectedPackage.price.validate().toStringAsFixed(DECIMAL_POINT).toDouble();
+    data.finalTotalServicePrice = selectedPackage.price
+        .validate()
+        .toStringAsFixed(DECIMAL_POINT)
+        .toDouble();
   } else {
     if (serviceType == SERVICE_TYPE_HOURLY) {
-      data.finalTotalServicePrice = hourlyCalculation(price: servicePrice.validate(), secTime: durationDiff.validate().toInt());
+      data.finalTotalServicePrice = hourlyCalculation(
+          price: servicePrice.validate(),
+          secTime: durationDiff.validate().toInt());
     } else {
-      data.finalTotalServicePrice = (servicePrice * quantity).toStringAsFixed(DECIMAL_POINT).toDouble();
+      data.finalTotalServicePrice =
+          (servicePrice + bookingStore.subTotal * quantity)
+              .toStringAsFixed(DECIMAL_POINT)
+              .toDouble();
     }
   }
 
-  data.finalDiscountAmount = selectedPackage == null && discount != 0 ? ((data.finalTotalServicePrice / 100) * discount).toStringAsFixed(DECIMAL_POINT).toDouble() : 0;
+  data.finalDiscountAmount = selectedPackage == null && discount != 0
+      ? ((data.finalTotalServicePrice / 100) * discount)
+          .toStringAsFixed(DECIMAL_POINT)
+          .toDouble()
+      : 0;
 
-  data.finalCouponDiscountAmount = appliedCouponData != null ? calculateCouponDiscount(couponData: appliedCouponData, price: data.finalTotalServicePrice) : 0;
+  data.finalCouponDiscountAmount = appliedCouponData != null
+      ? calculateCouponDiscount(
+          couponData: appliedCouponData, price: data.finalTotalServicePrice)
+      : 0;
 
-  data.finalSubTotal = (data.finalTotalServicePrice - data.finalDiscountAmount - data.finalCouponDiscountAmount).toStringAsFixed(DECIMAL_POINT).toDouble();
+  data.finalSubTotal = (data.finalTotalServicePrice -
+          data.finalDiscountAmount -
+          data.finalCouponDiscountAmount)
+      .toStringAsFixed(DECIMAL_POINT)
+      .toDouble();
 
-  num totalExtraCharges = extraCharges.validate().sumByDouble((e) => e.price.validate() * e.qty.validate(value: 1));
+  num totalExtraCharges = extraCharges
+      .validate()
+      .sumByDouble((e) => e.price.validate() * e.qty.validate(value: 1));
 
-  data.finalTotalTax = calculateTotalTaxAmount(taxes, data.finalSubTotal + totalExtraCharges);
+  data.finalTotalTax =
+      calculateTotalTaxAmount(taxes, data.finalSubTotal + totalExtraCharges);
 
-  data.finalGrandTotalAmount = (data.finalSubTotal + data.finalTotalTax + totalExtraCharges).toStringAsFixed(DECIMAL_POINT).toDouble();
+  data.finalGrandTotalAmount =
+      (data.finalSubTotal + data.finalTotalTax + totalExtraCharges)
+          .toStringAsFixed(DECIMAL_POINT)
+          .toDouble();
 
   return data;
 }
 
-num calculateCouponDiscount({CouponData? couponData, num price = 0, ServiceData? detail}) {
+num calculateCouponDiscount(
+    {CouponData? couponData, num price = 0, ServiceData? detail}) {
   num couponAmount = 0.0;
 
   if (couponData != null) {
@@ -70,7 +98,10 @@ num calculateTotalTaxAmount(List<TaxData>? taxes, num subTotal) {
     } else {
       element.totalCalculatedValue = element.value.validate();
     }
-    taxAmount += element.totalCalculatedValue.validate().toStringAsFixed(DECIMAL_POINT).toDouble();
+    taxAmount += element.totalCalculatedValue
+        .validate()
+        .toStringAsFixed(DECIMAL_POINT)
+        .toDouble();
   });
 
   return taxAmount.toStringAsFixed(DECIMAL_POINT).toDouble();
@@ -91,5 +122,7 @@ num hourlyCalculation({required int secTime, required num price}) {
     totalMinutes = secTime / 60;
   }
 
-  return (totalMinutes * perMinuteCharge).toStringAsFixed(DECIMAL_POINT).toDouble();
+  return (totalMinutes * perMinuteCharge)
+      .toStringAsFixed(DECIMAL_POINT)
+      .toDouble();
 }

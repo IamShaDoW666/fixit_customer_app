@@ -18,6 +18,12 @@ mixin _$BookingStore on _BookingStore, Store {
                   () => super.selectedOptions,
                   name: '_BookingStore.selectedOptions'))
           .value;
+  Computed<num>? _$subTotalComputed;
+
+  @override
+  num get subTotal => (_$subTotalComputed ??=
+          Computed<num>(() => super.subTotal, name: '_BookingStore.subTotal'))
+      .value;
 
   late final _$optionsAtom =
       Atom(name: '_BookingStore.options', context: context);
@@ -39,11 +45,11 @@ mixin _$BookingStore on _BookingStore, Store {
       ActionController(name: '_BookingStore', context: context);
 
   @override
-  void initQuantities(List<Option> options) {
+  void initQuantities(List<Option> options, num pricePerSqft) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.initQuantities');
     try {
-      return super.initQuantities(options);
+      return super.initQuantities(options, pricePerSqft);
     } finally {
       _$_BookingStoreActionController.endAction(_$actionInfo);
     }
@@ -83,7 +89,7 @@ mixin _$BookingStore on _BookingStore, Store {
   }
 
   @override
-  void increment(Map<String, dynamic> option) {
+  void increment(ObservableMap<String, dynamic> option) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.increment');
     try {
@@ -94,7 +100,7 @@ mixin _$BookingStore on _BookingStore, Store {
   }
 
   @override
-  void decrement(Map<String, dynamic> option) {
+  void decrement(ObservableMap<String, dynamic> option) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.decrement');
     try {
@@ -163,7 +169,8 @@ mixin _$BookingStore on _BookingStore, Store {
   String toString() {
     return '''
 options: ${options},
-selectedOptions: ${selectedOptions}
+selectedOptions: ${selectedOptions},
+subTotal: ${subTotal}
     ''';
   }
 }
