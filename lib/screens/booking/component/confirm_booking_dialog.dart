@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:booking_system_flutter/component/loader_widget.dart';
@@ -95,7 +96,9 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       CommonKeys.date:
           widget.data.serviceDetail!.dateTimeVal.validate().toString(),
       BookingServiceKeys.couponId: widget.couponCode.validate(),
-      BookService.amount: widget.data.serviceDetail!.price,
+      BookService.amount: bookingStore.subTotal > 0
+          ? bookingStore.subTotal + widget.data.serviceDetail!.price.validate()
+          : widget.data.serviceDetail!.price.validate(),
       BookService.quantity: '${widget.qty}',
       BookingServiceKeys.totalAmount:
           widget.bookingPrice.validate().toStringAsFixed(DECIMAL_POINT),
@@ -108,7 +111,10 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
               : null,
       BookingServiceKeys.type: BOOKING_TYPE_SERVICE,
       BookingServiceKeys.bookingPackage:
-          widget.selectedPackage != null ? selectedPackage : null
+          widget.selectedPackage != null ? selectedPackage : null,
+      BookingServiceKeys.optionVariants:
+          jsonEncode(bookingStore.selectedOptions),
+      BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft
     };
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());
@@ -136,7 +142,8 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
     print(widget.data.imageList);
     addBookingMultiPart(
             request: request,
-            imageList: widget.data.imageList!
+            imageList: widget.data.imageList
+                .validate()
                 .where((element) => !element.path.contains('http'))
                 .toList())
         .then((bookingDetailResponse) async {

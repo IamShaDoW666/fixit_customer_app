@@ -34,11 +34,14 @@ BookingAmountModel finalCalculations({
       data.finalTotalServicePrice = hourlyCalculation(
           price: servicePrice.validate(),
           secTime: durationDiff.validate().toInt());
-    } else {
+    } else if (bookingStore.subTotal > 0) {
       data.finalTotalServicePrice =
           (servicePrice + bookingStore.subTotal * quantity)
               .toStringAsFixed(DECIMAL_POINT)
               .toDouble();
+    } else {
+      data.finalTotalServicePrice =
+          (servicePrice * quantity).toStringAsFixed(DECIMAL_POINT).toDouble();
     }
   }
 

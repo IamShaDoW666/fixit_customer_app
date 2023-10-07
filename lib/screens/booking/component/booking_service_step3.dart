@@ -127,7 +127,11 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       child: Row(
                         children: [
                           PriceWidget(
-                              price: bookingStore.subTotal.validate(),
+                              price: bookingStore.subTotal > 0
+                                  ? bookingStore.subTotal +
+                                      widget.data.serviceDetail!.price
+                                          .validate()
+                                  : widget.data.serviceDetail!.price.validate(),
                               size: 12,
                               isBoldText: false,
                               color: textSecondaryColorGlobal),
