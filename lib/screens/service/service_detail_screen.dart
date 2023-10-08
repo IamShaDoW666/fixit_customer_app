@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
@@ -314,6 +316,19 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                             style: secondaryTextStyle()),
                   ],
                 ).paddingAll(16),
+                if (snap.data!.serviceDetail!.options != null &&
+                    snap.data!.serviceDetail!.options!
+                        .any((element) => element.area! > 0))
+                  Observer(builder: (_) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text("Approx. sqft: " +
+                                bookingStore.getApproximateArea.toString())
+                            .paddingSymmetric(horizontal: 18),
+                      ],
+                    );
+                  }),
                 OptionsWidget(snap.data!.serviceDetail!.options.validate(),
                         snap.data!.serviceDetail)
                     .paddingAll(16),

@@ -24,6 +24,13 @@ mixin _$BookingStore on _BookingStore, Store {
   num get subTotal => (_$subTotalComputed ??=
           Computed<num>(() => super.subTotal, name: '_BookingStore.subTotal'))
       .value;
+  Computed<num>? _$getApproximateAreaComputed;
+
+  @override
+  num get getApproximateArea => (_$getApproximateAreaComputed ??= Computed<num>(
+          () => super.getApproximateArea,
+          name: '_BookingStore.getApproximateArea'))
+      .value;
 
   late final _$optionsAtom =
       Atom(name: '_BookingStore.options', context: context);
@@ -38,6 +45,22 @@ mixin _$BookingStore on _BookingStore, Store {
   set options(ObservableList<ObservableMap<String, dynamic>> value) {
     _$optionsAtom.reportWrite(value, super.options, () {
       super.options = value;
+    });
+  }
+
+  late final _$approximateAreaAtom =
+      Atom(name: '_BookingStore.approximateArea', context: context);
+
+  @override
+  num get approximateArea {
+    _$approximateAreaAtom.reportRead();
+    return super.approximateArea;
+  }
+
+  @override
+  set approximateArea(num value) {
+    _$approximateAreaAtom.reportWrite(value, super.approximateArea, () {
+      super.approximateArea = value;
     });
   }
 
@@ -169,8 +192,10 @@ mixin _$BookingStore on _BookingStore, Store {
   String toString() {
     return '''
 options: ${options},
+approximateArea: ${approximateArea},
 selectedOptions: ${selectedOptions},
-subTotal: ${subTotal}
+subTotal: ${subTotal},
+getApproximateArea: ${getApproximateArea}
     ''';
   }
 }

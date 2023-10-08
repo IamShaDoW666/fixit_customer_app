@@ -46,26 +46,44 @@ class _MultiOptionState extends State<MultiOption> {
         style: boldTextStyle(size: LABEL_TEXT_SIZE),
       ),
       8.height,
-      Wrap(
+      Column(
           children: List.generate(
               widget.option.variants!.length,
-              (idx) => ChoiceChip(
-                    label: Text(widget.option.variants![idx].name.validate()),
-                    labelStyle: boldTextStyle(
-                        color: checkSelected(
-                                widget.option.variants![idx].id.validate())
-                            ? Colors.white
-                            : primaryColor),
-                    showCheckmark: false,
-                    selectedColor: primaryColor,
-                    side: BorderSide(color: primaryColor),
-                    selected: checkSelected(
-                        widget.option.variants![idx].id.validate()),
-                    onSelected: (newValue) {
-                      selectVariant(widget.option.id.validate(),
-                          widget.option.variants![idx].id.validate());
-                    },
-                  ).paddingAll(8)))
+              (idx) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        width: context.width() * 0.6,
+                        child: ChoiceChip(
+                          label: Marquee(
+                            animationDuration: Duration(seconds: 1),
+                            pauseDuration: Duration(seconds: 2),
+                            backDuration: Duration(seconds: 1),
+                            child: Text(
+                              widget.option.variants![idx].name.validate(),
+                            ),
+                          ),
+                          labelStyle: boldTextStyle(
+                              color: checkSelected(widget
+                                      .option.variants![idx].id
+                                      .validate())
+                                  ? Colors.white
+                                  : primaryColor),
+                          showCheckmark: false,
+                          selectedColor: primaryColor,
+                          side: BorderSide(color: primaryColor),
+                          selected: checkSelected(
+                              widget.option.variants![idx].id.validate()),
+                          onSelected: (newValue) {
+                            selectVariant(widget.option.id.validate(),
+                                widget.option.variants![idx].id.validate());
+                          },
+                        ),
+                      ).paddingAll(8),
+                      Text(widget.option.variants![idx].priceFormat.validate())
+                    ],
+                  )))
     ]);
   }
 }

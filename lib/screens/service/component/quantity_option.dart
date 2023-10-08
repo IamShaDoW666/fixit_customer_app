@@ -40,8 +40,13 @@ class _QuantityOptionState extends State<QuantityOption> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(widget.option.name.validate(),
-            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+        Row(
+          children: [
+            Text(widget.option.name.validate(),
+                style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+            Text(' (' + widget.option.area.toString() + ' sqft)')
+          ],
+        ),
         Observer(
           builder: (context) => Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

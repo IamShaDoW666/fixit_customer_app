@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:mobx/mobx.dart';
 
 import '../model/service_data_model.dart';
@@ -11,6 +9,9 @@ abstract class _BookingStore with Store {
   @observable
   ObservableList<ObservableMap<String, dynamic>> options =
       ObservableList<ObservableMap<String, dynamic>>();
+
+  @observable
+  num approximateArea = 0;
 
   @action
   void initQuantities(List<Option> options, num pricePerSqft) {
@@ -139,5 +140,16 @@ abstract class _BookingStore with Store {
       total += option['price'];
     });
     return total;
+  }
+
+  @computed
+  num get getApproximateArea {
+    num area = 0;
+    selectedOptions.forEach((option) {
+      if (option.containsKey('area')) {
+        area += (option['area'] * option['quantity']);
+      }
+    });
+    return area;
   }
 }
