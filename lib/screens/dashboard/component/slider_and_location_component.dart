@@ -168,44 +168,61 @@ class _SliderLocationComponentState extends State<SliderLocationComponent> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Observer(
-        builder: (context) {
-          return AppButton(
-            padding: EdgeInsets.all(0),
-            width: context.width(),
-            child: Container(
-              padding: EdgeInsets.all(16),
-              decoration: commonDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ic_location.iconImage(
-                      color: appStore.isDarkMode ? Colors.white : Colors.black),
-                  8.width,
-                  Text(
-                    appStore.isCurrentLocation
-                        ? getStringAsync(CURRENT_ADDRESS)
-                        : language.lblLocationOff,
-                    style: secondaryTextStyle(),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ).expand(),
-                  8.width,
-                  ic_active_location.iconImage(
-                      size: 24,
-                      color: appStore.isCurrentLocation ? primaryColor : grey),
-                ],
-              ),
+    return SearchLocation(
+      commonDecoration: commonDecoration,
+      callback: () {},
+    ).expand();
+  }
+}
+
+class SearchLocation extends StatelessWidget {
+  const SearchLocation({
+    super.key,
+    required this.commonDecoration,
+    required this.callback,
+  });
+
+  final Decoration commonDecoration;
+  final VoidCallback? callback;
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      builder: (context) {
+        return AppButton(
+          padding: EdgeInsets.all(0),
+          width: context.width(),
+          child: Container(
+            padding: EdgeInsets.all(16),
+            decoration: commonDecoration,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ic_location.iconImage(
+                    color: appStore.isDarkMode ? Colors.white : Colors.black),
+                8.width,
+                Text(
+                  appStore.isCurrentLocation
+                      ? getStringAsync(CURRENT_ADDRESS)
+                      : language.lblLocationOff,
+                  style: secondaryTextStyle(),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ).expand(),
+                8.width,
+                ic_active_location.iconImage(
+                    size: 24,
+                    color: appStore.isCurrentLocation ? primaryColor : grey),
+              ],
             ),
-            onTap: () async {
-              locationWiseService(context, () {
-                widget.callback?.call();
-              });
-            },
-          ).paddingSymmetric(horizontal: 16, vertical: 8);
-        },
-      ).expand(),
+          ),
+          onTap: () async {
+            locationWiseService(context, () {
+              callback?.call();
+            });
+          },
+        ).paddingOnly(top: 64, left: 16, right: 16);
+      },
     );
   }
 }

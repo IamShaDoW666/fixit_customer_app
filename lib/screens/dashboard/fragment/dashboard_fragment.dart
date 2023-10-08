@@ -24,6 +24,17 @@ class DashboardFragment extends StatefulWidget {
 class _DashboardFragmentState extends State<DashboardFragment> {
   Future<DashboardResponse>? future;
 
+  Decoration get commonDecoration {
+    return boxDecorationDefault(
+      color: context.cardColor,
+      boxShadow: [
+        BoxShadow(color: shadowColorGlobal, offset: Offset(1, 0)),
+        BoxShadow(color: shadowColorGlobal, offset: Offset(0, 1)),
+        BoxShadow(color: shadowColorGlobal, offset: Offset(-1, 0)),
+      ],
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -91,8 +102,8 @@ class _DashboardFragmentState extends State<DashboardFragment> {
                   return await 2.seconds.delay;
                 },
                 children: [
-                  SliderLocationComponent(
-                    sliderList: snap.slider.validate(),
+                  SearchLocation(
+                    commonDecoration: commonDecoration,
                     callback: () async {
                       appStore.setLoading(true);
 
