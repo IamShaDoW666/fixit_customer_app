@@ -228,6 +228,7 @@ class Option {
   int? typeInt;
   int? unitPrice;
   int? area;
+  bool? customizable;
   List<Variant>? variants;
 
   Option(
@@ -238,6 +239,7 @@ class Option {
       this.typeInt,
       this.unitPrice,
       this.area,
+      this.customizable,
       this.variants});
 
   factory Option.fromJson(Map<String, dynamic> json) {
@@ -249,6 +251,7 @@ class Option {
         typeInt: json['type_int'],
         unitPrice: json['unit_price'],
         area: json['area'],
+        customizable: json['customizable'],
         variants: json['variants'] != null
             ? (json['variants'] as List)
                 .map((i) => Variant.fromJson(i))
@@ -265,6 +268,7 @@ class Option {
     data['type_int'] = this.typeInt;
     data['unit_price'] = this.unitPrice;
     data['area'] = this.area;
+    data['customizable'] = this.customizable;
     if (this.variants != null) {
       data['variants'] = this.variants!.map((v) => v.toJson()).toList();
     }
@@ -277,15 +281,18 @@ class Variant {
   String? name;
   int? price;
   String? priceFormat;
+  bool? showDescription;
 
-  Variant({this.id, this.name, this.price, this.priceFormat});
+  Variant(
+      {this.id, this.name, this.price, this.priceFormat, this.showDescription});
 
   factory Variant.fromJson(Map<String, dynamic> json) {
     return Variant(
         id: json['id'],
         name: json['name'],
         price: json['price'],
-        priceFormat: json['price_format']);
+        priceFormat: json['price_format'],
+        showDescription: json['show_description']);
   }
 
   Map<String, dynamic> toJson() {
@@ -294,6 +301,7 @@ class Variant {
     data['name'] = this.name;
     data['price'] = this.price;
     data['price_format'] = this.priceFormat;
+    data['show_description'] = this.showDescription;
     return data;
   }
 }
