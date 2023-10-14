@@ -19,8 +19,6 @@ class QuantityOption extends StatefulWidget {
 }
 
 class _QuantityOptionState extends State<QuantityOption> {
-  int quantity = 1;
-
   void increment() {
     setState(() {
       bookingStore
@@ -37,40 +35,46 @@ class _QuantityOptionState extends State<QuantityOption> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            Text(widget.option.name.validate(),
-                style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-            Text(' (' + widget.option.area.toString() + ' sqft)')
-          ],
-        ),
-        Observer(
-          builder: (context) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              GestureDetector(
-                child: FaIcon(FontAwesomeIcons.minus),
-                onTap: decrement,
-              ),
-              8.width,
-              Text(
-                bookingStore
-                    .getOption(widget.option.id.validate())['quantity']
-                    .toString(),
-                style: boldTextStyle(size: 18),
-              ),
-              8.width,
-              GestureDetector(
-                child: FaIcon(FontAwesomeIcons.plus),
-                onTap: increment,
-              )
-            ],
-          ),
-        )
-      ],
+    return Observer(
+      builder: (_) => ((bookingStore.customize &&
+                  widget.option.customizable!) ||
+              (bookingStore.customize && !widget.option.customizable!))
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(widget.option.name.validate(),
+                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                    Text(' (' + widget.option.area.toString() + ' sqft)')
+                  ],
+                ),
+                Observer(
+                  builder: (context) => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      GestureDetector(
+                        child: FaIcon(FontAwesomeIcons.minus),
+                        onTap: decrement,
+                      ),
+                      8.width,
+                      Text(
+                        bookingStore
+                            .getOption(widget.option.id.validate())['quantity']
+                            .toString(),
+                        style: boldTextStyle(size: 18),
+                      ),
+                      8.width,
+                      GestureDetector(
+                        child: FaIcon(FontAwesomeIcons.plus),
+                        onTap: increment,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            )
+          : Offstage(),
     );
   }
 }

@@ -114,7 +114,8 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
           widget.selectedPackage != null ? selectedPackage : null,
       BookingServiceKeys.optionVariants:
           jsonEncode(bookingStore.selectedOptions),
-      BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft
+      BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft,
+      BookingServiceKeys.mobile: true
     };
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());

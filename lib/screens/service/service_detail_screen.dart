@@ -14,6 +14,7 @@ import 'package:booking_system_flutter/screens/booking/component/booking_detail_
 import 'package:booking_system_flutter/screens/booking/provider_info_screen.dart';
 import 'package:booking_system_flutter/screens/review/components/review_widget.dart';
 import 'package:booking_system_flutter/screens/review/rating_view_all_screen.dart';
+import 'package:booking_system_flutter/screens/service/component/package_option.dart';
 import 'package:booking_system_flutter/screens/service/component/service_component.dart';
 import 'package:booking_system_flutter/screens/service/component/service_detail_header_component.dart';
 import 'package:booking_system_flutter/screens/service/component/service_faq_widget.dart';
@@ -375,7 +376,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                       boxShadow: [BoxShadow()]),
                   child: Observer(
                     builder: (_) => Text(
-                      "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${(bookingStore.subTotal.validate() + snap!.data!.serviceDetail!.price.validate()).toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
+                      "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${(bookingStore.subTotal.validate() + snap.data!.serviceDetail!.price.validate()).toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
                       style: boldTextStyle(color: white, size: 16),
                     ).paddingAll(16),
                   ),
@@ -446,16 +447,27 @@ class _OptionsWidgetState extends State<OptionsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-            widget.options.length.validate(),
-            (index) => widget.options[index].typeInt == 0
-                ? widget.options[index].multi == 0
-                    ? SingleOption(widget.options[index], bookingStore)
-                        .paddingAll(8)
-                    : MultiOption(widget.options[index], bookingStore)
-                        .paddingAll(8)
-                : QuantityOption(widget.options[index]).paddingAll(8)));
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
+      ...List.generate(
+          widget.options.length.validate(),
+          (index) => widget.options[index].typeInt == 0
+              ? widget.options[index].multi == 0
+                  ? SingleOption(widget.options[index], bookingStore)
+                      .paddingAll(8)
+                  : MultiOption(widget.options[index], bookingStore)
+                      .paddingAll(8)
+              : widget.options[index].typeInt == 2
+                  ? PackageOption(
+                      widget.options[index], widget.service!, bookingStore)
+                  : QuantityOption(widget.options[index])),
+      Observer(
+          builder: (_) => bookingStore.descriptionValue != ''
+              ? Text(
+                  bookingStore.descriptionValue,
+                  style: boldTextStyle(size: 16),
+                )
+              : Offstage())
+    ]);
   }
 }

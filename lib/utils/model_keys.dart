@@ -49,6 +49,7 @@ class BookingServiceKeys {
   static String bookingAttachment = 'booking_attachment_';
   static String optionVariants = 'option_variants';
   static String pricePerSqft = 'price_per_sqft';
+  static String mobile = 'mobile';
 }
 
 class CouponKeys {

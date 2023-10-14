@@ -41,6 +41,7 @@ class ServiceData {
   num? isEnableAdvancePayment;
   num? advancePaymentPercentage;
   num? advancePaymentAmount;
+  bool? customizable;
   List<String>? attachments;
   List<String>? serviceAttachments;
   List<ServiceAddressMapping>? serviceAddressMapping;
@@ -101,6 +102,7 @@ class ServiceData {
       this.isEnableAdvancePayment,
       this.advancePaymentPercentage,
       this.advancePaymentAmount,
+      this.customizable,
       this.options});
 
   factory ServiceData.fromJson(Map<String, dynamic> json) {
@@ -157,6 +159,7 @@ class ServiceData {
           : null,
       isEnableAdvancePayment: json[AdvancePaymentKey.isEnableAdvancePayment],
       advancePaymentPercentage: json[AdvancePaymentKey.advancePaymentAmount],
+      customizable: json['customizable'],
       advancePaymentAmount: json['advance_payment_amount'],
     );
   }
@@ -190,6 +193,7 @@ class ServiceData {
     data['created_at'] = this.createdAt;
     data['customer_name'] = this.customerName;
     data['service_id'] = this.serviceId;
+    data['customizable'] = this.customizable;
     data['user_id'] = this.userId;
     data['type'] = this.type;
     if (this.serviceAttachments != null) {
@@ -280,11 +284,19 @@ class Variant {
   int? id;
   String? name;
   int? price;
+  int? packageArea;
   String? priceFormat;
   bool? showDescription;
+  String? description;
 
   Variant(
-      {this.id, this.name, this.price, this.priceFormat, this.showDescription});
+      {this.id,
+      this.name,
+      this.price,
+      this.packageArea,
+      this.priceFormat,
+      this.description,
+      this.showDescription});
 
   factory Variant.fromJson(Map<String, dynamic> json) {
     return Variant(
@@ -292,6 +304,8 @@ class Variant {
         name: json['name'],
         price: json['price'],
         priceFormat: json['price_format'],
+        packageArea: json['package_area'],
+        description: json['description'],
         showDescription: json['show_description']);
   }
 
@@ -301,6 +315,8 @@ class Variant {
     data['name'] = this.name;
     data['price'] = this.price;
     data['price_format'] = this.priceFormat;
+    data['package_area'] = this.packageArea;
+    data['description'] = this.description;
     data['show_description'] = this.showDescription;
     return data;
   }

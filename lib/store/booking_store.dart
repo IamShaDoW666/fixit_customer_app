@@ -13,6 +13,9 @@ abstract class _BookingStore with Store {
   @observable
   num approximateArea = 0;
 
+  @observable
+  bool customize = false;
+
   @action
   void initQuantities(List<Option> options, num pricePerSqft) {
     Iterable<Option> quantityOptions =
@@ -20,12 +23,12 @@ abstract class _BookingStore with Store {
     quantityOptions.forEach((option) {
       if (option.unitPrice! > 0) {
         addQuantityOption(ObservableMap.of(
-            {'option': option.id, 'quantity': 1, 'price': option.unitPrice}));
+            {'option': option.id, 'quantity': 0, 'price': option.unitPrice}));
       } else {
         addQuantityOption(ObservableMap.of({
           'option': option.id,
-          'quantity': 1,
-          'price': option.area! * pricePerSqft,
+          'quantity': 0,
+          'price': 0,
           'area': option.area,
           'pricePerArea': pricePerSqft
         }));
@@ -34,7 +37,25 @@ abstract class _BookingStore with Store {
   }
 
   @action
+  void toggleCustomize() {
+    Iterable<ObservableMap<String, dynamic>> package =
+        selectedOptions.where((element) => element['package'] == true);
+    if (package.isNotEmpty) {
+      removeOptionsById(package.first['option']);
+    }
+    customize = !customize;
+  }
+
+  @action
   void addRadioOption(Map<String, dynamic> option) {
+    removeOptionsById(option['option']);
+    if (!optionExists(option)) {
+      options.add(ObservableMap.of(option));
+    }
+  }
+
+  @action
+  void addPackageOption(Map<String, dynamic> option) {
     removeOptionsById(option['option']);
     if (!optionExists(option)) {
       options.add(ObservableMap.of(option));
@@ -70,7 +91,7 @@ abstract class _BookingStore with Store {
 
   @action
   void decrement(ObservableMap<String, dynamic> option) {
-    if (option['quantity'] != 1) {
+    if (option['quantity'] != 0) {
       option['quantity']--;
       if (option['unitPrice'] != null) {
         option['price'] = option['unitPrice'] * option['quantity'];
@@ -137,7 +158,9 @@ abstract class _BookingStore with Store {
   num get subTotal {
     num total = 0;
     selectedOptions.forEach((option) {
-      total += option['price'];
+      if (option['price'] != null) {
+        total += (option['price']);
+      }
     });
     return total;
   }
@@ -146,10 +169,29 @@ abstract class _BookingStore with Store {
   num get getApproximateArea {
     num area = 0;
     selectedOptions.forEach((option) {
+      if (option.containsKey('package')) {
+        area += option['packageArea'];
+      }
       if (option.containsKey('area')) {
         area += (option['area'] * option['quantity']);
       }
     });
     return area;
+  }
+
+  @computed
+  String get customizeValue => customize.toString();
+
+  @computed
+  String get descriptionValue {
+    if (!customize) {
+      Iterable<ObservableMap<String, dynamic>> options =
+          selectedOptions.where((element) => element['package'] == true);
+      if (options.isNotEmpty) {
+        return options.firstOrNull!['description'];
+      }
+      return '';
+    }
+    return '';
   }
 }

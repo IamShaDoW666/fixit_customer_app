@@ -221,7 +221,7 @@ class SearchLocation extends StatelessWidget {
               callback?.call();
             });
           },
-        ).paddingOnly(top: 64, left: 16, right: 16);
+        ).paddingOnly(left: 16, right: 16, top: 32);
       },
     );
   }

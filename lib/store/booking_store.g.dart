@@ -31,6 +31,20 @@ mixin _$BookingStore on _BookingStore, Store {
           () => super.getApproximateArea,
           name: '_BookingStore.getApproximateArea'))
       .value;
+  Computed<String>? _$customizeValueComputed;
+
+  @override
+  String get customizeValue =>
+      (_$customizeValueComputed ??= Computed<String>(() => super.customizeValue,
+              name: '_BookingStore.customizeValue'))
+          .value;
+  Computed<String>? _$descriptionValueComputed;
+
+  @override
+  String get descriptionValue => (_$descriptionValueComputed ??=
+          Computed<String>(() => super.descriptionValue,
+              name: '_BookingStore.descriptionValue'))
+      .value;
 
   late final _$optionsAtom =
       Atom(name: '_BookingStore.options', context: context);
@@ -64,6 +78,22 @@ mixin _$BookingStore on _BookingStore, Store {
     });
   }
 
+  late final _$customizeAtom =
+      Atom(name: '_BookingStore.customize', context: context);
+
+  @override
+  bool get customize {
+    _$customizeAtom.reportRead();
+    return super.customize;
+  }
+
+  @override
+  set customize(bool value) {
+    _$customizeAtom.reportWrite(value, super.customize, () {
+      super.customize = value;
+    });
+  }
+
   late final _$_BookingStoreActionController =
       ActionController(name: '_BookingStore', context: context);
 
@@ -79,11 +109,33 @@ mixin _$BookingStore on _BookingStore, Store {
   }
 
   @override
+  void toggleCustomize() {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.toggleCustomize');
+    try {
+      return super.toggleCustomize();
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addRadioOption(Map<String, dynamic> option) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.addRadioOption');
     try {
       return super.addRadioOption(option);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addPackageOption(Map<String, dynamic> option) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.addPackageOption');
+    try {
+      return super.addPackageOption(option);
     } finally {
       _$_BookingStoreActionController.endAction(_$actionInfo);
     }
@@ -193,9 +245,12 @@ mixin _$BookingStore on _BookingStore, Store {
     return '''
 options: ${options},
 approximateArea: ${approximateArea},
+customize: ${customize},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},
-getApproximateArea: ${getApproximateArea}
+getApproximateArea: ${getApproximateArea},
+customizeValue: ${customizeValue},
+descriptionValue: ${descriptionValue}
     ''';
   }
 }

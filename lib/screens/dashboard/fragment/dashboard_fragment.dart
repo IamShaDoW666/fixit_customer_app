@@ -1,3 +1,4 @@
+import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/dashboard_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
@@ -89,38 +90,61 @@ class _DashboardFragmentState extends State<DashboardFragment> {
             },
             loadingWidget: DashboardShimmer(),
             onSuccess: (snap) {
-              return AnimatedScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                listAnimationType: ListAnimationType.FadeIn,
-                fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
-                onSwipeRefresh: () async {
-                  appStore.setLoading(true);
+              return SafeArea(
+                child: AnimatedScrollView(
+                  physics: AlwaysScrollableScrollPhysics(),
+                  listAnimationType: ListAnimationType.FadeIn,
+                  fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
+                  onSwipeRefresh: () async {
+                    appStore.setLoading(true);
 
-                  init();
-                  setState(() {});
+                    init();
+                    setState(() {});
 
-                  return await 2.seconds.delay;
-                },
-                children: [
-                  SearchLocation(
-                    commonDecoration: commonDecoration,
-                    callback: () async {
-                      appStore.setLoading(true);
+                    return await 2.seconds.delay;
+                  },
+                  children: [
+                    if (appStore.isLoggedIn)
+                      Container(
+                        // decoration: commonDecoration,
+                        // color: Colors.amber,
+                        width: context.width(),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Welcome " + appStore.userFullName,
+                                style: TextStyle(fontSize: 28),
+                              ),
+                              CachedImageWidget(
+                                  circle: true,
+                                  url: appStore.userProfileImage,
+                                  height: 48),
+                            ],
+                          ),
+                        ).paddingAll(8),
+                      ).paddingSymmetric(horizontal: 16, vertical: 8),
+                    SearchLocation(
+                      commonDecoration: commonDecoration,
+                      callback: () async {
+                        appStore.setLoading(true);
 
-                      init();
-                      setState(() {});
-                    },
-                  ),
-                  30.height,
-                  PendingBookingComponent(upcomingData: snap.upcomingData),
-                  CategoryComponent(categoryList: snap.category.validate()),
-                  16.height,
-                  FeaturedServiceListComponent(
-                      serviceList: snap.featuredServices.validate()),
-                  ServiceListComponent(serviceList: snap.service.validate()),
-                  16.height,
-                  NewJobRequestComponent(),
-                ],
+                        init();
+                        setState(() {});
+                      },
+                    ),
+                    30.height,
+                    PendingBookingComponent(upcomingData: snap.upcomingData),
+                    CategoryComponent(categoryList: snap.category.validate()),
+                    16.height,
+                    FeaturedServiceListComponent(
+                        serviceList: snap.featuredServices.validate()),
+                    ServiceListComponent(serviceList: snap.service.validate()),
+                    16.height,
+                    NewJobRequestComponent(),
+                  ],
+                ),
               );
             },
           ),
