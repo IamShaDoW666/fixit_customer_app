@@ -34,11 +34,9 @@ import 'model/booking_data_model.dart';
 import 'model/booking_status_model.dart';
 import 'model/category_model.dart';
 import 'model/dashboard_model.dart';
-import 'store/booking_store.dart';
 
 //region Mobx Stores
 AppStore appStore = AppStore();
-BookingStore bookingStore = BookingStore();
 FilterStore filterStore = FilterStore();
 //endregion
 

@@ -1,4 +1,3 @@
-import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/store/booking_store.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +87,7 @@ class _SingleOptionState extends State<PackageOption> {
               side: BorderSide(color: primaryColor),
               onSelected: (newValue) {
                 setState(() {
-                  bookingStore.toggleCustomize();
+                  widget.bookingStore.toggleCustomize();
                 });
               },
               selected: widget.bookingStore.customize,

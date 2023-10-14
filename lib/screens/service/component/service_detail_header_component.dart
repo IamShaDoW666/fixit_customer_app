@@ -75,7 +75,14 @@ class _ServiceDetailHeaderComponentState
             top: context.statusBarHeight + 8,
             left: 16,
             child: Container(
-              child: BackWidget(iconColor: context.iconColor),
+              child: BackWidget(
+                onPressed: () {
+                  setState(() {
+                    finish(context);
+                  });
+                },
+                iconColor: context.iconColor,
+              ),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: context.cardColor.withOpacity(0.7)),

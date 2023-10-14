@@ -120,6 +120,17 @@ mixin _$BookingStore on _BookingStore, Store {
   }
 
   @override
+  void removeQuantityOptions() {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.removeQuantityOptions');
+    try {
+      return super.removeQuantityOptions();
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void addRadioOption(Map<String, dynamic> option) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.addRadioOption');

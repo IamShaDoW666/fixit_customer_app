@@ -3,6 +3,7 @@ import 'package:booking_system_flutter/component/custom_stepper.dart';
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
+import 'package:booking_system_flutter/screens/booking/component/booking_service_image.dart';
 import 'package:booking_system_flutter/screens/map/map_screen.dart';
 import 'package:booking_system_flutter/services/location_service.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
@@ -268,6 +269,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                           ],
                         ),
                         16.height,
+                        BookingServiceImage(data: widget.data),
                         Text("${language.hintDescription}:",
                             style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                         8.height,

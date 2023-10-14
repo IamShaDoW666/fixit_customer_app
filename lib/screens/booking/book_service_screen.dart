@@ -55,16 +55,9 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
         ),
       ),
       CustomStep(
-          title: widget.data.serviceDetail!.isSlotAvailable
-              ? language.lblStep3
-              : language.lblStep2,
-          page: BookingServiceImage(
-              data: widget.data,
-              isSlotAvailable: !widget.data.serviceDetail!.isSlotAvailable)),
-      CustomStep(
         title: widget.data.serviceDetail!.isSlotAvailable
-            ? language.lblStep4
-            : language.lblStep3,
+            ? language.lblStep3
+            : language.lblStep2,
         page: BookingServiceStep3(
             data: widget.data,
             selectedPackage:

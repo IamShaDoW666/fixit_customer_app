@@ -112,10 +112,15 @@ class _DashboardFragmentState extends State<DashboardFragment> {
                         child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
-                                "Welcome " + appStore.userFullName,
-                                style: TextStyle(fontSize: 28),
+                              Container(
+                                width: context.width() * 0.7,
+                                child: Text(
+                                  maxLines: 2,
+                                  "Welcome " + appStore.userFullName,
+                                  style: TextStyle(fontSize: 26),
+                                ),
                               ),
                               CachedImageWidget(
                                   circle: true,

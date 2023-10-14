@@ -43,7 +43,21 @@ abstract class _BookingStore with Store {
     if (package.isNotEmpty) {
       removeOptionsById(package.first['option']);
     }
+    removeQuantityOptions();
     customize = !customize;
+  }
+
+  @action
+  void removeQuantityOptions() {
+    Iterable<ObservableMap<String, dynamic>> quantityOptions = selectedOptions
+        .where((element) => element.containsKey('quantity'))
+        .toList();
+    if (quantityOptions.isNotEmpty) {
+      quantityOptions.forEach((element) {
+        element['quantity'] = 0;
+        element['price'] = 0;
+      });
+    }
   }
 
   @action

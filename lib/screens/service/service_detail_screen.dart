@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
@@ -33,6 +31,9 @@ import 'component/multi_option.dart';
 import 'component/quantity_option.dart';
 import 'component/single_option.dart';
 
+//Booking Store
+BookingStore bookingStore = BookingStore();
+
 class ServiceDetailScreen extends StatefulWidget {
   final int serviceId;
   final ServiceData? service;
@@ -55,14 +56,25 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
   @override
   void initState() {
     super.initState();
-    bookingStore.options = ObservableList.of([]);
     setStatusBarColor(transparentColor);
     init();
   }
 
   void init() async {
+    print('____________________');
     future = getServiceDetails(
         serviceId: widget.serviceId.validate(), customerId: appStore.userId);
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
+  void dispose() {
+    setStatusBarColor(transparentColor);
+    super.dispose();
   }
 
   //region Widgets
@@ -267,17 +279,6 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
   }
 
   @override
-  void setState(fn) {
-    if (mounted) super.setState(fn);
-  }
-
-  @override
-  void dispose() {
-    setStatusBarColor(transparentColor);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     Widget buildBodyWidget(AsyncSnapshot<ServiceDetailResponse> snap) {
       if (snap.hasError) {
@@ -359,11 +360,11 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                 reviewWidget(
                     data: snap.data!.ratingData!,
                     serviceDetailResponse: snap.data!),
-                24.height,
-                if (snap.data!.relatedService.validate().isNotEmpty)
-                  relatedServiceWidget(
-                      serviceList: snap.data!.relatedService.validate(),
-                      serviceId: snap.data!.serviceDetail!.id.validate()),
+                // 24.height,
+                // if (snap.data!.relatedService.validate().isNotEmpty)
+                //   relatedServiceWidget(
+                //       serviceList: snap.data!.relatedService.validate(),
+                //       serviceId: snap.data!.serviceDetail!.id.validate()),
               ],
             ),
             Positioned(
@@ -441,14 +442,22 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   @override
   void initState() {
     super.initState();
+    bookingStore.options = ObservableList.of([]);
+    bookingStore.approximateArea = 0;
     bookingStore.initQuantities(
         widget.options, widget.service!.pricePerSqft.validate());
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    bookingStore.options = ObservableList.of([]);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
+      // Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
       ...List.generate(
           widget.options.length.validate(),
           (index) => widget.options[index].typeInt == 0

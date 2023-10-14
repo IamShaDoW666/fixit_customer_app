@@ -1,6 +1,5 @@
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 
@@ -40,18 +39,17 @@ class _MultiOptionState extends State<MultiOption> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) =>
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          widget.option.name.validate(),
-          style: boldTextStyle(size: LABEL_TEXT_SIZE),
-        ),
-        8.height,
-        Column(
-            children: List.generate(
-                widget.option.variants!.length,
-                (idx) => Row(
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text(
+        widget.option.name.validate(),
+        style: boldTextStyle(size: LABEL_TEXT_SIZE),
+      ),
+      8.height,
+      Column(
+          children: List.generate(
+              widget.option.variants!.length,
+              (idx) => !widget.option.variants![idx].showDescription!
+                  ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
@@ -86,8 +84,59 @@ class _MultiOptionState extends State<MultiOption> {
                         Text(
                             widget.option.variants![idx].priceFormat.validate())
                       ],
-                    )))
-      ]),
-    );
+                    )
+                  : ChoiceChip(
+                      label: Container(
+                        width: context.width(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Marquee(
+                                  animationDuration: Duration(seconds: 1),
+                                  pauseDuration: Duration(seconds: 2),
+                                  backDuration: Duration(seconds: 1),
+                                  child: Text(
+                                    widget.option.variants![idx].name
+                                        .validate(),
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                                16.height,
+                                Container(
+                                  width: context.width() * 0.6,
+                                  child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                    widget.option.variants![idx].description
+                                        .validate(),
+                                  ),
+                                )
+                              ],
+                            ),
+                            Text(widget.option.variants![idx].priceFormat
+                                .validate())
+                          ],
+                        ),
+                      ),
+                      labelStyle: boldTextStyle(
+                          color: checkSelected(
+                                  widget.option.variants![idx].id.validate())
+                              ? Colors.white
+                              : primaryColor),
+                      showCheckmark: false,
+                      selectedColor: primaryColor,
+                      side: BorderSide(color: primaryColor),
+                      selected: checkSelected(
+                          widget.option.variants![idx].id.validate()),
+                      onSelected: (newValue) {
+                        selectVariant(widget.option.id.validate(),
+                            widget.option.variants![idx].id.validate());
+                      },
+                    ).paddingSymmetric(vertical: 8)))
+    ]);
   }
 }

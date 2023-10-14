@@ -10,6 +10,7 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/screens/booking/component/confirm_booking_dialog.dart';
 import 'package:booking_system_flutter/screens/booking/component/coupon_widget.dart';
 import 'package:booking_system_flutter/screens/service/package/package_info_bottom_sheet.dart';
+import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
