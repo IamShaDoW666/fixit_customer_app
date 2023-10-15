@@ -3,7 +3,6 @@ import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/category_model.dart';
 import 'package:booking_system_flutter/screens/category/category_screen.dart';
-import 'package:booking_system_flutter/screens/dashboard/component/category_widget.dart';
 import 'package:booking_system_flutter/screens/service/view_all_service_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -81,6 +80,8 @@ class CategoryComponentState extends State<CategoryComponent> {
                           backgroundColor: context.cardColor,
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SizedBox(
                               child: CachedImageWidget(
@@ -93,8 +94,13 @@ class CategoryComponentState extends State<CategoryComponent> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Text(widget.categoryList![index].name.validate())
-                                .paddingSymmetric(vertical: 8)
+                            Marquee(
+                              animationDuration: Duration(milliseconds: 2000),
+                              backDuration: Duration(milliseconds: 2000),
+                              pauseDuration: Duration(milliseconds: 1500),
+                              child: Text(
+                                  widget.categoryList![index].name.validate()),
+                            ).paddingAll(8)
                           ],
                         ),
                       ),
