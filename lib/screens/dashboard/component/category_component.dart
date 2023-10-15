@@ -57,6 +57,14 @@ class CategoryComponentState extends State<CategoryComponent> {
                     ? 9
                     : widget.categoryList!.length,
                 (index) => GestureDetector(
+                      onTap: () {
+                        ViewAllServiceScreen(
+                                categoryId:
+                                    widget.categoryList![index].id.validate(),
+                                categoryName: widget.categoryList![index].name,
+                                isFromCategory: true)
+                            .launch(context);
+                      },
                       child: Container(
                         width: context.width() / 3 - 26,
                         decoration: boxDecorationWithRoundedCorners(
@@ -90,26 +98,7 @@ class CategoryComponentState extends State<CategoryComponent> {
                           ],
                         ),
                       ),
-                    ))).paddingSymmetric(horizontal: 16, vertical: 8)
-        // HorizontalList(
-        //   itemCount: widget.categoryList.validate().length,
-        //   padding: EdgeInsets.only(left: 16, right: 16),
-        //   runSpacing: 8,
-        //   spacing: 12,
-        //   itemBuilder: (_, i) {
-        //     CategoryData data = widget.categoryList![i];
-        //     return GestureDetector(
-        //       onTap: () {
-        //         ViewAllServiceScreen(
-        //                 categoryId: data.id.validate(),
-        //                 categoryName: data.name,
-        //                 isFromCategory: true)
-        //             .launch(context);
-        //       },
-        //       child: CategoryWidget(categoryData: data),
-        //     );
-        //   },
-        // ),
+                    ))).paddingSymmetric(horizontal: 16, vertical: 8),
       ],
     );
   }
