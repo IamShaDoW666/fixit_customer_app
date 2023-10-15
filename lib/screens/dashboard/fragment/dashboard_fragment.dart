@@ -106,8 +106,6 @@ class _DashboardFragmentState extends State<DashboardFragment> {
                   children: [
                     if (appStore.isLoggedIn)
                       Container(
-                        // decoration: commonDecoration,
-                        // color: Colors.amber,
                         width: context.width(),
                         child: Center(
                           child: Row(

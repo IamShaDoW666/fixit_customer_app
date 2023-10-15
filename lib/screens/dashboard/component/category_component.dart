@@ -1,3 +1,4 @@
+import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/component/view_all_label_component.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/category_model.dart';
@@ -48,25 +49,67 @@ class CategoryComponentState extends State<CategoryComponent> {
             });
           },
         ).paddingSymmetric(horizontal: 16),
-        HorizontalList(
-          itemCount: widget.categoryList.validate().length,
-          padding: EdgeInsets.only(left: 16, right: 16),
-          runSpacing: 8,
-          spacing: 12,
-          itemBuilder: (_, i) {
-            CategoryData data = widget.categoryList![i];
-            return GestureDetector(
-              onTap: () {
-                ViewAllServiceScreen(
-                        categoryId: data.id.validate(),
-                        categoryName: data.name,
-                        isFromCategory: true)
-                    .launch(context);
-              },
-              child: CategoryWidget(categoryData: data),
-            );
-          },
-        ),
+        Wrap(
+            spacing: 16,
+            runSpacing: 16,
+            children: List.generate(
+                widget.categoryList!.length >= 9
+                    ? 9
+                    : widget.categoryList!.length,
+                (index) => GestureDetector(
+                      child: Container(
+                        width: context.width() / 3 - 26,
+                        decoration: boxDecorationWithRoundedCorners(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12, // Shadow color
+                              offset:
+                                  Offset(0, 2), // Offset (horizontal, vertical)
+                              blurRadius: 4.0, // Blur radius
+                              spreadRadius: 0.0, // Spread radius
+                            ),
+                          ],
+                          borderRadius: radius(),
+                          backgroundColor: context.cardColor,
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              child: CachedImageWidget(
+                                url: widget.categoryList![index].categoryImage
+                                    .validate(),
+                                height: 100,
+                                width: context.width(),
+                                radius: 12,
+                                circle: false,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Text(widget.categoryList![index].name.validate())
+                                .paddingSymmetric(vertical: 8)
+                          ],
+                        ),
+                      ),
+                    ))).paddingSymmetric(horizontal: 16, vertical: 8)
+        // HorizontalList(
+        //   itemCount: widget.categoryList.validate().length,
+        //   padding: EdgeInsets.only(left: 16, right: 16),
+        //   runSpacing: 8,
+        //   spacing: 12,
+        //   itemBuilder: (_, i) {
+        //     CategoryData data = widget.categoryList![i];
+        //     return GestureDetector(
+        //       onTap: () {
+        //         ViewAllServiceScreen(
+        //                 categoryId: data.id.validate(),
+        //                 categoryName: data.name,
+        //                 isFromCategory: true)
+        //             .launch(context);
+        //       },
+        //       child: CategoryWidget(categoryData: data),
+        //     );
+        //   },
+        // ),
       ],
     );
   }
