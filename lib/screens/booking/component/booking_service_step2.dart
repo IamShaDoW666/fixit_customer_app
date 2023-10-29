@@ -5,6 +5,8 @@ import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_service_image.dart';
 import 'package:booking_system_flutter/screens/map/map_screen.dart';
+import 'package:booking_system_flutter/screens/service/component/provider_select.dart';
+import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/services/location_service.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
@@ -315,17 +317,74 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                     text: language.lblPrevious,
                     textColor: textPrimaryColorGlobal,
                   ).expand(),
+                if (widget.data.providers!.length > 1)
+                  AppButton(
+                    shapeBorder: RoundedRectangleBorder(
+                        borderRadius: radius(),
+                        side: BorderSide(color: context.primaryColor)),
+                    onTap: () {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: radiusOnly(
+                                topLeft: defaultRadius,
+                                topRight: defaultRadius)),
+                        builder: (_) {
+                          return DraggableScrollableSheet(
+                              initialChildSize: 0.50,
+                              minChildSize: 0.2,
+                              maxChildSize: 1,
+                              builder: (context, scrollController) =>
+                                  ProviderSelect(
+                                    serviceData: widget.data.serviceDetail,
+                                    scrollController: scrollController,
+                                  ));
+                        },
+                      );
+                    },
+                    text: 'Select Provider',
+                    textColor: textPrimaryColorGlobal,
+                  ).expand(),
                 if (!widget.isSlotAvailable.validate()) 16.width,
                 AppButton(
                   onTap: () {
-                    hideKeyboard(context);
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      widget.data.serviceDetail!.bookingDescription =
-                          descriptionCont.text;
-                      widget.data.serviceDetail!.address = addressCont.text;
-                      customStepperController.nextPage(
-                          duration: 200.milliseconds, curve: Curves.easeOut);
+                    if (bookingStore.providerId != 0) {
+                      hideKeyboard(context);
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        widget.data.serviceDetail!.bookingDescription =
+                            descriptionCont.text;
+                        widget.data.serviceDetail!.address = addressCont.text;
+                        customStepperController.nextPage(
+                            duration: 200.milliseconds, curve: Curves.easeOut);
+                      }
+                    } else {
+                      if (widget.data.providers!.length == 1) {
+                        bookingStore.providerId =
+                            widget.data.providers![0].id.validate();
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          widget.data.serviceDetail!.bookingDescription =
+                              descriptionCont.text;
+                          widget.data.serviceDetail!.address = addressCont.text;
+                          customStepperController.nextPage(
+                              duration: 200.milliseconds,
+                              curve: Curves.easeOut);
+                        }
+                      }
+                      hideKeyboard(context);
+                      snackBar(
+                        context,
+                        title: "Please select provider",
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(borderRadius: radius(30)),
+                        duration: Duration(seconds: 3),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 128, horizontal: 8),
+                      );
                     }
                   },
                   text: language.btnNext,

@@ -1,11 +1,8 @@
-import 'dart:io';
-
 import 'package:booking_system_flutter/component/back_widget.dart';
 import 'package:booking_system_flutter/component/custom_stepper.dart';
 import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/package_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
-import 'package:booking_system_flutter/screens/booking/component/booking_service_image.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_service_step1.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_service_step2.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_service_step3.dart';

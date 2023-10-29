@@ -14,6 +14,9 @@ abstract class _BookingStore with Store {
   num approximateArea = 0;
 
   @observable
+  int providerId = 0;
+
+  @observable
   bool customize = false;
 
   @action

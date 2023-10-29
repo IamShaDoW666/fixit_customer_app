@@ -50,6 +50,7 @@ class BookingServiceKeys {
   static String optionVariants = 'option_variants';
   static String pricePerSqft = 'price_per_sqft';
   static String mobile = 'mobile';
+  static String providerId = 'provider_id';
 }
 
 class CouponKeys {

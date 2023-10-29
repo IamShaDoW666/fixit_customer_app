@@ -78,6 +78,22 @@ mixin _$BookingStore on _BookingStore, Store {
     });
   }
 
+  late final _$providerIdAtom =
+      Atom(name: '_BookingStore.providerId', context: context);
+
+  @override
+  int get providerId {
+    _$providerIdAtom.reportRead();
+    return super.providerId;
+  }
+
+  @override
+  set providerId(int value) {
+    _$providerIdAtom.reportWrite(value, super.providerId, () {
+      super.providerId = value;
+    });
+  }
+
   late final _$customizeAtom =
       Atom(name: '_BookingStore.customize', context: context);
 
@@ -256,6 +272,7 @@ mixin _$BookingStore on _BookingStore, Store {
     return '''
 options: ${options},
 approximateArea: ${approximateArea},
+providerId: ${providerId},
 customize: ${customize},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},

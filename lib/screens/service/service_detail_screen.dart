@@ -137,9 +137,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(language.lblAboutProvider,
-            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-        16.height,
+        // 16.height,
         BookingDetailProviderWidget(providerData: data).onTap(() async {
           await ProviderInfoScreen(providerId: data.id).launch(context);
           setStatusBarColor(Colors.transparent);
@@ -338,7 +336,18 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                     data: snap.data!.serviceDetail!.bookingSlots.validate(),
                     isSlotAvailable: snap.data!.serviceDetail!.isSlotAvailable),
                 availableWidget(data: snap.data!.serviceDetail!),
-                providerWidget(data: snap.data!.provider!),
+                // providerWidget(data: snap.data!.provider!),
+
+                Column(
+                  children: [
+                    Text("Providers",
+                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                    ...List.generate(
+                        snap.data!.providers!.length,
+                        (index) =>
+                            providerWidget(data: snap.data!.providers![index]))
+                  ],
+                ),
 
                 /// Only active status package display
                 if (snap.data!.serviceDetail!.servicePackage
@@ -444,6 +453,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     super.initState();
     bookingStore.options = ObservableList.of([]);
     bookingStore.approximateArea = 0;
+    bookingStore.providerId = 0;
     bookingStore.initQuantities(
         widget.options, widget.service!.pricePerSqft.validate());
   }
@@ -452,6 +462,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   void dispose() {
     super.dispose();
     bookingStore.options = ObservableList.of([]);
+    bookingStore.providerId = 0;
   }
 
   @override

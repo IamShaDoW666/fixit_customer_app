@@ -88,7 +88,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
     Map<String, dynamic> request = {
       CommonKeys.id: "",
       CommonKeys.serviceId: widget.data.serviceDetail!.id.toString(),
-      CommonKeys.providerId: widget.data.provider!.id.validate().toString(),
+      // CommonKeys.providerId: widget.data.provider!.id.validate().toString(),
       CommonKeys.customerId: appStore.userId.toString().toString(),
       BookingServiceKeys.description:
           widget.data.serviceDetail!.bookingDescription.validate().toString(),
@@ -116,7 +116,8 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.optionVariants:
           jsonEncode(bookingStore.selectedOptions),
       BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft,
-      BookingServiceKeys.mobile: true
+      BookingServiceKeys.mobile: true,
+      BookingServiceKeys.providerId: bookingStore.providerId
     };
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());

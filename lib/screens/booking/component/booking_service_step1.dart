@@ -57,16 +57,29 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
     isUpdate = widget.bookingData != null;
 
     if (widget.data!.serviceDetail!.bookingDate != null) {
-      selectedHorizontalDate = DateTime.parse(widget.data!.serviceDetail!.bookingDate.validate().toString());
+      selectedHorizontalDate = DateTime.parse(
+          widget.data!.serviceDetail!.bookingDate.validate().toString());
     }
 
     if (isUpdate) {
-      selectedHorizontalDate = DateTime.parse(widget.bookingData!.date.validate().toString());
+      selectedHorizontalDate =
+          DateTime.parse(widget.bookingData!.date.validate().toString());
 
-      SlotData tempSlot = slotsList.firstWhere((element) => element.day.validate().toLowerCase() == selectedHorizontalDate.weekday.weekDayName.validate().toLowerCase());
+      SlotData tempSlot = slotsList.firstWhere((element) =>
+          element.day.validate().toLowerCase() ==
+          selectedHorizontalDate.weekday.weekDayName.validate().toLowerCase());
 
-      if (!tempSlot.slot.validate().contains(widget.bookingData!.bookingSlot.validate())) {
-        slotsList.firstWhere((element) => element.day.validate().toLowerCase() == selectedHorizontalDate.weekday.weekDayName.validate().toLowerCase()).slot!.add(widget.bookingData!.bookingSlot.validate());
+      if (!tempSlot.slot
+          .validate()
+          .contains(widget.bookingData!.bookingSlot.validate())) {
+        slotsList
+            .firstWhere((element) =>
+                element.day.validate().toLowerCase() ==
+                selectedHorizontalDate.weekday.weekDayName
+                    .validate()
+                    .toLowerCase())
+            .slot!
+            .add(widget.bookingData!.bookingSlot.validate());
       }
     }
   }
@@ -78,7 +91,9 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
 
   void _handleNextButtonClick() {
     if (isUpdate) {
-      if (widget.data!.serviceDetail!.bookingSlot.validate() == widget.bookingData!.bookingSlot.validate()) return toast(language.pleaseSelectDifferentSlotThenPrevious);
+      if (widget.data!.serviceDetail!.bookingSlot.validate() ==
+          widget.bookingData!.bookingSlot.validate())
+        return toast(language.pleaseSelectDifferentSlotThenPrevious);
 
       showConfirmDialogCustom(
         context,
@@ -92,11 +107,17 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
     } else {
       if (widget.data!.serviceDetail!.bookingSlot.validate().isNotEmpty) {
         Fluttertoast.cancel();
-        widget.data!.serviceDetail!.bookingDate = formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7);
-        widget.data!.serviceDetail!.bookingDay = selectedHorizontalDate.weekday.weekDayName.toLowerCase();
-        widget.data!.serviceDetail!.dateTimeVal = formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_3);
+        widget.data!.serviceDetail!.bookingDate = formatDate(
+            selectedHorizontalDate.toString(),
+            format: DATE_FORMAT_7);
+        widget.data!.serviceDetail!.bookingDay =
+            selectedHorizontalDate.weekday.weekDayName.toLowerCase();
+        widget.data!.serviceDetail!.dateTimeVal = formatDate(
+            selectedHorizontalDate.toString(),
+            format: DATE_FORMAT_3);
         log(selectedHorizontalDate.toString());
-        customStepperController.nextPage(duration: 200.milliseconds, curve: Curves.linearToEaseOut);
+        customStepperController.nextPage(
+            duration: 200.milliseconds, curve: Curves.linearToEaseOut);
       } else {
         toast(language.pleaseSelectTheSlotsFirst, length: Toast.LENGTH_LONG);
       }
@@ -106,8 +127,10 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
   void updateDetails() async {
     Map request = {
       CommonKeys.id: widget.bookingData!.id.validate(),
-      "date": formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7),
-      "booking_date": formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7),
+      "date":
+          formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7),
+      "booking_date":
+          formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7),
       "booking_slot": widget.data!.serviceDetail!.bookingSlot,
       "booking_day": selectedHorizontalDate.weekday.weekDayName.toLowerCase(),
       CommonKeys.status: widget.bookingData!.status.validate(),
@@ -116,7 +139,8 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
     log(request);
     appStore.setLoading(true);
     await updateBooking(request).then((value) {
-      widget.bookingData!.date = formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7);
+      widget.bookingData!.date =
+          formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7);
       widget.bookingData!.bookingSlot = widget.data!.serviceDetail!.bookingSlot;
 
       toast(language.lblDateTimeUpdated);
@@ -131,8 +155,17 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> temp =
-        slotsList.validate().isNotEmpty ? slotsList.validate().firstWhere((element) => element.day!.toLowerCase() == selectedHorizontalDate.weekday.weekDayName.toLowerCase(), orElse: () => SlotData(slot: [], day: '')).slot.validate() : [];
+    List<String> temp = slotsList.validate().isNotEmpty
+        ? slotsList
+            .validate()
+            .firstWhere(
+                (element) =>
+                    element.day!.toLowerCase() ==
+                    selectedHorizontalDate.weekday.weekDayName.toLowerCase(),
+                orElse: () => SlotData(slot: [], day: ''))
+            .slot
+            .validate()
+        : [];
     return Scaffold(
       appBar: widget.showAppbar
           ? appBarWidget(
@@ -152,16 +185,22 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(language.lblSelectDate, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                  Text(language.lblSelectDate,
+                      style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                   16.height,
                   HorizontalDatePickerWidget(
                     height: 90,
                     startDate: DateTime.now(),
-                    endDate: DateTime(DateTime.now().year, DateTime.now().month + 2),
+                    endDate:
+                        DateTime(DateTime.now().year, DateTime.now().month + 2),
                     selectedDate: selectedHorizontalDate,
                     widgetWidth: context.width(),
                     selectedColor: primaryColor,
-                    dateItemComponentList: [DateItem.Month, DateItem.Day, DateItem.WeekDay],
+                    dateItemComponentList: [
+                      DateItem.Month,
+                      DateItem.Day,
+                      DateItem.WeekDay
+                    ],
                     dayFontSize: 20,
                     weekDayFontSize: 16,
                     datePickerController: _datePickerController,
@@ -178,7 +217,8 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(language.use24HourFormat, style: secondaryTextStyle(size: 14)),
+                      Text(language.use24HourFormat,
+                          style: secondaryTextStyle(size: 14)),
                       16.width,
                       Observer(builder: (context) {
                         return Transform.scale(
@@ -194,13 +234,19 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
                     ],
                   ),
                   16.height,
-                  Text(language.availableSlots, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                  Text(language.availableSlots,
+                      style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                   16.height,
                   temp.isNotEmpty
                       ? AvailableSlotsComponent(
                           key: keyForTimeSlotWidget,
-                          selectedSlots: widget.data!.serviceDetail!.bookingSlot.validate().isNotEmpty
-                              ? [widget.data!.serviceDetail!.bookingSlot.validate()]
+                          selectedSlots: widget.data!.serviceDetail!.bookingSlot
+                                  .validate()
+                                  .isNotEmpty
+                              ? [
+                                  widget.data!.serviceDetail!.bookingSlot
+                                      .validate()
+                                ]
                               : isUpdate
                                   ? [widget.bookingData!.bookingSlot.validate()]
                                   : [],
@@ -211,7 +257,8 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
                             isSlotSelected = selectedSlots.isNotEmpty;
 
                             if (isSlotSelected) {
-                              widget.data!.serviceDetail!.bookingSlot = selectedSlots.first.validate();
+                              widget.data!.serviceDetail!.bookingSlot =
+                                  selectedSlots.first.validate();
                             } else {
                               widget.data!.serviceDetail!.bookingSlot = "";
                             }
@@ -237,7 +284,9 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
                 text: isUpdate ? language.lblUpdate : language.btnNext,
               ),
             ),
-            Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
+            Observer(
+                builder: (_) =>
+                    LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),
       ),
