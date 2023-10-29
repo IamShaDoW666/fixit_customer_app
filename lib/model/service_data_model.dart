@@ -1,5 +1,6 @@
 import 'package:booking_system_flutter/model/package_data_model.dart';
 import 'package:booking_system_flutter/model/slot_data.dart';
+import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -48,6 +49,7 @@ class ServiceData {
   List<SlotData>? bookingSlots;
   List<BookingPackage>? servicePackage;
   List<Option>? options;
+  List<UserData>? providers;
 
   //Local
   bool get isSlotAvailable => isSlot.validate() == 1;
@@ -103,7 +105,8 @@ class ServiceData {
       this.advancePaymentPercentage,
       this.advancePaymentAmount,
       this.customizable,
-      this.options});
+      this.options,
+      this.providers});
 
   factory ServiceData.fromJson(Map<String, dynamic> json) {
     return ServiceData(
@@ -156,6 +159,11 @@ class ServiceData {
           : null,
       options: json['options'] != null
           ? (json['options'] as List).map((i) => Option.fromJson(i)).toList()
+          : null,
+      providers: json['providers'] != null
+          ? (json['providers'] as List)
+              .map((i) => UserData.fromJson(i))
+              .toList()
           : null,
       isEnableAdvancePayment: json[AdvancePaymentKey.isEnableAdvancePayment],
       advancePaymentPercentage: json[AdvancePaymentKey.advancePaymentAmount],
@@ -210,6 +218,10 @@ class ServiceData {
 
     if (this.options != null) {
       data['options'] = this.options!.map((v) => v.toJson()).toList();
+    }
+
+    if (this.providers != null) {
+      data['provider'] = this.providers!.map((v) => v.toJson()).toList();
     }
 
     if (this.servicePackage != null) {

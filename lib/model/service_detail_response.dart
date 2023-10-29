@@ -5,7 +5,7 @@ import 'package:booking_system_flutter/model/user_data_model.dart';
 
 class ServiceDetailResponse {
   List<CouponData>? couponData;
-  UserData? provider;
+  List<UserData>? providers;
   List<RatingData>? ratingData;
   ServiceData? serviceDetail;
   List<TaxData>? taxes;
@@ -15,7 +15,7 @@ class ServiceDetailResponse {
 
   ServiceDetailResponse(
       {this.couponData,
-      this.provider,
+      this.providers,
       this.ratingData,
       this.serviceDetail,
       this.taxes,
@@ -29,8 +29,11 @@ class ServiceDetailResponse {
               .map((i) => CouponData.fromJson(i))
               .toList()
           : null,
-      provider:
-          json['provider'] != null ? UserData.fromJson(json['provider']) : null,
+      providers: json['providers'] != null
+          ? (json['providers'] as List)
+              .map((i) => UserData.fromJson(i))
+              .toList()
+          : null,
       ratingData: json['rating_data'] != null
           ? (json['rating_data'] as List)
               .map((i) => RatingData.fromJson(i))
@@ -60,8 +63,8 @@ class ServiceDetailResponse {
     if (this.couponData != null) {
       data['coupon_data'] = this.couponData!.map((v) => v.toJson()).toList();
     }
-    if (this.provider != null) {
-      data['provider'] = this.provider!.toJson();
+    if (this.providers != null) {
+      data['provider'] = this.providers!.map((v) => v.toJson()).toList();
     }
     if (this.ratingData != null) {
       data['rating_data'] = this.ratingData!.map((v) => v.toJson()).toList();

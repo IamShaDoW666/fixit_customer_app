@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "482957258448-gvrke5gqikc14o1529ohlingt57un4o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yallakhedma.fixit",
+            "certificate_hash": "66fa04a29cbcfe00e1f4291b90e23b002ce1d495"
+          }
+        },
+        {
           "client_id": "482957258448-6orkdbsb7bvti49p95vgic6ckg16taom.apps.googleusercontent.com",
           "client_type": 3
         }
