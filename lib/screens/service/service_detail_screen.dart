@@ -454,6 +454,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     bookingStore.options = ObservableList.of([]);
     bookingStore.approximateArea = 0;
     bookingStore.providerId = 0;
+    bookingStore.providerName = '';
     bookingStore.initQuantities(
         widget.options, widget.service!.pricePerSqft.validate());
   }
@@ -463,6 +464,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     super.dispose();
     bookingStore.options = ObservableList.of([]);
     bookingStore.providerId = 0;
+    bookingStore.providerName = '';
   }
 
   @override

@@ -45,6 +45,13 @@ mixin _$BookingStore on _BookingStore, Store {
           Computed<String>(() => super.descriptionValue,
               name: '_BookingStore.descriptionValue'))
       .value;
+  Computed<bool>? _$providerSelectedComputed;
+
+  @override
+  bool get providerSelected => (_$providerSelectedComputed ??= Computed<bool>(
+          () => super.providerSelected,
+          name: '_BookingStore.providerSelected'))
+      .value;
 
   late final _$optionsAtom =
       Atom(name: '_BookingStore.options', context: context);
@@ -91,6 +98,22 @@ mixin _$BookingStore on _BookingStore, Store {
   set providerId(int value) {
     _$providerIdAtom.reportWrite(value, super.providerId, () {
       super.providerId = value;
+    });
+  }
+
+  late final _$providerNameAtom =
+      Atom(name: '_BookingStore.providerName', context: context);
+
+  @override
+  String get providerName {
+    _$providerNameAtom.reportRead();
+    return super.providerName;
+  }
+
+  @override
+  set providerName(String value) {
+    _$providerNameAtom.reportWrite(value, super.providerName, () {
+      super.providerName = value;
     });
   }
 
@@ -273,12 +296,14 @@ mixin _$BookingStore on _BookingStore, Store {
 options: ${options},
 approximateArea: ${approximateArea},
 providerId: ${providerId},
+providerName: ${providerName},
 customize: ${customize},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},
 getApproximateArea: ${getApproximateArea},
 customizeValue: ${customizeValue},
-descriptionValue: ${descriptionValue}
+descriptionValue: ${descriptionValue},
+providerSelected: ${providerSelected}
     ''';
   }
 }

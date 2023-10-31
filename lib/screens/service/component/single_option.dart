@@ -1,4 +1,3 @@
-import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/store/booking_store.dart';
 import 'package:flutter/material.dart';

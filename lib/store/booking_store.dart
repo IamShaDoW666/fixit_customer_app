@@ -17,6 +17,9 @@ abstract class _BookingStore with Store {
   int providerId = 0;
 
   @observable
+  String providerName = '';
+
+  @observable
   bool customize = false;
 
   @action
@@ -211,4 +214,7 @@ abstract class _BookingStore with Store {
     }
     return '';
   }
+
+  @computed
+  bool get providerSelected => providerName != '';
 }

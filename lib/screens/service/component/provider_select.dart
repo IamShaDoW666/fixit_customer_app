@@ -50,8 +50,8 @@ class ProviderSelect extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
                   serviceData!.providers!.length,
-                  (index) => providerWidget(
-                      data: serviceData!.providers![index], context: context)),
+                  (index) =>
+                      ProviderWidget(data: serviceData!.providers![index])),
             )
           ],
         ),
@@ -60,36 +60,51 @@ class ProviderSelect extends StatelessWidget {
   }
 }
 
-Widget providerWidget({required UserData data, required BuildContext context}) {
-  return GestureDetector(
-    onTap: () {
-      bookingStore.providerId = data.id.validate();
-      finish(context);
-    },
-    child: Container(
-      color: cardColor,
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          ImageBorder(src: data.profileImage.validate(), height: 70),
-          16.width,
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(data.displayName.validate(), style: boldTextStyle())
-                      .flexible(),
-                  16.width,
-                ],
-              ),
-              4.height,
-              DisabledRatingBarWidget(
-                  rating: data.providersServiceRating.validate()),
-            ],
-          ).expand(),
-        ],
-      ).paddingAll(24),
-    ),
-  );
+class ProviderWidget extends StatefulWidget {
+  final UserData data;
+  const ProviderWidget({Key? key, required this.data}) : super(key: key);
+
+  @override
+  _ProviderSelectState createState() => _ProviderSelectState();
+}
+
+class _ProviderSelectState extends State<ProviderWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          bookingStore.providerId = widget.data.id.validate();
+          bookingStore.providerName = widget.data.displayName.validate();
+        });
+        finish(context);
+      },
+      child: Container(
+        color: cardColor,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ImageBorder(src: widget.data.profileImage.validate(), height: 70),
+            16.width,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(widget.data.displayName.validate(),
+                            style: boldTextStyle())
+                        .flexible(),
+                    16.width,
+                  ],
+                ),
+                4.height,
+                DisabledRatingBarWidget(
+                    rating: widget.data.providersServiceRating.validate()),
+              ],
+            ).expand(),
+          ],
+        ).paddingAll(24),
+      ),
+    );
+  }
 }
