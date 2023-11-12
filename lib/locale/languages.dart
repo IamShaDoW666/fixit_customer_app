@@ -60,6 +60,10 @@ abstract class BaseLanguage {
 
   String get privacyPolicy;
 
+  String get inclusions;
+
+  String get exclusions;
+
   String get about;
 
   String get changePassword;

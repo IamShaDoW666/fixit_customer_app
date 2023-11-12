@@ -5,6 +5,12 @@ class LanguageAr extends BaseLanguage {
   String get walkTitle1 => 'العثور على خدماتك';
 
   @override
+  String get inclusions => "inclusions";
+
+  @override
+  String get exclusions => "exclusions";
+
+  @override
   String get walkTitle2 => 'حجز موعد';
 
   @override

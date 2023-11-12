@@ -41,9 +41,17 @@ class _QuantityOptionState extends State<QuantityOption> {
               children: [
                 Row(
                   children: [
-                    Text(widget.option.name.validate(),
-                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                    Text(' (' + widget.option.area.toString() + ' sqft)')
+                    Container(
+                      width: context.width() * 0.6,
+                      child: Marquee(
+                        animationDuration: Duration(seconds: 1),
+                        child: Text(widget.option.name.validate(),
+                            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                      ),
+                    ),
+                    Marquee(
+                        child: Text(
+                            ' (' + widget.option.area.toString() + ' sqft)'))
                   ],
                 ),
                 Observer(

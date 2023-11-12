@@ -25,6 +25,8 @@ class ServiceData {
   num? userId;
   String? duration;
   String? description;
+  String? inclusions;
+  String? exclusions;
   String? providerName;
   String? categoryName;
   String? subCategoryName;
@@ -73,6 +75,8 @@ class ServiceData {
       this.categoryName,
       this.cityId,
       this.description,
+      this.inclusions,
+      this.exclusions,
       this.bookingDay,
       this.discount,
       this.duration,
@@ -126,6 +130,8 @@ class ServiceData {
       duration: json['duration'],
       status: json['status'],
       description: json['description'],
+      inclusions: json['inclusions'],
+      exclusions: json['exclusions'],
       isFeatured: json['is_featured'],
       providerName: json['provider_name'],
       categoryName: json['category_name'],
@@ -178,6 +184,8 @@ class ServiceData {
     data['category_name'] = this.categoryName;
     data['city_id'] = this.cityId;
     data['description'] = this.description;
+    data['inclusions'] = this.inclusions;
+    data['exclusions'] = this.exclusions;
     data['discount'] = this.discount;
     data['booking_date'] = this.bookingDate;
     data['booking_slot'] = this.bookingSlot;
@@ -299,6 +307,8 @@ class Variant {
   int? packageArea;
   String? priceFormat;
   bool? showDescription;
+  String? inclusions;
+  String? exclusions;
   String? description;
   List<OptionVariant>? optionVariants;
 
@@ -309,6 +319,8 @@ class Variant {
       this.packageArea,
       this.priceFormat,
       this.description,
+      this.inclusions,
+      this.exclusions,
       this.showDescription,
       this.optionVariants});
 
@@ -336,6 +348,8 @@ class Variant {
     data['price_format'] = this.priceFormat;
     data['package_area'] = this.packageArea;
     data['description'] = this.description;
+    data['inclusions'] = this.inclusions;
+    data['exclusions'] = this.exclusions;
     data['show_description'] = this.showDescription;
     if (this.optionVariants != null) {
       data['optionVariants'] =

@@ -162,6 +162,12 @@ class LanguageEn extends BaseLanguage {
   String get done => "Done";
 
   @override
+  String get inclusions => "Inclusions";
+
+  @override
+  String get exclusions => "Exclusions";
+
+  @override
   String get totalAmount => 'Total Amount';
 
   @override

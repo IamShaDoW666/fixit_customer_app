@@ -11,6 +11,11 @@ class LanguageFr extends BaseLanguage {
   String get walkTitle3 => "Passerelle de paiement";
 
   @override
+  String get inclusions => "inclusions";
+  @override
+  String get exclusions => "exclusions";
+
+  @override
   String get getStarted => "Commencer";
 
   @override

@@ -11,6 +11,11 @@ class LanguageDe extends BaseLanguage {
   String get walkTitle3 => "Zahlungs-Gateways";
 
   @override
+  String get inclusions => "inclusions";
+  @override
+  String get exclusions => "exclusions";
+
+  @override
   String get getStarted => "Loslegen";
 
   @override

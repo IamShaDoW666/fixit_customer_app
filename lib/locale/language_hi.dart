@@ -11,6 +11,12 @@ class LanguageHi extends BaseLanguage {
   String get walkTitle3 => 'अदायगी रास्ता';
 
   @override
+  String get inclusions => "Inclusions";
+
+  @override
+  String get exclusions => "Exclusions";
+
+  @override
   String get getStarted => 'शुरू हो जाओ';
 
   @override

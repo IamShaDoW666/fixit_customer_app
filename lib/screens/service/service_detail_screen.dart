@@ -332,11 +332,49 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                 OptionsWidget(snap.data!.serviceDetail!.options.validate(),
                         snap.data!.serviceDetail)
                     .paddingAll(16),
+
                 slotsAvailable(
                     data: snap.data!.serviceDetail!.bookingSlots.validate(),
                     isSlotAvailable: snap.data!.serviceDetail!.isSlotAvailable),
                 availableWidget(data: snap.data!.serviceDetail!),
                 // providerWidget(data: snap.data!.provider!),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    8.height,
+                    Text(language.inclusions,
+                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                    8.height,
+                    snap.data!.serviceDetail!.inclusions.validate().isNotEmpty
+                        ? ReadMoreText(
+                            snap.data!.serviceDetail!.inclusions.validate(),
+                            style: secondaryTextStyle(),
+                            colorClickableText: context.primaryColor,
+                            textAlign: TextAlign.justify,
+                          )
+                        : Text(language.lblNotDescription,
+                            style: secondaryTextStyle()),
+                  ],
+                ).paddingAll(16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    8.height,
+                    Text(language.exclusions,
+                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                    8.height,
+                    snap.data!.serviceDetail!.exclusions.validate().isNotEmpty
+                        ? ReadMoreText(
+                            snap.data!.serviceDetail!.exclusions.validate(),
+                            style: secondaryTextStyle(),
+                            colorClickableText: context.primaryColor,
+                            textAlign: TextAlign.justify,
+                          )
+                        : Text(language.lblNotDescription,
+                            style: secondaryTextStyle()),
+                  ],
+                ).paddingAll(16),
 
                 Column(
                   children: [
