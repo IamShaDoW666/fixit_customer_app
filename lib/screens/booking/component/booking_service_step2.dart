@@ -307,43 +307,38 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
               children: [
                 if (widget.data.providers!.length > 1)
                   Observer(
-                    builder: (_) => Row(
-                      children: [
-                        AppButton(
-                          width: context.width(),
-                          shapeBorder: RoundedRectangleBorder(
-                              borderRadius: radius(),
-                              side: BorderSide(color: context.primaryColor)),
-                          onTap: () {
-                            showModalBottomSheet(
-                              backgroundColor: Colors.transparent,
-                              context: context,
-                              isScrollControlled: true,
-                              isDismissible: true,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: radiusOnly(
-                                      topLeft: defaultRadius,
-                                      topRight: defaultRadius)),
-                              builder: (_) {
-                                return DraggableScrollableSheet(
-                                    initialChildSize: 0.50,
-                                    minChildSize: 0.2,
-                                    maxChildSize: 1,
-                                    builder: (_, scrollController) =>
-                                        ProviderSelect(
-                                          serviceData:
-                                              widget.data.serviceDetail,
-                                          scrollController: scrollController,
-                                        ));
-                              },
-                            );
+                    builder: (_) => AppButton(
+                      width: context.width(),
+                      shapeBorder: RoundedRectangleBorder(
+                          borderRadius: radius(),
+                          side: BorderSide(color: context.primaryColor)),
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          isScrollControlled: true,
+                          isDismissible: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: radiusOnly(
+                                  topLeft: defaultRadius,
+                                  topRight: defaultRadius)),
+                          builder: (_) {
+                            return DraggableScrollableSheet(
+                                initialChildSize: 0.50,
+                                minChildSize: 0.2,
+                                maxChildSize: 1,
+                                builder: (_, scrollController) =>
+                                    ProviderSelect(
+                                      serviceData: widget.data.serviceDetail,
+                                      scrollController: scrollController,
+                                    ));
                           },
-                          text: bookingStore.providerSelected
-                              ? bookingStore.providerName
-                              : 'Select Provider',
-                          textColor: textPrimaryColorGlobal,
-                        ),
-                      ],
+                        );
+                      },
+                      text: bookingStore.providerSelected
+                          ? bookingStore.providerName
+                          : 'Select Provider',
+                      textColor: textPrimaryColorGlobal,
                     ),
                   ),
                 16.height,
