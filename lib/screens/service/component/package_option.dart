@@ -36,10 +36,14 @@ class _SingleOptionState extends State<PackageOption> {
         'variant': variant.id.validate(),
         'description': variant.description,
         'package': true,
-        'packageArea': variant.packageArea,
+        'packageArea': variant.packageArea ?? 0,
+        'optionVariants': variant.optionVariants,
         'price': (variant.price != null && variant.price! > 0)
             ? variant.price
-            : variant.packageArea! * widget.service.pricePerSqft!
+            : (variant.packageArea != null &&
+                    widget.service.pricePerSqft != null)
+                ? variant.packageArea! * widget.service.pricePerSqft!
+                : null
       });
     });
   }
@@ -74,24 +78,24 @@ class _SingleOptionState extends State<PackageOption> {
                         selectVariant(widget.option.variants![idx]);
                       },
                     ).paddingAll(8)),
-          if (widget.service.customizable != null &&
-              widget.service.customizable == true)
-            ChoiceChip(
-              label: Text('Customize'),
-              labelStyle: boldTextStyle(
-                  color: widget.bookingStore.customize
-                      ? Colors.white
-                      : primaryColor),
-              selectedColor: primaryColor,
-              showCheckmark: false,
-              side: BorderSide(color: primaryColor),
-              onSelected: (newValue) {
-                setState(() {
-                  widget.bookingStore.toggleCustomize();
-                });
-              },
-              selected: widget.bookingStore.customize,
-            ).paddingAll(8),
+          // if (widget.service.customizable != null &&
+          //     widget.service.customizable == true)
+          //   ChoiceChip(
+          //     label: Text('Customize'),
+          //     labelStyle: boldTextStyle(
+          //         color: widget.bookingStore.customize
+          //             ? Colors.white
+          //             : primaryColor),
+          //     selectedColor: primaryColor,
+          //     showCheckmark: false,
+          //     side: BorderSide(color: primaryColor),
+          //     onSelected: (newValue) {
+          //       setState(() {
+          //         widget.bookingStore.toggleCustomize();
+          //       });
+          //     },
+          //     selected: widget.bookingStore.customize,
+          //   ).paddingAll(8),
         ])
       ]),
     );

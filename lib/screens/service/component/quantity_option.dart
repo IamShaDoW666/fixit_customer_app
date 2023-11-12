@@ -36,10 +36,7 @@ class _QuantityOptionState extends State<QuantityOption> {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => ((bookingStore.customize &&
-                  widget.option.customizable!) ||
-              (bookingStore.customize && !widget.option.customizable!))
-          ? Row(
+        builder: (_) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
@@ -73,8 +70,6 @@ class _QuantityOptionState extends State<QuantityOption> {
                   ),
                 )
               ],
-            )
-          : Offstage(),
-    );
+            ));
   }
 }

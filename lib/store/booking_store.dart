@@ -79,6 +79,13 @@ abstract class _BookingStore with Store {
     removeOptionsById(option['option']);
     if (!optionExists(option)) {
       options.add(ObservableMap.of(option));
+      options.forEach((e) {
+        if (e['quantity'] != null) {
+          e['quantity'] = option['optionVariants']
+              .firstWhere((element) => element.optionId == e['option'])
+              .quantity;
+        }
+      });
     }
   }
 

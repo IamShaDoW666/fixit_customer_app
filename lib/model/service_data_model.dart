@@ -300,6 +300,7 @@ class Variant {
   String? priceFormat;
   bool? showDescription;
   String? description;
+  List<OptionVariant>? optionVariants;
 
   Variant(
       {this.id,
@@ -308,7 +309,8 @@ class Variant {
       this.packageArea,
       this.priceFormat,
       this.description,
-      this.showDescription});
+      this.showDescription,
+      this.optionVariants});
 
   factory Variant.fromJson(Map<String, dynamic> json) {
     return Variant(
@@ -318,7 +320,12 @@ class Variant {
         priceFormat: json['price_format'],
         packageArea: json['package_area'],
         description: json['description'],
-        showDescription: json['show_description']);
+        showDescription: json['show_description'],
+        optionVariants: json['optionVariants'] != null
+            ? (json['optionVariants'] as List)
+                .map((i) => OptionVariant.fromJson(i))
+                .toList()
+            : null);
   }
 
   Map<String, dynamic> toJson() {
@@ -330,6 +337,10 @@ class Variant {
     data['package_area'] = this.packageArea;
     data['description'] = this.description;
     data['show_description'] = this.showDescription;
+    if (this.optionVariants != null) {
+      data['optionVariants'] =
+          this.optionVariants!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -416,6 +427,32 @@ class ProviderAddressMapping {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class OptionVariant {
+  int? id;
+  int? optionId;
+  int? variantId;
+  int? quantity;
+  OptionVariant({this.id, this.optionId, this.variantId, this.quantity});
+
+  factory OptionVariant.fromJson(Map<String, dynamic> json) {
+    return OptionVariant(
+      id: json['id'],
+      optionId: json['option_id'],
+      variantId: json['variant_id'],
+      quantity: json['quantity'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['option_id'] = this.optionId;
+    data['variant_id'] = this.variantId;
+    data['quantity'] = this.quantity;
     return data;
   }
 }
