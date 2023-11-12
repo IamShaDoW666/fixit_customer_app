@@ -470,7 +470,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
+      // Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
       ...List.generate(
           widget.options.length.validate(),
           (index) => widget.options[index].typeInt == 0
