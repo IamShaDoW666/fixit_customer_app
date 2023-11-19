@@ -30,6 +30,7 @@ class _MultiOptionState extends State<MultiOption> {
       widget.bookingStore.addMultiOption({
         'option': optionId,
         'variant': variantId,
+        'type': 'normal',
         'price': widget.option.variants!
             .firstWhere((element) => element.id == variantId)
             .price

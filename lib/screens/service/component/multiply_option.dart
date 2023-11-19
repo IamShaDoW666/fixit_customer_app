@@ -1,4 +1,3 @@
-import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,19 +6,18 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 
-class QuantityOption extends StatefulWidget {
+class MultiplyOption extends StatefulWidget {
   final Option option;
-  // final BookingStore bookingStore;
-  QuantityOption(
+  MultiplyOption(
     this.option, {
     super.key,
   });
 
   @override
-  State<QuantityOption> createState() => _QuantityOptionState();
+  State<MultiplyOption> createState() => _MultiplyOptionState();
 }
 
-class _QuantityOptionState extends State<QuantityOption> {
+class _MultiplyOptionState extends State<MultiplyOption> {
   void increment() {
     setState(() {
       bookingStore
@@ -50,19 +48,9 @@ class _QuantityOptionState extends State<QuantityOption> {
                             style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                       ),
                     ),
-                    if (widget.option.typeInt != 3)
-                      if (widget.option.area != null && widget.option.area! > 0)
-                        Marquee(
-                            child: Text(' (' +
-                                widget.option.area.toString() +
-                                ' sqft)'))
-                      else if (widget.option.unitPrice != null &&
-                          widget.option.unitPrice! > 0)
-                        Marquee(
-                            child: Text(' (' +
-                                widget.option.unitPrice.toString() +
-                                appStore.currencySymbol +
-                                ')'))
+                    Marquee(
+                        child: Text(
+                            ' (' + widget.option.area.toString() + ' sqft)'))
                   ],
                 ),
                 Observer(

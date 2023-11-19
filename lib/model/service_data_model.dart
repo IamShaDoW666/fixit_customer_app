@@ -254,6 +254,7 @@ class Option {
   int? area;
   bool? customizable;
   List<Variant>? variants;
+  int? multiplyOption;
 
   Option(
       {this.id,
@@ -264,7 +265,8 @@ class Option {
       this.unitPrice,
       this.area,
       this.customizable,
-      this.variants});
+      this.variants,
+      this.multiplyOption});
 
   factory Option.fromJson(Map<String, dynamic> json) {
     return Option(
@@ -276,6 +278,7 @@ class Option {
         unitPrice: json['unit_price'],
         area: json['area'],
         customizable: json['customizable'],
+        multiplyOption: json['multiply_option'],
         variants: json['variants'] != null
             ? (json['variants'] as List)
                 .map((i) => Variant.fromJson(i))
@@ -293,6 +296,7 @@ class Option {
     data['unit_price'] = this.unitPrice;
     data['area'] = this.area;
     data['customizable'] = this.customizable;
+    data['multiply_option'] = this.multiplyOption;
     if (this.variants != null) {
       data['variants'] = this.variants!.map((v) => v.toJson()).toList();
     }

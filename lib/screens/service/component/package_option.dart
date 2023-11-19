@@ -36,6 +36,7 @@ class _SingleOptionState extends State<PackageOption> {
         'variant': variant.id.validate(),
         'description': variant.description,
         'package': true,
+        'type': 'package',
         'packageArea': variant.packageArea ?? 0,
         'optionVariants': variant.optionVariants,
         'price': (variant.price != null && variant.price! > 0)
@@ -59,25 +60,24 @@ class _SingleOptionState extends State<PackageOption> {
         ),
         8.height,
         Wrap(children: [
-          if (!widget.bookingStore.customize)
-            ...List.generate(
-                widget.option.variants!.length,
-                (idx) => ChoiceChip(
-                      label: Text(widget.option.variants![idx].name.validate()),
-                      labelStyle: boldTextStyle(
-                          color: checkSelected(
-                                  widget.option.variants![idx].id.validate())
-                              ? Colors.white
-                              : primaryColor),
-                      showCheckmark: false,
-                      selectedColor: primaryColor,
-                      side: BorderSide(color: primaryColor),
-                      selected: checkSelected(
-                          widget.option.variants![idx].id.validate()),
-                      onSelected: (newValue) {
-                        selectVariant(widget.option.variants![idx]);
-                      },
-                    ).paddingAll(8)),
+          ...List.generate(
+              widget.option.variants!.length,
+              (idx) => ChoiceChip(
+                    label: Text(widget.option.variants![idx].name.validate()),
+                    labelStyle: boldTextStyle(
+                        color: checkSelected(
+                                widget.option.variants![idx].id.validate())
+                            ? Colors.white
+                            : primaryColor),
+                    showCheckmark: false,
+                    selectedColor: primaryColor,
+                    side: BorderSide(color: primaryColor),
+                    selected: checkSelected(
+                        widget.option.variants![idx].id.validate()),
+                    onSelected: (newValue) {
+                      selectVariant(widget.option.variants![idx]);
+                    },
+                  ).paddingAll(8)),
           // if (widget.service.customizable != null &&
           //     widget.service.customizable == true)
           //   ChoiceChip(

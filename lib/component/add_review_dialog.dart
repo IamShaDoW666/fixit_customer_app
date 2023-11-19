@@ -1,5 +1,6 @@
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/main.dart';
+import 'package:booking_system_flutter/model/booking_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
@@ -13,9 +14,17 @@ class AddReviewDialog extends StatefulWidget {
   final int? bookingId;
   final int? serviceId;
   final int? handymanId;
+  final int? providerId;
   final bool? isCustomerRating;
 
-  AddReviewDialog({this.customerReview, this.bookingId, this.serviceId, this.handymanId, this.isCustomerRating});
+  AddReviewDialog({
+    this.customerReview,
+    this.bookingId,
+    this.serviceId,
+    this.handymanId,
+    this.isCustomerRating,
+    this.providerId,
+  });
 
   @override
   State<AddReviewDialog> createState() => _AddReviewDialogState();
@@ -32,7 +41,8 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
   @override
   void initState() {
     isUpdate = widget.customerReview != null;
-    isHandymanUpdate = widget.customerReview != null && widget.handymanId != null;
+    isHandymanUpdate =
+        widget.customerReview != null && widget.handymanId != null;
 
     if (isUpdate) {
       selectedRating = widget.customerReview!.rating.validate().toDouble();
@@ -53,6 +63,7 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
         "customer_id": appStore.userId.validate(),
         "rating": selectedRating.validate(),
         "review": reviewCont.text.validate(),
+        "provider_id": widget.providerId
       };
       if (widget.handymanId != null) {
         req.putIfAbsent("handyman_id", () => widget.handymanId);
@@ -92,6 +103,7 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
       "customer_id": appStore.userId.validate(),
       "rating": selectedRating.validate(),
       "review": reviewCont.text.validate(),
+      "provider_id": widget.providerId
     };
     if (widget.handymanId != null) {
       req.putIfAbsent("handyman_id", () => widget.handymanId);
@@ -138,7 +150,9 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                 ),
                 child: Row(
                   children: [
-                    Text(language.yourReview, style: boldTextStyle(color: Colors.white)).expand(),
+                    Text(language.yourReview,
+                            style: boldTextStyle(color: Colors.white))
+                        .expand(),
                     IconButton(
                       icon: Icon(Icons.clear, color: Colors.white, size: 16),
                       onPressed: () {
@@ -156,14 +170,16 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                     child: Row(
                       children: [
                         Text("*", style: secondaryTextStyle(color: Colors.red)),
-                        Text(language.lblYourRating, style: secondaryTextStyle()),
+                        Text(language.lblYourRating,
+                            style: secondaryTextStyle()),
                         16.width,
                         RatingBarWidget(
                           onRatingChanged: (rating) {
                             selectedRating = rating;
                             setState(() {});
                           },
-                          activeColor: getRatingBarColor(selectedRating.toInt()),
+                          activeColor:
+                              getRatingBarColor(selectedRating.toInt()),
                           inActiveColor: ratingBarColor,
                           rating: selectedRating,
                           size: 18,
@@ -187,8 +203,12 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                   Row(
                     children: [
                       AppButton(
-                        text: isHandymanUpdate ? language.lblDelete : language.lblCancel,
-                        textColor: isHandymanUpdate ? Colors.red : textPrimaryColorGlobal,
+                        text: isHandymanUpdate
+                            ? language.lblDelete
+                            : language.lblCancel,
+                        textColor: isHandymanUpdate
+                            ? Colors.red
+                            : textPrimaryColorGlobal,
                         color: context.cardColor,
                         onTap: () {
                           if (isHandymanUpdate) {
@@ -201,7 +221,11 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
                               onAccept: (c) async {
                                 appStore.setLoading(true);
 
-                                await deleteHandymanReview(id: widget.customerReview!.id.validate().toInt()).then((value) {
+                                await deleteHandymanReview(
+                                        id: widget.customerReview!.id
+                                            .validate()
+                                            .toInt())
+                                    .then((value) {
                                   toast(value.message);
                                   finish(context, true);
                                 }).catchError((e) {
@@ -238,7 +262,10 @@ class _AddReviewDialogState extends State<AddReviewDialog> {
             ],
           ),
         ),
-        Observer(builder: (context) => LoaderWidget().visible(appStore.isLoading).withSize(height: 80, width: 80))
+        Observer(
+            builder: (context) => LoaderWidget()
+                .visible(appStore.isLoading)
+                .withSize(height: 80, width: 80))
       ],
     );
   }

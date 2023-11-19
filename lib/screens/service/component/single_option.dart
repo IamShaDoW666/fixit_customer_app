@@ -32,6 +32,7 @@ class _SingleOptionState extends State<SingleOption> {
       widget.bookingStore.addRadioOption({
         'option': widget.option.id.validate(),
         'variant': variantId,
+        'type': 'normal',
         'price': widget.option.variants!
             .firstWhere((element) => element.id == variantId)
             .price

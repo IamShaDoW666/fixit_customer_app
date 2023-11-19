@@ -133,6 +133,22 @@ mixin _$BookingStore on _BookingStore, Store {
     });
   }
 
+  late final _$pricePerSqftAtom =
+      Atom(name: '_BookingStore.pricePerSqft', context: context);
+
+  @override
+  num get pricePerSqft {
+    _$pricePerSqftAtom.reportRead();
+    return super.pricePerSqft;
+  }
+
+  @override
+  set pricePerSqft(num value) {
+    _$pricePerSqftAtom.reportWrite(value, super.pricePerSqft, () {
+      super.pricePerSqft = value;
+    });
+  }
+
   late final _$_BookingStoreActionController =
       ActionController(name: '_BookingStore', context: context);
 
@@ -280,6 +296,17 @@ mixin _$BookingStore on _BookingStore, Store {
   }
 
   @override
+  void calculate(Map<String, dynamic> option) {
+    final _$actionInfo = _$_BookingStoreActionController.startAction(
+        name: '_BookingStore.calculate');
+    try {
+      return super.calculate(option);
+    } finally {
+      _$_BookingStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   ObservableMap<String, dynamic> getOption(int id) {
     final _$actionInfo = _$_BookingStoreActionController.startAction(
         name: '_BookingStore.getOption');
@@ -298,6 +325,7 @@ approximateArea: ${approximateArea},
 providerId: ${providerId},
 providerName: ${providerName},
 customize: ${customize},
+pricePerSqft: ${pricePerSqft},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},
 getApproximateArea: ${getApproximateArea},

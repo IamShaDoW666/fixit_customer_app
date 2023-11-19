@@ -22,24 +22,65 @@ abstract class _BookingStore with Store {
   @observable
   bool customize = false;
 
+  @observable
+  num pricePerSqft = 0;
+
   @action
   void initQuantities(List<Option> options, num pricePerSqft) {
     Iterable<Option> quantityOptions =
         options.where((option) => option.typeInt == 1);
+    Iterable<Option> multiplyOptions =
+        options.where((option) => option.typeInt == 3);
+
     quantityOptions.forEach((option) {
       if (option.unitPrice! > 0) {
-        addQuantityOption(ObservableMap.of(
-            {'option': option.id, 'quantity': 0, 'price': option.unitPrice}));
+        addQuantityOption(ObservableMap.of({
+          'option': option.id,
+          'quantity': 0,
+          'type': 'quantity',
+          'unitPrice': option.unitPrice,
+          'price': 0
+        }));
       } else {
         addQuantityOption(ObservableMap.of({
           'option': option.id,
           'quantity': 0,
           'price': 0,
+          'type': 'quantity',
           'area': option.area,
           'pricePerArea': pricePerSqft
         }));
       }
     });
+
+    multiplyOptions.forEach((option) {
+      addQuantityOption(ObservableMap.of({
+        'option': option.id,
+        'quantity': 0,
+        'type': 'multiply',
+        'multiplyOption': option.multiplyOption
+      }));
+    });
+
+    Option? packageOption =
+        options.where((option) => option.typeInt == 2).firstOrNull;
+    if (packageOption != null) {
+      Variant variant = packageOption.variants![0];
+      addPackageOption({
+        'option': packageOption.id,
+        'variant': variant.id,
+        'description': variant.description,
+        'package': true,
+        'type': 'package',
+        'packageArea': variant.packageArea ?? 0,
+        'optionVariants': variant.optionVariants,
+        'price': (variant.price != null && variant.price! > 0)
+            ? variant.price
+            : (variant.packageArea != null)
+                ? variant.packageArea! * pricePerSqft
+                : null
+      });
+    }
   }
 
   @action
@@ -80,10 +121,18 @@ abstract class _BookingStore with Store {
     if (!optionExists(option)) {
       options.add(ObservableMap.of(option));
       options.forEach((e) {
-        if (e['quantity'] != null) {
-          e['quantity'] = option['optionVariants']
-              .firstWhere((element) => element.optionId == e['option'])
-              .quantity;
+        if (option['optionVariants'].length != 0) {
+          if (e['quantity'] != null) {
+            if (option['optionVariants']
+                    .firstWhere((element) => element.optionId == e['option'])
+                    .quantity !=
+                null) {
+              e['quantity'] = option['optionVariants']
+                  .firstWhere((element) => element.optionId == e['option'])
+                  .quantity;
+              calculate(e);
+            }
+          }
         }
       });
     }
@@ -108,24 +157,14 @@ abstract class _BookingStore with Store {
   @action
   void increment(ObservableMap<String, dynamic> option) {
     option['quantity']++;
-    if (option['unitPrice'] != null) {
-      option['price'] = option['unitPrice'] * option['quantity'];
-    } else {
-      option['price'] =
-          (option['area'] * option['pricePerArea']) * option['quantity'];
-    }
+    calculate(option);
   }
 
   @action
   void decrement(ObservableMap<String, dynamic> option) {
     if (option['quantity'] != 0) {
       option['quantity']--;
-      if (option['unitPrice'] != null) {
-        option['price'] = option['unitPrice'] * option['quantity'];
-      } else {
-        option['price'] =
-            (option['area'] * option['pricePerArea']) * option['quantity'];
-      }
+      calculate(option);
     }
   }
 
@@ -172,6 +211,26 @@ abstract class _BookingStore with Store {
   }
 
   @action
+  void calculate(Map<String, dynamic> option) {
+    if (option['multiplyOption'] != null) {
+    } else {
+      if (option['unitPrice'] != null) {
+        option['price'] = option['unitPrice'] * option['quantity'];
+      } else {
+        option['price'] =
+            (option['area'] * option['pricePerArea']) * option['quantity'];
+      }
+    }
+    Iterable<ObservableMap<String, dynamic>> multiplyOptions =
+        options.where((option) => option['type'] == 'multiply');
+    multiplyOptions.forEach((multiplyOption) {
+      multiplyOption['price'] =
+          getOption(multiplyOption['multiplyOption'])['price'] *
+              multiplyOption['quantity'];
+    });
+  }
+
+  @action
   ObservableMap<String, dynamic> getOption(int id) =>
       options.firstWhere((option) => option['option'] == id);
 
@@ -187,6 +246,12 @@ abstract class _BookingStore with Store {
     selectedOptions.forEach((option) {
       if (option['price'] != null) {
         total += (option['price']);
+      }
+      if (option['type'] == 'multiply') {
+        ObservableMap<String, dynamic> multiplyOption =
+            getOption(option['multiplyOption']);
+        if (option['price'] == (multiplyOption['price'] * option['quantity']))
+          total -= multiplyOption['price'];
       }
     });
     return total;

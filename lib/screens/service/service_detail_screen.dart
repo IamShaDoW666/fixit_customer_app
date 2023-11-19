@@ -12,6 +12,7 @@ import 'package:booking_system_flutter/screens/booking/component/booking_detail_
 import 'package:booking_system_flutter/screens/booking/provider_info_screen.dart';
 import 'package:booking_system_flutter/screens/review/components/review_widget.dart';
 import 'package:booking_system_flutter/screens/review/rating_view_all_screen.dart';
+import 'package:booking_system_flutter/screens/service/component/multiply_option.dart';
 import 'package:booking_system_flutter/screens/service/component/package_option.dart';
 import 'package:booking_system_flutter/screens/service/component/service_component.dart';
 import 'package:booking_system_flutter/screens/service/component/service_detail_header_component.dart';
@@ -493,6 +494,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     bookingStore.approximateArea = 0;
     bookingStore.providerId = 0;
     bookingStore.providerName = '';
+    bookingStore.pricePerSqft = widget.service!.pricePerSqft ?? 0;
     bookingStore.initQuantities(
         widget.options, widget.service!.pricePerSqft.validate());
   }
@@ -508,7 +510,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      // Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
+      Observer(builder: (_) => Text(bookingStore.selectedOptions.toString())),
       ...List.generate(
           widget.options.length.validate(),
           (index) => widget.options[index].typeInt == 0
@@ -520,7 +522,9 @@ class _OptionsWidgetState extends State<OptionsWidget> {
               : widget.options[index].typeInt == 2
                   ? PackageOption(
                       widget.options[index], widget.service!, bookingStore)
-                  : QuantityOption(widget.options[index])),
+                  : widget.options[index].typeInt == 3
+                      ? MultiplyOption(widget.options[index])
+                      : QuantityOption(widget.options[index])),
     ]);
   }
 }

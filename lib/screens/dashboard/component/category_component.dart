@@ -52,8 +52,8 @@ class CategoryComponentState extends State<CategoryComponent> {
             spacing: 16,
             runSpacing: 16,
             children: List.generate(
-                widget.categoryList!.length >= 9
-                    ? 9
+                widget.categoryList!.length >= 12
+                    ? 12
                     : widget.categoryList!.length,
                 (index) => GestureDetector(
                       onTap: () {
@@ -65,7 +65,7 @@ class CategoryComponentState extends State<CategoryComponent> {
                             .launch(context);
                       },
                       child: Container(
-                        width: context.width() / 3 - 26,
+                        width: context.width() / 4 - 20,
                         decoration: boxDecorationWithRoundedCorners(
                           boxShadow: [
                             BoxShadow(

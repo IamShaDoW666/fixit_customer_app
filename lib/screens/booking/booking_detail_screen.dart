@@ -541,7 +541,9 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                         contentPadding: EdgeInsets.zero,
                         builder: (p0) {
                           return AddReviewDialog(
-                              customerReview: customerReview);
+                            customerReview: customerReview,
+                            providerId: bookingDetail.providerId,
+                          );
                         },
                       ).then((value) {
                         if (value ?? false) {
@@ -588,6 +590,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                       contentPadding: EdgeInsets.zero,
                       builder: (p0) {
                         return AddReviewDialog(
+                            providerId: bookingDetail.providerId.validate(),
                             serviceId: bookingDetail.serviceId.validate(),
                             bookingId: bookingDetail.id.validate());
                       },
