@@ -87,20 +87,20 @@ class CategoryComponentState extends State<CategoryComponent> {
                               child: CachedImageWidget(
                                 url: widget.categoryList![index].categoryImage
                                     .validate(),
-                                height: 100,
-                                width: context.width(),
+                                height: 50,
+                                width: 50,
                                 radius: 12,
                                 circle: false,
                                 fit: BoxFit.cover,
                               ),
                             ),
                             Marquee(
-                              animationDuration: Duration(milliseconds: 2000),
-                              backDuration: Duration(milliseconds: 2000),
-                              pauseDuration: Duration(milliseconds: 1500),
+                              animationDuration: Duration(milliseconds: 3000),
+                              backDuration: Duration(milliseconds: 3000),
+                              pauseDuration: Duration(milliseconds: 2500),
                               child: Text(
                                   widget.categoryList![index].name.validate()),
-                            ).paddingAll(8)
+                            ).paddingAll(10)
                           ],
                         ),
                       ),

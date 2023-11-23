@@ -117,7 +117,7 @@ class _DashboardFragmentState extends State<DashboardFragment> {
                                 child: Text(
                                   maxLines: 2,
                                   "Welcome " + appStore.userFullName,
-                                  style: TextStyle(fontSize: 26),
+                                  style: TextStyle(fontSize: 22),
                                 ),
                               ),
                               CachedImageWidget(

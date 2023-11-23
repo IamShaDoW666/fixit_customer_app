@@ -34,7 +34,7 @@ class ServiceListComponent extends StatelessWidget {
                 children: List.generate(serviceList.length, (index) {
                   return ServiceComponent(
                       serviceData: serviceList[index],
-                      width: context.width() / 2 - 26);
+                      width: context.width() / 2 - 25);
                 }),
               ).paddingSymmetric(horizontal: 16, vertical: 8)
             : Container(
