@@ -64,7 +64,8 @@ class CategoryWidget extends StatelessWidget {
             directionMarguee: DirectionMarguee.oneDirection,
             child: Text(
               '${categoryData.name.validate()}',
-              style: primaryTextStyle(size: 12),
+              style: primaryTextStyle(
+                  size: 12, color: appStore.isDarkMode ? white : black),
             ),
           ),
         ],

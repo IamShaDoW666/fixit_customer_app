@@ -1,4 +1,3 @@
-
 import 'package:booking_system_flutter/component/app_common_dialog.dart';
 import 'package:booking_system_flutter/component/cached_image_widget.dart';
 import 'package:booking_system_flutter/component/custom_stepper.dart';
@@ -57,7 +56,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
         servicePrice: widget.data.serviceDetail!.price.validate(),
         appliedCouponData: appliedCouponData,
         discount: widget.data.serviceDetail!.discount.validate(),
-        taxes: widget.data.taxes,
+        taxes: bookingStore.taxes,
         quantity: itemCount,
         selectedPackage: widget.selectedPackage,
         options: bookingStore.selectedOptions);
@@ -285,7 +284,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                                 context: context,
                                 builder: (_) {
                                   return AppliedTaxListBottomSheet(
-                                      taxes: widget.data.taxes.validate(),
+                                      taxes: bookingStore.taxes,
                                       subTotal:
                                           bookingAmountModel.finalSubTotal);
                                 },

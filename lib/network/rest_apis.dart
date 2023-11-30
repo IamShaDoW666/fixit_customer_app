@@ -23,6 +23,7 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/service_response.dart';
 import 'package:booking_system_flutter/model/service_review_response.dart';
 import 'package:booking_system_flutter/model/state_list_model.dart';
+import 'package:booking_system_flutter/model/tax_detail_model.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/model/verify_transaction_response.dart';
 import 'package:booking_system_flutter/network/network_utils.dart';
@@ -449,6 +450,27 @@ Future<ServiceDetailResponse> getServiceDetails(
 
     appStore.setLoading(false);
     return res;
+  } catch (e) {
+    appStore.setLoading(false);
+    log(e);
+    throw errorSomethingWentWrong;
+  }
+}
+
+//Tax Detail Api
+Future<List<TaxData>> getTaxDetails({required int providerId}) async {
+  try {
+    List<TaxData>? response = List.empty();
+    var res = await handleResponse(await buildHttpResponse(
+        'tax-detail/$providerId',
+        method: HttpMethodType.GET));
+    response = res != null
+        ? (res as List).map((i) => TaxData.fromJson(i)).toList()
+        : null;
+
+    appStore.setLoading(false);
+    log(response);
+    return response ?? List.empty();
   } catch (e) {
     appStore.setLoading(false);
 

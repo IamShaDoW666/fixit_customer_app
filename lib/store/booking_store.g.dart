@@ -149,6 +149,29 @@ mixin _$BookingStore on _BookingStore, Store {
     });
   }
 
+  late final _$taxesAtom = Atom(name: '_BookingStore.taxes', context: context);
+
+  @override
+  List<TaxData> get taxes {
+    _$taxesAtom.reportRead();
+    return super.taxes;
+  }
+
+  @override
+  set taxes(List<TaxData> value) {
+    _$taxesAtom.reportWrite(value, super.taxes, () {
+      super.taxes = value;
+    });
+  }
+
+  late final _$getTaxesAsyncAction =
+      AsyncAction('_BookingStore.getTaxes', context: context);
+
+  @override
+  Future<void> getTaxes(int providerId) {
+    return _$getTaxesAsyncAction.run(() => super.getTaxes(providerId));
+  }
+
   late final _$_BookingStoreActionController =
       ActionController(name: '_BookingStore', context: context);
 
@@ -326,6 +349,7 @@ providerId: ${providerId},
 providerName: ${providerName},
 customize: ${customize},
 pricePerSqft: ${pricePerSqft},
+taxes: ${taxes},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},
 getApproximateArea: ${getApproximateArea},

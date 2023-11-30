@@ -176,6 +176,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                 8.height,
                 Text(language.lblStepper1Title,
                     style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                Text(bookingStore.taxes.toString()),
                 20.height,
                 Form(
                   key: formKey,

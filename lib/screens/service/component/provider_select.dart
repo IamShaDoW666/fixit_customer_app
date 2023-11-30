@@ -2,6 +2,7 @@ import 'package:booking_system_flutter/component/disabled_rating_bar_widget.dart
 import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
+import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -70,12 +71,19 @@ class ProviderWidget extends StatefulWidget {
 
 class _ProviderSelectState extends State<ProviderWidget> {
   @override
+  void initState() {
+    super.initState();
+    getTaxDetails(providerId: 4);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
           bookingStore.providerId = widget.data.id.validate();
           bookingStore.providerName = widget.data.displayName.validate();
+          bookingStore.getTaxes(widget.data.id.validate());
         });
         finish(context);
       },

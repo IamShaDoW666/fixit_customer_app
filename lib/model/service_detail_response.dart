@@ -91,6 +91,7 @@ class TaxData {
   String? title;
   String? type;
   num? value;
+  bool? seperate;
   num? totalCalculatedValue;
 
   TaxData(
@@ -99,16 +100,17 @@ class TaxData {
       this.title,
       this.type,
       this.value,
-      this.totalCalculatedValue});
+      this.totalCalculatedValue,
+      this.seperate});
 
   factory TaxData.fromJson(Map<String, dynamic> json) {
     return TaxData(
-      id: json['id'],
-      providerId: json['provider_id'],
-      title: json['title'],
-      type: json['type'],
-      value: json['value'],
-    );
+        id: json['id'],
+        providerId: json['provider_id'],
+        title: json['title'],
+        type: json['type'],
+        value: json['value'],
+        seperate: json['seperate']);
   }
 
   Map<String, dynamic> toJson() {
@@ -118,6 +120,7 @@ class TaxData {
     data['title'] = this.title;
     data['type'] = this.type;
     data['value'] = this.value;
+    data['seperate'] = this.seperate;
     return data;
   }
 }

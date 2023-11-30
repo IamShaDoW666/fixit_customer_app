@@ -1,5 +1,6 @@
 import 'package:booking_system_flutter/model/extra_charges_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
+import 'package:booking_system_flutter/model/tax_detail_model.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -93,6 +94,7 @@ num calculateCouponDiscount(
 }
 
 num calculateTotalTaxAmount(List<TaxData>? taxes, num subTotal) {
+  log(taxes);
   num taxAmount = 0.0;
 
   taxes.validate().forEach((element) {

@@ -131,8 +131,9 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
           () => widget.data.serviceDetail!.bookingDay.validate().toString());
     }
 
-    if (widget.data.taxes.validate().isNotEmpty) {
-      request.putIfAbsent('tax', () => widget.data.taxes);
+    if (bookingStore.taxes.isNotEmpty) {
+      request.putIfAbsent('tax',
+          () => jsonEncode(bookingStore.taxes.map((e) => e.toJson()).toList()));
     }
     if (widget.data.serviceDetail != null &&
         widget.data.serviceDetail!.isAdvancePayment) {

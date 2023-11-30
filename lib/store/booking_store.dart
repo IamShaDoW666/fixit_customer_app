@@ -1,4 +1,8 @@
+import 'package:booking_system_flutter/model/service_detail_response.dart';
+import 'package:booking_system_flutter/model/tax_detail_model.dart';
+import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:mobx/mobx.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../model/service_data_model.dart';
 part 'booking_store.g.dart';
@@ -24,6 +28,9 @@ abstract class _BookingStore with Store {
 
   @observable
   num pricePerSqft = 0;
+
+  @observable
+  List<TaxData> taxes = List.empty();
 
   @action
   void initQuantities(List<Option> options, num pricePerSqft) {
@@ -171,6 +178,15 @@ abstract class _BookingStore with Store {
   @action
   void removeOption(Map<String, dynamic> option) {
     options.remove(option);
+  }
+
+  @action
+  Future<void> getTaxes(int providerId) async {
+    if (providerId < 1) {
+      return;
+    }
+    List<TaxData> taxData = await getTaxDetails(providerId: providerId);
+    taxes = taxData;
   }
 
   @action
