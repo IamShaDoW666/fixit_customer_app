@@ -24,7 +24,6 @@ class DashboardFragment extends StatefulWidget {
 
 class _DashboardFragmentState extends State<DashboardFragment> {
   Future<DashboardResponse>? future;
-
   Decoration get commonDecoration {
     return boxDecorationDefault(
       color: context.cardColor,
