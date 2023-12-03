@@ -82,6 +82,14 @@ Future<Response> buildHttpResponse(
 
     Response response;
 
+    if (appStore.selectedLanguageCode.isNotEmpty) {
+      if (request != null) {
+        request = {...request, 'locale': appStore.selectedLanguageCode};
+      } else {
+        request = {'locale': appStore.selectedLanguageCode};
+      }
+    }
+
     if (method == HttpMethodType.POST) {
       // log('Request: ${jsonEncode(request)}');
       response =
