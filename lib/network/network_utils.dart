@@ -78,17 +78,24 @@ Future<Response> buildHttpResponse(
 }) async {
   if (await isNetworkAvailable()) {
     var headers = buildHeaderTokens(extraKeys: extraKeys);
-    Uri url = buildBaseUrl(endPoint);
-
-    Response response;
-
     if (appStore.selectedLanguageCode.isNotEmpty) {
+      var locale = appStore.selectedLanguageCode;
+      if (method == HttpMethodType.GET) {
+        if (endPoint.contains('?')) {
+          endPoint = "$endPoint&locale=$locale";
+        } else {
+          endPoint = "$endPoint?locale=$locale";
+        }
+      }
       if (request != null) {
         request = {...request, 'locale': appStore.selectedLanguageCode};
       } else {
         request = {'locale': appStore.selectedLanguageCode};
       }
     }
+    Uri url = buildBaseUrl(endPoint);
+
+    Response response;
 
     if (method == HttpMethodType.POST) {
       // log('Request: ${jsonEncode(request)}');
