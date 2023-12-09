@@ -159,6 +159,9 @@ class LanguageEn extends BaseLanguage {
   String get payment => "Payment";
 
   @override
+  String get paymentMode => "Payment Mode";
+
+  @override
   String get done => "Done";
 
   @override
@@ -372,7 +375,7 @@ class LanguageEn extends BaseLanguage {
   String get lblPrice => "Price";
 
   @override
-  String get lblTax => "Tax";
+  String get lblTax => "Additional Fee";
 
   @override
   String get lblDiscount => "Discount";

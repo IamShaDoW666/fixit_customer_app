@@ -5,10 +5,10 @@ class LanguageAr extends BaseLanguage {
   String get walkTitle1 => 'العثور على خدماتك';
 
   @override
-  String get inclusions => "inclusions";
+  String get inclusions => "الادراج";
 
   @override
-  String get exclusions => "exclusions";
+  String get exclusions => "الاستثناءات";
 
   @override
   String get walkTitle2 => 'حجز موعد';
@@ -57,6 +57,9 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get alreadyHaveAccountTxt => 'هل لديك حساب';
+
+  @override
+  String get paymentMode => "Payment Mode";
 
   @override
   String get rememberMe => 'تذكرنى';

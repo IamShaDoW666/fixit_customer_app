@@ -14,6 +14,7 @@ class CommonKeys {
   static String paymentStatus = "payment_status";
   static String paymentMethod = "payment_type";
   static String advancePaidAmount = "advance_paid_amount";
+  static String isMobile = "is_mobile";
 }
 
 class UserKeys {
@@ -51,6 +52,7 @@ class BookingServiceKeys {
   static String pricePerSqft = 'price_per_sqft';
   static String mobile = 'mobile';
   static String providerId = 'provider_id';
+  static String paymentMode = 'payment_mode';
 }
 
 class CouponKeys {

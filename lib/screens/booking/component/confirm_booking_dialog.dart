@@ -29,10 +29,11 @@ class ConfirmBookingDialog extends StatefulWidget {
   final String? couponCode;
   final BookingPackage? selectedPackage;
   final BookingAmountModel? bookingAmountModel;
-
+  final String paymentMode;
   ConfirmBookingDialog({
     required this.data,
     required this.bookingPrice,
+    required this.paymentMode,
     this.qty = 1,
     this.couponCode,
     this.selectedPackage,
@@ -116,7 +117,8 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
           jsonEncode(bookingStore.selectedOptions),
       BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft,
       BookingServiceKeys.mobile: true,
-      BookingServiceKeys.providerId: bookingStore.providerId
+      BookingServiceKeys.providerId: bookingStore.providerId,
+      BookingServiceKeys.paymentMode: widget.paymentMode
     };
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());

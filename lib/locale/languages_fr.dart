@@ -468,6 +468,9 @@ class LanguageFr extends BaseLanguage {
   String get lblPayNow => "Payez maintenant";
 
   @override
+  String get paymentMode => "Payment Mode";
+
+  @override
   String get lblCheckStatus => "État de contrôle";
 
   @override

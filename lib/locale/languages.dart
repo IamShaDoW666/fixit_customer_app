@@ -48,6 +48,8 @@ abstract class BaseLanguage {
 
   String get language;
 
+  String get paymentMode;
+
   String get appTheme;
 
   String get bookingHistory;

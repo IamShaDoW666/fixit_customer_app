@@ -88,9 +88,16 @@ Future<Response> buildHttpResponse(
         }
       }
       if (request != null) {
-        request = {...request, 'locale': appStore.selectedLanguageCode};
+        request = {
+          ...request,
+          'locale': appStore.selectedLanguageCode,
+          CommonKeys.isMobile: true
+        };
       } else {
-        request = {'locale': appStore.selectedLanguageCode};
+        request = {
+          'locale': appStore.selectedLanguageCode,
+          CommonKeys.isMobile: true
+        };
       }
     }
     Uri url = buildBaseUrl(endPoint);

@@ -41,6 +41,8 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
 
   int itemCount = 1;
 
+  String paymentMode = 'cod';
+
   @override
   void initState() {
     super.initState();
@@ -582,6 +584,30 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(language.paymentMode,
+                    style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                RadioListTile(
+                    value: 'cod',
+                    dense: true,
+                    title: Text('Cash'),
+                    groupValue: paymentMode,
+                    activeColor: primaryColor,
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    onChanged: (val) {
+                      setState(() {});
+                      paymentMode = val.validate();
+                    }),
+                RadioListTile(
+                    value: 'card',
+                    title: Text('Card'),
+                    dense: true,
+                    activeColor: primaryColor,
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    groupValue: paymentMode,
+                    onChanged: (val) {
+                      setState(() {});
+                      paymentMode = val.validate();
+                    }),
                 Observer(builder: (context) {
                   return WalletBalanceComponent().visible(
                       appStore.isEnableUserWallet &&
@@ -624,6 +650,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                               bookingAmountModel.finalGrandTotalAmount,
                           selectedPackage: widget.selectedPackage,
                           qty: itemCount,
+                          paymentMode: paymentMode,
                           couponCode: appliedCouponData?.code,
                           bookingAmountModel: BookingAmountModel(
                             finalCouponDiscountAmount:

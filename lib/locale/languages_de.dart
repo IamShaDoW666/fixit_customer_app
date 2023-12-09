@@ -8,6 +8,9 @@ class LanguageDe extends BaseLanguage {
   String get walkTitle2 => "Buchen Sie den Termin";
 
   @override
+  String get paymentMode => "Payment Mode";
+
+  @override
   String get walkTitle3 => "Zahlungs-Gateways";
 
   @override

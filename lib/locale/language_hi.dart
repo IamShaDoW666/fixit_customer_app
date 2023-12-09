@@ -1082,6 +1082,9 @@ class LanguageHi extends BaseLanguage {
       'स्थान की अनुमति को स्थायी रूप से अस्वीकार कर दिया जाता है, हम अनुमतियों का अनुरोध नहीं कर सकते।';
 
   @override
+  String get paymentMode => "Payment Mode";
+
+  @override
   String get lblEnableLocation =>
       'कृपया सुनिश्चित करें कि स्थान सेवाएं सक्षम हैं।';
 
