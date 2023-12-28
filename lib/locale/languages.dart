@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class BaseLanguage {
-  static BaseLanguage of(BuildContext context) => Localizations.of<BaseLanguage>(context, BaseLanguage)!;
+  static BaseLanguage of(BuildContext context) =>
+      Localizations.of<BaseLanguage>(context, BaseLanguage)!;
 
   String get walkTitle1;
 
@@ -47,6 +48,8 @@ abstract class BaseLanguage {
 
   String get language;
 
+  String get paymentMode;
+
   String get appTheme;
 
   String get bookingHistory;
@@ -58,6 +61,10 @@ abstract class BaseLanguage {
   String get helpSupport;
 
   String get privacyPolicy;
+
+  String get inclusions;
+
+  String get exclusions;
 
   String get about;
 
@@ -272,6 +279,8 @@ abstract class BaseLanguage {
   String get lblStep1;
 
   String get lblStep2;
+
+  String get lblStep4;
 
   String get lblBookingID;
 

@@ -22,7 +22,8 @@ class ProviderInfoScreen extends StatefulWidget {
   final bool canCustomerContact;
   final VoidCallback? onUpdate;
 
-  ProviderInfoScreen({this.providerId, this.canCustomerContact = false, this.onUpdate});
+  ProviderInfoScreen(
+      {this.providerId, this.canCustomerContact = false, this.onUpdate});
 
   @override
   ProviderInfoScreenState createState() => ProviderInfoScreenState();
@@ -39,7 +40,8 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
   }
 
   Future<void> init() async {
-    future = getProviderDetail(widget.providerId.validate(), userId: appStore.userId.validate());
+    future = getProviderDetail(widget.providerId.validate(),
+        userId: appStore.userId.validate());
   }
 
   @override
@@ -54,11 +56,15 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
           label: language.service,
           list: list,
           onTap: () {
-            ViewAllServiceScreen(providerId: providerId).launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
+            ViewAllServiceScreen(providerId: providerId)
+                .launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
           },
         ),
         8.height,
-        if (list.isEmpty) NoDataWidget(title: language.lblNoServicesFound, imageWidget: EmptyStateWidget()),
+        if (list.isEmpty)
+          NoDataWidget(
+              title: language.lblNoServicesFound,
+              imageWidget: EmptyStateWidget()),
         if (list.isNotEmpty)
           AnimatedWrap(
             spacing: 16,
@@ -66,8 +72,10 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
             itemCount: list.length,
             listAnimationType: ListAnimationType.FadeIn,
             fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
-            scaleConfiguration: ScaleConfiguration(duration: 300.milliseconds, delay: 50.milliseconds),
-            itemBuilder: (_, index) => ServiceComponent(serviceData: list[index], width: context.width()),
+            scaleConfiguration: ScaleConfiguration(
+                duration: 300.milliseconds, delay: 50.milliseconds),
+            itemBuilder: (_, index) => ServiceComponent(
+                serviceData: list[index], width: context.width()),
           )
       ],
     );
@@ -84,7 +92,11 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
       child: Scaffold(
         body: SnapHelperWidget<ProviderInfoResponse>(
           future: future,
-          initialData: cachedProviderList.firstWhere((element) => element?.$1 == widget.providerId.validate(), orElse: () => null)?.$2,
+          initialData: cachedProviderList
+              .firstWhere(
+                  (element) => element?.$1 == widget.providerId.validate(),
+                  orElse: () => null)
+              ?.$2,
           onSuccess: (data) {
             return Stack(
               children: [
@@ -103,7 +115,9 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                             widget.onUpdate?.call();
                           }),
                           16.width,
-                          Text(language.lblAboutProvider, style: boldTextStyle(color: Colors.white, size: 18)),
+                          Text(language.lblAboutProvider,
+                              style:
+                                  boldTextStyle(color: Colors.white, size: 18)),
                         ],
                       ),
                     ),
@@ -121,18 +135,26 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(language.knownLanguages, style: boldTextStyle()),
+                              Text(language.knownLanguages,
+                                  style: boldTextStyle()),
                               8.height,
                               Wrap(
-                                children: data.userData!.knownLanguagesArray.map((e) {
+                                children:
+                                    data.userData!.knownLanguagesArray.map((e) {
                                   return Container(
                                     decoration: boxDecorationWithRoundedCorners(
-                                      borderRadius: BorderRadius.all(Radius.circular(4)),
-                                      backgroundColor: appStore.isDarkMode ? cardDarkColor : primaryColor.withOpacity(0.1),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      backgroundColor: appStore.isDarkMode
+                                          ? cardDarkColor
+                                          : primaryColor.withOpacity(0.1),
                                     ),
-                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
                                     margin: EdgeInsets.all(4),
-                                    child: Text(e, style: secondaryTextStyle(weight: FontWeight.bold)),
+                                    child: Text(e,
+                                        style: secondaryTextStyle(
+                                            weight: FontWeight.bold)),
                                   );
                                 }).toList(),
                               ),
@@ -143,18 +165,25 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(language.essentialSkills, style: boldTextStyle()),
+                              Text(language.essentialSkills,
+                                  style: boldTextStyle()),
                               8.height,
                               Wrap(
                                 children: data.userData!.skillsArray.map((e) {
                                   return Container(
                                     decoration: boxDecorationWithRoundedCorners(
-                                      borderRadius: BorderRadius.all(Radius.circular(4)),
-                                      backgroundColor: appStore.isDarkMode ? cardDarkColor : primaryColor.withOpacity(0.1),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      backgroundColor: appStore.isDarkMode
+                                          ? cardDarkColor
+                                          : primaryColor.withOpacity(0.1),
                                     ),
-                                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
                                     margin: EdgeInsets.all(4),
-                                    child: Text(e, style: secondaryTextStyle(weight: FontWeight.bold)),
+                                    child: Text(e,
+                                        style: secondaryTextStyle(
+                                            weight: FontWeight.bold)),
                                   );
                                 }).toList(),
                               ),
@@ -165,9 +194,11 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(language.lblAboutProvider, style: boldTextStyle()),
+                              Text(language.lblAboutProvider,
+                                  style: boldTextStyle()),
                               8.height,
-                              Text(data.userData!.description.validate(), style: secondaryTextStyle()),
+                              Text(data.userData!.description.validate(),
+                                  style: secondaryTextStyle()),
                               16.height,
                             ],
                           ),
@@ -175,14 +206,21 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(language.personalInfo, style: boldTextStyle()),
+                              Text(language.personalInfo,
+                                  style: boldTextStyle()),
                               8.height,
                               TextIcon(
                                 spacing: 10,
                                 onTap: () {
-                                  launchMail("${data.userData!.email.validate()}");
+                                  launchMail(
+                                      "${data.userData!.email.validate()}");
                                 },
-                                prefix: Image.asset(ic_message, width: 16, height: 16, color: appStore.isDarkMode ? Colors.white : context.primaryColor),
+                                prefix: Image.asset(ic_message,
+                                    width: 16,
+                                    height: 16,
+                                    color: appStore.isDarkMode
+                                        ? Colors.white
+                                        : context.primaryColor),
                                 text: data.userData!.email.validate(),
                                 textStyle: secondaryTextStyle(size: 14),
                                 expandedText: true,
@@ -191,9 +229,15 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                               TextIcon(
                                 spacing: 10,
                                 onTap: () {
-                                  launchCall("${data.userData!.contactNumber.validate()}");
+                                  launchCall(
+                                      "${data.userData!.contactNumber.validate()}");
                                 },
-                                prefix: Image.asset(ic_calling, width: 16, height: 16, color: appStore.isDarkMode ? Colors.white : context.primaryColor),
+                                prefix: Image.asset(ic_calling,
+                                    width: 16,
+                                    height: 16,
+                                    color: appStore.isDarkMode
+                                        ? Colors.white
+                                        : context.primaryColor),
                                 text: data.userData!.contactNumber.validate(),
                                 textStyle: secondaryTextStyle(size: 14),
                                 expandedText: true,
@@ -201,7 +245,9 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                               8.height,
                             ],
                           ),
-                        servicesWidget(list: data.serviceList!, providerId: widget.providerId.validate()),
+                        servicesWidget(
+                            list: data.serviceList!,
+                            providerId: widget.providerId.validate()),
                       ],
                     ).paddingAll(16),
                   ],
@@ -214,7 +260,9 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                     return await 2.seconds.delay;
                   },
                 ),
-                Observer(builder: (context) => LoaderWidget().visible(appStore.isLoading))
+                Observer(
+                    builder: (context) =>
+                        LoaderWidget().visible(appStore.isLoading))
               ],
             );
           },

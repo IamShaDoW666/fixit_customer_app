@@ -1,11 +1,12 @@
 import 'package:nb_utils/nb_utils.dart';
 
 /// DO NOT CHANGE THIS PACKAGE NAME
-var appPackageName = isAndroid ? 'com.iqonic.servicebooking' : 'com.iqonic.user';
+var appPackageName =
+    isAndroid ? 'com.iqonic.servicebooking' : 'com.iqonic.user';
 
 //region Common Configs
 const DEFAULT_FIREBASE_PASSWORD = '12345678';
-const DECIMAL_POINT = 2;
+const DECIMAL_POINT = 0;
 const PER_PAGE_ITEM = 20;
 const PER_PAGE_CATEGORY_ITEM = 50;
 const LABEL_TEXT_SIZE = 14;
@@ -162,8 +163,10 @@ const ONESIGNAL_API_KEY = 'ONESIGNAL_API_KEY';
 const ONESIGNAL_REST_API_KEY = 'ONESIGNAL_REST_API_KEY';
 const ONESIGNAL_CHANNEL_KEY = 'ONESIGNAL_CHANNEL_ID';
 const ONESIGNAL_APP_ID_PROVIDER = 'ONESIGNAL_ONESIGNAL_APP_ID_PROVIDER';
-const ONESIGNAL_REST_API_KEY_PROVIDER = 'ONESIGNAL_ONESIGNAL_REST_API_KEY_PROVIDER';
-const ONESIGNAL_CHANNEL_KEY_PROVIDER = 'ONESIGNAL_ONESIGNAL_CHANNEL_ID_PROVIDER';
+const ONESIGNAL_REST_API_KEY_PROVIDER =
+    'ONESIGNAL_ONESIGNAL_REST_API_KEY_PROVIDER';
+const ONESIGNAL_CHANNEL_KEY_PROVIDER =
+    'ONESIGNAL_ONESIGNAL_CHANNEL_ID_PROVIDER';
 
 //endregion
 
@@ -302,7 +305,8 @@ const GOOGLE_MAP_PREFIX = 'https://www.google.com/maps/search/?api=1&query=';
 
 //endregion
 
-SlideConfiguration sliderConfigurationGlobal = SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds);
+SlideConfiguration sliderConfigurationGlobal =
+    SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds);
 
 // region JOB REQUEST STATUS
 const JOB_REQUEST_STATUS_REQUESTED = "requested";
@@ -311,3 +315,5 @@ const JOB_REQUEST_STATUS_ASSIGNED = "assigned";
 // endregion
 
 const PAYPAL_STATUS = 2;
+
+enum GalleryFileTypes { CANCEL, CAMERA, GALLERY }

@@ -29,7 +29,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import 'model/booking_data_model.dart';
 import 'model/booking_status_model.dart';
 import 'model/category_model.dart';
@@ -98,39 +97,54 @@ void main() async {
 
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
 
-  int themeModeIndex = getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
+  int themeModeIndex =
+      getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
   if (themeModeIndex == THEME_MODE_LIGHT) {
     appStore.setDarkMode(false);
   } else if (themeModeIndex == THEME_MODE_DARK) {
     appStore.setDarkMode(true);
   }
 
-  await appStore.setUseMaterialYouTheme(getBoolAsync(USE_MATERIAL_YOU_THEME), isInitializing: true);
+  await appStore.setUseMaterialYouTheme(getBoolAsync(USE_MATERIAL_YOU_THEME),
+      isInitializing: true);
 
   if (appStore.isLoggedIn) {
     await appStore.setUserId(getIntAsync(USER_ID), isInitializing: true);
-    await appStore.setFirstName(getStringAsync(FIRST_NAME), isInitializing: true);
+    await appStore.setFirstName(getStringAsync(FIRST_NAME),
+        isInitializing: true);
     await appStore.setLastName(getStringAsync(LAST_NAME), isInitializing: true);
-    await appStore.setUserEmail(getStringAsync(USER_EMAIL), isInitializing: true);
+    await appStore.setUserEmail(getStringAsync(USER_EMAIL),
+        isInitializing: true);
     await appStore.setUserName(getStringAsync(USERNAME), isInitializing: true);
-    await appStore.setContactNumber(getStringAsync(CONTACT_NUMBER), isInitializing: true);
-    await appStore.setUserProfile(getStringAsync(PROFILE_IMAGE), isInitializing: true);
+    await appStore.setContactNumber(getStringAsync(CONTACT_NUMBER),
+        isInitializing: true);
+    await appStore.setUserProfile(getStringAsync(PROFILE_IMAGE),
+        isInitializing: true);
     await appStore.setCountryId(getIntAsync(COUNTRY_ID), isInitializing: true);
     await appStore.setStateId(getIntAsync(STATE_ID), isInitializing: true);
     await appStore.setCityId(getIntAsync(COUNTRY_ID), isInitializing: true);
     await appStore.setUId(getStringAsync(UID), isInitializing: true);
     await appStore.setToken(getStringAsync(TOKEN), isInitializing: true);
     await appStore.setAddress(getStringAsync(ADDRESS), isInitializing: true);
-    await appStore.setCurrencyCode(getStringAsync(CURRENCY_COUNTRY_CODE), isInitializing: true);
-    await appStore.setCurrencyCountryId(getStringAsync(CURRENCY_COUNTRY_ID), isInitializing: true);
-    await appStore.setCurrencySymbol(getStringAsync(CURRENCY_COUNTRY_SYMBOL), isInitializing: true);
-    await appStore.setPrivacyPolicy(getStringAsync(PRIVACY_POLICY), isInitializing: true);
-    await appStore.setLoginType(getStringAsync(LOGIN_TYPE), isInitializing: true);
+    await appStore.setCurrencyCode(getStringAsync(CURRENCY_COUNTRY_CODE),
+        isInitializing: true);
+    await appStore.setCurrencyCountryId(getStringAsync(CURRENCY_COUNTRY_ID),
+        isInitializing: true);
+    await appStore.setCurrencySymbol(getStringAsync(CURRENCY_COUNTRY_SYMBOL),
+        isInitializing: true);
+    await appStore.setPrivacyPolicy(getStringAsync(PRIVACY_POLICY),
+        isInitializing: true);
+    await appStore.setLoginType(getStringAsync(LOGIN_TYPE),
+        isInitializing: true);
     await appStore.setPlayerId(getStringAsync(PLAYERID), isInitializing: true);
-    await appStore.setTermConditions(getStringAsync(TERM_CONDITIONS), isInitializing: true);
-    await appStore.setInquiryEmail(getStringAsync(INQUIRY_EMAIL), isInitializing: true);
-    await appStore.setHelplineNumber(getStringAsync(HELPLINE_NUMBER), isInitializing: true);
-    await appStore.setEnableUserWallet(getBoolAsync(ENABLE_USER_WALLET), isInitializing: true);
+    await appStore.setTermConditions(getStringAsync(TERM_CONDITIONS),
+        isInitializing: true);
+    await appStore.setInquiryEmail(getStringAsync(INQUIRY_EMAIL),
+        isInitializing: true);
+    await appStore.setHelplineNumber(getStringAsync(HELPLINE_NUMBER),
+        isInitializing: true);
+    await appStore.setEnableUserWallet(getBoolAsync(ENABLE_USER_WALLET),
+        isInitializing: true);
   }
 
   runApp(MyApp());
@@ -166,7 +180,8 @@ class _MyAppState extends State<MyApp> {
                 home: SplashScreen(),
                 theme: AppTheme.lightTheme(color: snap.data),
                 darkTheme: AppTheme.darkTheme(color: snap.data),
-                themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+                themeMode:
+                    appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 title: APP_NAME,
                 supportedLocales: LanguageDataModel.languageLocales(),
                 localizationsDelegates: [

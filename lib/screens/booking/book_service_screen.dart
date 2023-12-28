@@ -21,7 +21,11 @@ class BookServiceScreen extends StatefulWidget {
   final int bookingAddressId;
   final BookingPackage? selectedPackage;
 
-  BookServiceScreen({required this.data, this.bookingAddressId = 0, this.selectedPackage});
+  BookServiceScreen({
+    required this.data,
+    this.bookingAddressId = 0,
+    this.selectedPackage,
+  });
 
   @override
   _BookServiceScreenState createState() => _BookServiceScreenState();
@@ -39,20 +43,31 @@ class _BookServiceScreenState extends State<BookServiceScreen> {
   void init() async {
     stepsList = [
       CustomStep(
-        title: widget.data.serviceDetail!.isSlotAvailable ? language.lblStep2 : language.lblStep1,
+        title: widget.data.serviceDetail!.isSlotAvailable
+            ? language.lblStep2
+            : language.lblStep1,
         page: BookingServiceStep2(
           data: widget.data,
           isSlotAvailable: !widget.data.serviceDetail!.isSlotAvailable,
         ),
       ),
       CustomStep(
-        title: widget.data.serviceDetail!.isSlotAvailable ? language.lblStep3 : language.lblStep2,
-        page: BookingServiceStep3(data: widget.data, selectedPackage: widget.selectedPackage != null ? widget.selectedPackage : null),
+        title: widget.data.serviceDetail!.isSlotAvailable
+            ? language.lblStep3
+            : language.lblStep2,
+        page: BookingServiceStep3(
+            data: widget.data,
+            selectedPackage:
+                widget.selectedPackage != null ? widget.selectedPackage : null),
       ),
     ];
 
     if (widget.data.serviceDetail!.isSlotAvailable) {
-      stepsList!.insert(0, CustomStep(title: language.lblStep1, page: BookingServiceStep1(data: widget.data)));
+      stepsList!.insert(
+          0,
+          CustomStep(
+              title: language.lblStep1,
+              page: BookingServiceStep1(data: widget.data)));
     }
   }
 

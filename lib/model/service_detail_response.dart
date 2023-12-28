@@ -1,26 +1,59 @@
+import 'dart:io';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 
 class ServiceDetailResponse {
   List<CouponData>? couponData;
-  UserData? provider;
+  List<UserData>? providers;
   List<RatingData>? ratingData;
   ServiceData? serviceDetail;
   List<TaxData>? taxes;
   List<ServiceData>? relatedService;
   List<ServiceFaq>? serviceFaq;
+  List<File>? imageList;
 
-  ServiceDetailResponse({this.couponData, this.provider, this.ratingData, this.serviceDetail, this.taxes, this.relatedService, this.serviceFaq});
+  ServiceDetailResponse(
+      {this.couponData,
+      this.providers,
+      this.ratingData,
+      this.serviceDetail,
+      this.taxes,
+      this.relatedService,
+      this.serviceFaq});
 
   factory ServiceDetailResponse.fromJson(Map<String, dynamic> json) {
     return ServiceDetailResponse(
-      couponData: json['coupon_data'] != null ? (json['coupon_data'] as List).map((i) => CouponData.fromJson(i)).toList() : null,
-      provider: json['provider'] != null ? UserData.fromJson(json['provider']) : null,
-      ratingData: json['rating_data'] != null ? (json['rating_data'] as List).map((i) => RatingData.fromJson(i)).toList() : null,
-      serviceDetail: json['service_detail'] != null ? ServiceData.fromJson(json['service_detail']) : null,
-      taxes: json['taxes'] != null ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList() : null,
-      relatedService: json['related_service'] != null ? (json['related_service'] as List).map((i) => ServiceData.fromJson(i)).toList() : null,
-      serviceFaq: json['service_faq'] != null ? (json['service_faq'] as List).map((i) => ServiceFaq.fromJson(i)).toList() : null,
+      couponData: json['coupon_data'] != null
+          ? (json['coupon_data'] as List)
+              .map((i) => CouponData.fromJson(i))
+              .toList()
+          : null,
+      providers: json['providers'] != null
+          ? (json['providers'] as List)
+              .map((i) => UserData.fromJson(i))
+              .toList()
+          : null,
+      ratingData: json['rating_data'] != null
+          ? (json['rating_data'] as List)
+              .map((i) => RatingData.fromJson(i))
+              .toList()
+          : null,
+      serviceDetail: json['service_detail'] != null
+          ? ServiceData.fromJson(json['service_detail'])
+          : null,
+      taxes: json['taxes'] != null
+          ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList()
+          : null,
+      relatedService: json['related_service'] != null
+          ? (json['related_service'] as List)
+              .map((i) => ServiceData.fromJson(i))
+              .toList()
+          : null,
+      serviceFaq: json['service_faq'] != null
+          ? (json['service_faq'] as List)
+              .map((i) => ServiceFaq.fromJson(i))
+              .toList()
+          : null,
     );
   }
 
@@ -29,8 +62,8 @@ class ServiceDetailResponse {
     if (this.couponData != null) {
       data['coupon_data'] = this.couponData!.map((v) => v.toJson()).toList();
     }
-    if (this.provider != null) {
-      data['provider'] = this.provider!.toJson();
+    if (this.providers != null) {
+      data['provider'] = this.providers!.map((v) => v.toJson()).toList();
     }
     if (this.ratingData != null) {
       data['rating_data'] = this.ratingData!.map((v) => v.toJson()).toList();
@@ -42,7 +75,8 @@ class ServiceDetailResponse {
       data['taxes'] = this.taxes!.map((v) => v.toJson()).toList();
     }
     if (this.relatedService != null) {
-      data['related_service'] = this.relatedService!.map((v) => v.toJson()).toList();
+      data['related_service'] =
+          this.relatedService!.map((v) => v.toJson()).toList();
     }
     if (this.serviceFaq != null) {
       data['service_faq'] = this.serviceFaq!.map((v) => v.toJson()).toList();
@@ -57,18 +91,26 @@ class TaxData {
   String? title;
   String? type;
   num? value;
+  bool? seperate;
   num? totalCalculatedValue;
 
-  TaxData({this.id, this.providerId, this.title, this.type, this.value, this.totalCalculatedValue});
+  TaxData(
+      {this.id,
+      this.providerId,
+      this.title,
+      this.type,
+      this.value,
+      this.totalCalculatedValue,
+      this.seperate});
 
   factory TaxData.fromJson(Map<String, dynamic> json) {
     return TaxData(
-      id: json['id'],
-      providerId: json['provider_id'],
-      title: json['title'],
-      type: json['type'],
-      value: json['value'],
-    );
+        id: json['id'],
+        providerId: json['provider_id'],
+        title: json['title'],
+        type: json['type'],
+        value: json['value'],
+        seperate: json['seperate']);
   }
 
   Map<String, dynamic> toJson() {
@@ -78,6 +120,7 @@ class TaxData {
     data['title'] = this.title;
     data['type'] = this.type;
     data['value'] = this.value;
+    data['seperate'] = this.seperate;
     return data;
   }
 }
@@ -90,7 +133,13 @@ class CouponData {
   int? id;
   int? status;
 
-  CouponData({this.code, this.discount, this.discountType, this.expireDate, this.id, this.status});
+  CouponData(
+      {this.code,
+      this.discount,
+      this.discountType,
+      this.expireDate,
+      this.id,
+      this.status});
 
   factory CouponData.fromJson(Map<String, dynamic> json) {
     return CouponData(
@@ -170,7 +219,9 @@ class RatingData {
       customerName: json['customer_name'],
       customerProfileImage: json['customer_profile_image'],
       serviceName: json['service_name'],
-      attachments: json['attchments'] != null ? List<String>.from(json['attchments']) : null,
+      attachments: json['attchments'] != null
+          ? List<String>.from(json['attchments'])
+          : null,
     );
   }
 
@@ -207,7 +258,14 @@ class ServiceFaq {
   String? title;
   String? updatedAt;
 
-  ServiceFaq({this.createdAt, this.description, this.id, this.serviceId, this.status, this.title, this.updatedAt});
+  ServiceFaq(
+      {this.createdAt,
+      this.description,
+      this.id,
+      this.serviceId,
+      this.status,
+      this.title,
+      this.updatedAt});
 
   factory ServiceFaq.fromJson(Map<String, dynamic> json) {
     return ServiceFaq(

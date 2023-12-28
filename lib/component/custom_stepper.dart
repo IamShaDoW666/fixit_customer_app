@@ -25,9 +25,11 @@ class _CustomStepperState extends State<CustomStepper> {
 
   Widget buildStepDivider(int index) {
     return DottedLine(
-      dashColor: index < currentPage ? Theme.of(context).primaryColor : primaryColor.withOpacity(0.3),
+      dashColor: index < currentPage
+          ? Theme.of(context).primaryColor
+          : primaryColor.withOpacity(0.3),
       lineThickness: 1.5,
-    ).withWidth(50);
+    ).withWidth(25);
   }
 
   Widget buildStep(int index) {
@@ -42,17 +44,36 @@ class _CustomStepperState extends State<CustomStepper> {
             Container(
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: index <= currentPage ? Theme.of(context).primaryColor : Colors.transparent,
-                border: Border.all(color: index <= currentPage ? Colors.transparent : context.dividerColor),
+                color: index <= currentPage
+                    ? Theme.of(context).primaryColor
+                    : Colors.transparent,
+                border: Border.all(
+                    color: index <= currentPage
+                        ? Colors.transparent
+                        : context.dividerColor),
               ),
               padding: EdgeInsets.all(20),
-              child: Text("${(index + 1)}", style: boldTextStyle(color: index <= currentPage ? Colors.transparent : Colors.grey), maxLines: 1),
+              child: Text("${(index + 1)}",
+                  style: boldTextStyle(
+                      color: index <= currentPage
+                          ? Colors.transparent
+                          : Colors.grey),
+                  maxLines: 1),
             ),
-            Icon(Icons.done, color: index <= currentPage ? Colors.white : Colors.transparent),
+            Icon(Icons.done,
+                color:
+                    index <= currentPage ? Colors.white : Colors.transparent),
           ],
         ),
         8.height,
-        Marquee(child: Text(widget.stepsList[index].title, textAlign: TextAlign.center, style: boldTextStyle(color: index <= currentPage ? textPrimaryColorGlobal : Colors.grey))).expand()
+        Marquee(
+                child: Text(widget.stepsList[index].title,
+                    textAlign: TextAlign.center,
+                    style: boldTextStyle(
+                        color: index <= currentPage
+                            ? textPrimaryColorGlobal
+                            : Colors.grey)))
+            .expand()
       ],
     );
   }
@@ -60,7 +81,7 @@ class _CustomStepperState extends State<CustomStepper> {
   Widget _buildStepper(int currentStep) {
     return Container(
       height: 100,
-      width: context.width() * 0.8,
+      width: context.width(),
       child: Row(
         children: List.generate(
           widget.stepsList.length,
@@ -72,10 +93,10 @@ class _CustomStepperState extends State<CustomStepper> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   buildStep(index),
-                  Offstage(),
+                  // Offstage(),
                   buildStepDivider(index).paddingBottom(16),
                 ],
-              ).expand(flex: widget.stepsList.length);
+              ).expand(flex: 2);
             else
               return buildStep(index).expand();
           },
@@ -90,7 +111,8 @@ class _CustomStepperState extends State<CustomStepper> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        _buildStepper(currentPage).paddingOnly(left: 16, top: 16, right: 16, bottom: 16),
+        _buildStepper(currentPage)
+            .paddingOnly(left: 16, top: 16, right: 16, bottom: 16),
         Expanded(
           child: PageView.builder(
             controller: customStepperController,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
@@ -19,7 +21,10 @@ class RazorPayServiceNew {
     required Function(Map<String, dynamic>) onComplete,
   }) {
     razorPay = Razorpay();
-    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
+    razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, (res) {
+      print(res.toJson());
+      appStore.setLoading(false);
+    });
     razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
     razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWallet);
     this.paymentSetting = paymentSetting;
@@ -63,8 +68,11 @@ class RazorPayServiceNew {
       'description': APP_NAME,
       'image': 'https://razorpay.com/assets/razorpay-glyph.svg',
       'currency': 'INR', //TODO
-      'prefill': {'contact': appStore.userContactNumber, 'email': appStore.userEmail},
-     /* 'external': {
+      'prefill': {
+        'contact': appStore.userContactNumber,
+        'email': appStore.userEmail
+      },
+      /* 'external': {
         'wallets': ['paytm']
       }*/
     };

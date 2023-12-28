@@ -24,12 +24,17 @@ class CategoryWidget extends StatelessWidget {
                   width: CATEGORY_ICON_SIZE,
                   height: CATEGORY_ICON_SIZE,
                   padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(color: context.cardColor, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                      color: context.cardColor,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: SvgPicture.network(
                     categoryData.categoryImage.validate(),
                     height: CATEGORY_ICON_SIZE,
                     width: CATEGORY_ICON_SIZE,
-                    color: appStore.isDarkMode ? Colors.white : categoryData.color.validate(value: '000').toColor(),
+                    color: appStore.isDarkMode
+                        ? Colors.white
+                        : categoryData.color.validate(value: '000').toColor(),
                     placeholderBuilder: (context) => PlaceHolderWidget(
                       height: CATEGORY_ICON_SIZE,
                       width: CATEGORY_ICON_SIZE,
@@ -39,7 +44,12 @@ class CategoryWidget extends StatelessWidget {
                 )
               : Container(
                   padding: EdgeInsets.all(14),
-                  decoration: BoxDecoration(color: appStore.isDarkMode ? Colors.white24 : context.cardColor, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                      color: appStore.isDarkMode
+                          ? Colors.white24
+                          : context.cardColor,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: CachedImageWidget(
                     url: categoryData.categoryImage.validate(),
                     fit: BoxFit.cover,
@@ -50,12 +60,11 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
           4.height,
-          Marquee(
-            directionMarguee: DirectionMarguee.oneDirection,
-            child: Text(
-              '${categoryData.name.validate()}',
-              style: primaryTextStyle(size: 12),
-            ),
+          Text(
+            '${categoryData.name.validate()}',
+            textAlign: TextAlign.center,
+            style: primaryTextStyle(
+                size: 12, color: appStore.isDarkMode ? white : black),
           ),
         ],
       ),

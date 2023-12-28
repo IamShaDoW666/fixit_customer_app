@@ -9,10 +9,12 @@ class CommonKeys {
   static String date = 'date';
   static String status = 'status';
   static String dateTime = 'datetime';
+  static String type = 'type';
   static String txnId = "txn_id";
   static String paymentStatus = "payment_status";
   static String paymentMethod = "payment_type";
   static String advancePaidAmount = "advance_paid_amount";
+  static String isMobile = "is_mobile";
 }
 
 class UserKeys {
@@ -44,6 +46,13 @@ class BookingServiceKeys {
   static String userPostJob = 'user_post_job';
   static String type = 'type';
   static String bookingPackage = 'booking_package';
+  static String attachmentCount = "attachment_count";
+  static String bookingAttachment = 'booking_attachment_';
+  static String optionVariants = 'option_variants';
+  static String pricePerSqft = 'price_per_sqft';
+  static String mobile = 'mobile';
+  static String providerId = 'provider_id';
+  static String paymentMode = 'payment_mode';
 }
 
 class CouponKeys {

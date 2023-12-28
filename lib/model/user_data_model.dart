@@ -157,7 +157,9 @@ class UserData {
       stateId: json['state_id'],
       status: json['status'],
       updatedAt: json['updated_at'],
-      userRole: json['user_role'] != null ? new List<String>.from(json['user_role']) : null,
+      userRole: json['user_role'] != null
+          ? new List<String>.from(json['user_role'])
+          : null,
       userType: json['user_type'],
       username: json['username'],
       isOnline: json['isOnline'],
@@ -175,7 +177,9 @@ class UserData {
       lastNotificationSeen: json['last_notification_seen'],
       providersServiceRating: json['providers_service_rating'],
       handymanRating: json['handyman_rating'],
-      handymanReview: json['handyman_review'] != null ? new HandymanReview.fromJson(json['handyman_review']) : null,
+      handymanReview: json['handyman_review'] != null
+          ? new HandymanReview.fromJson(json['handyman_review'])
+          : null,
       timeZone: json['time_zone'],
       isVerifyProvider: json['is_verify_provider'],
       isUserExist: json['is_user_exist'],
@@ -196,7 +200,8 @@ class UserData {
     if (this.createdAt != null) data['created_at'] = this.createdAt;
     if (this.displayName != null) data['display_name'] = this.displayName;
     if (this.email != null) data['email'] = this.email;
-    if (this.emailVerifiedAt != null) data['email_verified_at'] = this.emailVerifiedAt;
+    if (this.emailVerifiedAt != null)
+      data['email_verified_at'] = this.emailVerifiedAt;
     if (this.firstName != null) data['first_name'] = this.firstName;
     if (this.id != null) data['id'] = this.id;
     if (this.socialImage != null) data['social_image'] = this.socialImage;
@@ -204,7 +209,8 @@ class UserData {
     if (this.lastName != null) data['last_name'] = this.lastName;
     if (this.playerId != null) data['player_id'] = this.playerId;
     if (this.providerId != null) data['provider_id'] = this.providerId;
-    if (this.providerTypeId != null) data['providertype_id'] = this.providerTypeId;
+    if (this.providerTypeId != null)
+      data['providertype_id'] = this.providerTypeId;
     if (this.stateId != null) data['state_id'] = this.stateId;
     if (this.status != null) data['status'] = this.status;
     if (this.updatedAt != null) data['updated_at'] = this.updatedAt;
@@ -214,20 +220,27 @@ class UserData {
     if (this.uid != null) data['uid'] = this.uid;
     if (this.isOnline != null) data['isOnline'] = this.isOnline;
     if (this.description != null) data['description'] = this.description;
-    if (this.knownLanguages != null) data['known_languages'] = this.knownLanguages;
+    if (this.knownLanguages != null)
+      data['known_languages'] = this.knownLanguages;
     if (this.skills != null) data['skills'] = this.skills;
     if (this.providerType != null) data['providertype'] = this.providerType;
     if (this.cityName != null) data['city_name'] = this.cityName;
     if (this.timeZone != null) data['time_zone'] = this.timeZone;
     if (this.loginType != null) data['login_type'] = this.loginType;
-    if (this.serviceAddressId != null) data['service_address_id'] = this.serviceAddressId;
-    if (this.lastNotificationSeen != null) data['last_notification_seen'] = this.lastNotificationSeen;
-    if (this.providersServiceRating != null) data['providers_service_rating'] = this.providersServiceRating;
-    if (this.handymanRating != null) data['handyman_rating'] = this.handymanRating;
-    if (this.isVerifyProvider != null) data['is_verify_provider'] = this.isVerifyProvider;
+    if (this.serviceAddressId != null)
+      data['service_address_id'] = this.serviceAddressId;
+    if (this.lastNotificationSeen != null)
+      data['last_notification_seen'] = this.lastNotificationSeen;
+    if (this.providersServiceRating != null)
+      data['providers_service_rating'] = this.providersServiceRating;
+    if (this.handymanRating != null)
+      data['handyman_rating'] = this.handymanRating;
+    if (this.isVerifyProvider != null)
+      data['is_verify_provider'] = this.isVerifyProvider;
     if (this.isUserExist != null) data['is_user_exist'] = this.isUserExist;
     if (this.designation != null) data['designation'] = this.designation;
-    if (this.verificationId != null) data['verificationId'] = this.verificationId;
+    if (this.verificationId != null)
+      data['verificationId'] = this.verificationId;
     if (this.otpCode != null) data['otpCode'] = this.otpCode;
     if (this.isFavourite != null) data['is_favourite'] = this.isFavourite;
     if (this.handymanReview != null) {

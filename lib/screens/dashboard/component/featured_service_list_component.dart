@@ -21,8 +21,8 @@ class FeaturedServiceListComponent extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 16),
       width: context.width(),
       decoration: BoxDecoration(
-        color: appStore.isDarkMode ? context.cardColor : context.primaryColor.withOpacity(0.1),
-      ),
+          // color: appStore.isDarkMode ? context.cardColor : context.primaryColor.withOpacity(0.1),
+          ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -39,7 +39,10 @@ class FeaturedServiceListComponent extends StatelessWidget {
               itemCount: serviceList.length,
               spacing: 16,
               padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              itemBuilder: (context, index) => ServiceComponent(serviceData: serviceList[index], width: 280, isBorderEnabled: true),
+              itemBuilder: (context, index) => ServiceComponent(
+                  serviceData: serviceList[index],
+                  width: 280,
+                  isBorderEnabled: true),
             )
           else
             Container(
