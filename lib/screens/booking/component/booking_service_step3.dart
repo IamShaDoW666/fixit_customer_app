@@ -581,44 +581,45 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
             buildBookingSummaryWidget(),
             16.height,
             priceWidget(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(language.paymentMode,
-                    style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                RadioListTile(
-                    value: 'cod',
-                    dense: true,
-                    title: Text('Cash'),
-                    groupValue: paymentMode,
-                    activeColor: primaryColor,
-                    controlAffinity: ListTileControlAffinity.trailing,
-                    onChanged: (val) {
-                      setState(() {});
-                      paymentMode = val.validate();
-                    }),
-                RadioListTile(
-                    value: 'card',
-                    title: Text('Card'),
-                    dense: true,
-                    activeColor: primaryColor,
-                    controlAffinity: ListTileControlAffinity.trailing,
-                    groupValue: paymentMode,
-                    onChanged: (val) {
-                      setState(() {});
-                      paymentMode = val.validate();
-                    }),
-                Observer(builder: (context) {
-                  return WalletBalanceComponent().visible(
-                      appStore.isEnableUserWallet &&
-                          widget.data.serviceDetail!.isFixedService);
-                }),
-                16.height,
-                Text(language.disclaimer,
-                    style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                Text(language.disclaimerContent, style: secondaryTextStyle()),
-              ],
-            ).paddingSymmetric(vertical: 16),
+            if (!widget.data.serviceDetail!.isAdvancePayment)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(language.paymentMode,
+                      style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                  RadioListTile(
+                      value: 'cod',
+                      dense: true,
+                      title: Text('Cash'),
+                      groupValue: paymentMode,
+                      activeColor: primaryColor,
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      onChanged: (val) {
+                        setState(() {});
+                        paymentMode = val.validate();
+                      }),
+                  RadioListTile(
+                      value: 'card',
+                      title: Text('Card'),
+                      dense: true,
+                      activeColor: primaryColor,
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      groupValue: paymentMode,
+                      onChanged: (val) {
+                        setState(() {});
+                        paymentMode = val.validate();
+                      }),
+                  Observer(builder: (context) {
+                    return WalletBalanceComponent().visible(
+                        appStore.isEnableUserWallet &&
+                            widget.data.serviceDetail!.isFixedService);
+                  }),
+                  16.height,
+                  Text(language.disclaimer,
+                      style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                  Text(language.disclaimerContent, style: secondaryTextStyle()),
+                ],
+              ).paddingSymmetric(vertical: 16),
             36.height,
             Row(
               children: [

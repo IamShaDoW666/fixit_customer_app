@@ -1237,7 +1237,7 @@ class LanguageAr extends BaseLanguage {
   String get use24HourFormat => 'استخدام تنسيق 24 ساعة؟';
 
   @override
-  String get email => 'بريد إلكتروني';
+  String get email => 'e-mail';
 
   @override
   String get badRequest => '400 طلب سىء';

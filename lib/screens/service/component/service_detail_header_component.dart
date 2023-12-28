@@ -231,17 +231,17 @@ class _ServiceDetailHeaderComponentState
                         ],
                       ),
                       4.height,
-                      TextIcon(
-                        edgeInsets:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-                        text: '${language.duration}',
-                        textStyle: secondaryTextStyle(size: 14),
-                        expandedText: true,
-                        suffix: Text(
-                          "${widget.serviceDetail.duration.validate()} ${language.lblHour}",
-                          style: boldTextStyle(color: primaryColor),
-                        ),
-                      ),
+                      // TextIcon(
+                      //   edgeInsets:
+                      //       EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+                      //   text: '${language.duration}',
+                      //   textStyle: secondaryTextStyle(size: 14),
+                      //   expandedText: true,
+                      //   suffix: Text(
+                      //     "${widget.serviceDetail.duration.validate()} ${language.lblHour}",
+                      //     style: boldTextStyle(color: primaryColor),
+                      //   ),
+                      // ),
                       TextIcon(
                         text: '${language.lblRating}',
                         textStyle: secondaryTextStyle(size: 14),

@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:482957258448:android:5ccd4b6ae2ac28389038d5",
+        "android_client_info": {
+          "package_name": "com.marsvisiongroup.yk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482957258448-934rk6g3h2h5ojr8vr7o47qln0m3i95r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marsvisiongroup.yk",
+            "certificate_hash": "66fa04a29cbcfe00e1f4291b90e23b002ce1d495"
+          }
+        },
+        {
+          "client_id": "482957258448-6orkdbsb7bvti49p95vgic6ckg16taom.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeqv1J0x0DL5NmsVABukHN9_blcMrFwKQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482957258448-4rcjn9dut5ndgk1g5kjkkt5ruf78l49q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:482957258448:android:9b709ae584de55e99038d5",
         "android_client_info": {
           "package_name": "com.yallakhedma.fixit"

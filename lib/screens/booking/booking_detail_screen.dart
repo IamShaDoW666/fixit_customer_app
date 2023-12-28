@@ -826,16 +826,28 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
       ).paddingOnly(left: 16, right: 16, bottom: 16);
     } else if (bookingResponse.bookingDetail!.status ==
         BookingStatusKeys.onGoing) {
-      return AppButton(
-        text: language.lblStart,
-        textColor: Colors.white,
-        color: Colors.green,
-        onTap: () {
-          _handleStartClick(status: bookingResponse);
-        },
-      ).paddingOnly(left: 16, right: 16, bottom: 16);
+      return Container(
+        width: context.width(),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(color: context.cardColor),
+        child: Text('Handyman is on the way', style: boldTextStyle()).center(),
+      );
+      // return AppButton(
+      //   text: language.lblStart,
+      //   textColor: Colors.white,
+      //   color: Colors.green,
+      //   onTap: () {
+      //     _handleStartClick(status: bookingResponse);
+      //   },
+      // ).paddingOnly(left: 16, right: 16, bottom: 16);
     } else if (bookingResponse.bookingDetail!.status ==
         BookingStatusKeys.inProgress) {
+      return Container(
+        width: context.width(),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(color: context.cardColor),
+        child: Text('Work in progress', style: boldTextStyle()).center(),
+      );
       return Row(
         children: [
           AppButton(
@@ -859,27 +871,33 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
       ).paddingOnly(left: 16, right: 16, bottom: 16);
     } else if (bookingResponse.bookingDetail!.status ==
         BookingStatusKeys.hold) {
-      return Row(
-        children: [
-          AppButton(
-            text: language.lblResume,
-            textColor: Colors.white,
-            color: primaryColor,
-            onTap: () {
-              _handleResumeClick(status: bookingResponse);
-            },
-          ).expand(),
-          16.width,
-          AppButton(
-            text: language.lblCancel,
-            textColor: Colors.white,
-            color: cancelled,
-            onTap: () {
-              _handleCancelClick(status: bookingResponse);
-            },
-          ).expand(),
-        ],
-      ).paddingOnly(left: 16, right: 16, bottom: 16);
+      return Container(
+        width: context.width(),
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(color: context.cardColor),
+        child: Text('Handyman held the work', style: boldTextStyle()).center(),
+      );
+      // return Row(
+      //   children: [
+      //     AppButton(
+      //       text: language.lblResume,
+      //       textColor: Colors.white,
+      //       color: primaryColor,
+      //       onTap: () {
+      //         _handleResumeClick(status: bookingResponse);
+      //       },
+      //     ).expand(),
+      //     16.width,
+      //     AppButton(
+      //       text: language.lblCancel,
+      //       textColor: Colors.white,
+      //       color: cancelled,
+      //       onTap: () {
+      //         _handleCancelClick(status: bookingResponse);
+      //       },
+      //     ).expand(),
+      //   ],
+      // ).paddingOnly(left: 16, right: 16, bottom: 16);
     } else if (bookingResponse.bookingDetail!.status ==
         BookingStatusKeys.pendingApproval) {
       return Container(

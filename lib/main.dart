@@ -29,7 +29,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import 'model/booking_data_model.dart';
 import 'model/booking_status_model.dart';
 import 'model/category_model.dart';

@@ -60,13 +60,11 @@ class CategoryWidget extends StatelessWidget {
                   ),
                 ),
           4.height,
-          Marquee(
-            directionMarguee: DirectionMarguee.oneDirection,
-            child: Text(
-              '${categoryData.name.validate()}',
-              style: primaryTextStyle(
-                  size: 12, color: appStore.isDarkMode ? white : black),
-            ),
+          Text(
+            '${categoryData.name.validate()}',
+            textAlign: TextAlign.center,
+            style: primaryTextStyle(
+                size: 12, color: appStore.isDarkMode ? white : black),
           ),
         ],
       ),

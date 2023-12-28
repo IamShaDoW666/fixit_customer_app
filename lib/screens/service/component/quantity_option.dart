@@ -50,19 +50,19 @@ class _QuantityOptionState extends State<QuantityOption> {
                             style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                       ),
                     ),
-                    if (widget.option.typeInt != 3)
-                      if (widget.option.area != null && widget.option.area! > 0)
-                        Marquee(
-                            child: Text(' (' +
-                                widget.option.area.toString() +
-                                ' sqft)'))
-                      else if (widget.option.unitPrice != null &&
-                          widget.option.unitPrice! > 0)
-                        Marquee(
-                            child: Text(' (' +
-                                widget.option.unitPrice.toString() +
-                                appStore.currencySymbol +
-                                ')'))
+                    // if (widget.option.typeInt != 3)
+                    //   if (widget.option.area != null && widget.option.area! > 0)
+                    //     Marquee(
+                    //         child: Text(' (' +
+                    //             widget.option.area.toString() +
+                    //             ' sqft)'))
+                    //   else if (widget.option.unitPrice != null &&
+                    //       widget.option.unitPrice! > 0)
+                    //     Marquee(
+                    //         child: Text(' (' +
+                    //             widget.option.unitPrice.toString() +
+                    //             appStore.currencySymbol +
+                    //             ')'))
                   ],
                 ),
                 Observer(

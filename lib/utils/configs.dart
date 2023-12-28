@@ -1,8 +1,8 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
-const APP_NAME = 'Yallakhedma';
-const APP_NAME_TAG_LINE = 'On-Demand Services App';
+const APP_NAME = 'YallaKhedma';
+const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
 var defaultPrimaryColor = Color.fromARGB(255, 181, 93, 31);
 const DOMAIN_URL = 'https://yallakhedma.com';
 const BASE_URL = '$DOMAIN_URL/api/';

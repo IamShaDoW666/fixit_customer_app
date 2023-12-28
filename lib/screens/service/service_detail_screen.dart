@@ -23,6 +23,7 @@ import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -307,11 +308,12 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                         style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                     8.height,
                     snap.data!.serviceDetail!.description.validate().isNotEmpty
-                        ? ReadMoreText(
-                            snap.data!.serviceDetail!.description.validate(),
-                            style: secondaryTextStyle(),
-                            colorClickableText: context.primaryColor,
-                            textAlign: TextAlign.justify,
+                        ? Html(
+                            data: snap.data!.serviceDetail!.description
+                                .validate(),
+                            // style: secondaryTextStyle(),
+                            // colorClickableText: context.primaryColor,
+                            // textAlign: TextAlign.justify,
                           )
                         : Text(language.lblNotDescription,
                             style: secondaryTextStyle()),
@@ -324,9 +326,11 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text("Approx. sqft: " +
-                                bookingStore.getApproximateArea.toString())
-                            .paddingSymmetric(horizontal: 18),
+                        if (bookingStore.selectedOptions
+                            .any((element) => element['area'] != null))
+                          Text("Approx. sqft: " +
+                                  bookingStore.getApproximateArea.toString())
+                              .paddingSymmetric(horizontal: 18),
                       ],
                     );
                   }),
@@ -348,11 +352,9 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                         style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                     8.height,
                     snap.data!.serviceDetail!.inclusions.validate().isNotEmpty
-                        ? ReadMoreText(
-                            snap.data!.serviceDetail!.inclusions.validate(),
-                            style: secondaryTextStyle(),
-                            colorClickableText: context.primaryColor,
-                            textAlign: TextAlign.justify,
+                        ? Html(
+                            data:
+                                snap.data!.serviceDetail!.inclusions.validate(),
                           )
                         : Text(language.lblNotDescription,
                             style: secondaryTextStyle()),
@@ -366,11 +368,12 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                         style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                     8.height,
                     snap.data!.serviceDetail!.exclusions.validate().isNotEmpty
-                        ? ReadMoreText(
-                            snap.data!.serviceDetail!.exclusions.validate(),
-                            style: secondaryTextStyle(),
-                            colorClickableText: context.primaryColor,
-                            textAlign: TextAlign.justify,
+                        ? Html(
+                            data:
+                                snap.data!.serviceDetail!.exclusions.validate(),
+                            // style: secondaryTextStyle(),
+                            // colorClickableText: context.primaryColor,
+                            // textAlign: TextAlign.justify,
                           )
                         : Text(language.lblNotDescription,
                             style: secondaryTextStyle()),

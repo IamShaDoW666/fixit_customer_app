@@ -120,6 +120,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.providerId: bookingStore.providerId,
       BookingServiceKeys.paymentMode: widget.paymentMode
     };
+    log("req: ${[request]}");
     if (widget.bookingAmountModel != null) {
       request.addAll(widget.bookingAmountModel!.toJson());
     }

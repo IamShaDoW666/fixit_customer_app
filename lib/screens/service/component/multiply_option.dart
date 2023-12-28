@@ -48,9 +48,9 @@ class _MultiplyOptionState extends State<MultiplyOption> {
                             style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                       ),
                     ),
-                    Marquee(
-                        child: Text(
-                            ' (' + widget.option.area.toString() + ' sqft)'))
+                    // Marquee(
+                    //     child: Text(
+                    //         ' (' + widget.option.area.toString() + ' sqft)'))
                   ],
                 ),
                 Observer(
