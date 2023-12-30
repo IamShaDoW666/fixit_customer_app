@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Handyman Service User</string>
+	<string>Yallakhedma</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Handyman Service User</string>
+	<string>yallakhedma</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -40,21 +40,21 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Handyman Service app requires access to the Camera to upload your profile photo.</string>
+	<string>Yallakhedma requires access to the Camera to upload your profile photo.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Handyman Service app requires access to the Camera to upload your profile photo.</string>
+	<string>Yallakhedma requires access to the Camera to upload your profile photo.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Handyman Service app requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Yallakhedma requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Handyman Service app requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Yallakhedma requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Handyman Service app requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Yallakhedma requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Handyman Service app requires access to microphone when you will be used to record your speech at time of  press the "Mic" button.</string>
+	<string>Yallakhedma requires access to microphone when you will be used to record your speech at time of  press the "Mic" button.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Handyman Service app requires access to the photo library to upload your profile photo.</string>
+	<string>Yallakhedma requires access to the photo library to upload your profile photo.</string>
 	<key>Privacy-Location Usage Description</key>
-	<string>Handyman Service app requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Yallakhedma requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
