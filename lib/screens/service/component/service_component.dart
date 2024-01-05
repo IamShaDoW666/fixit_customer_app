@@ -213,49 +213,24 @@ class ServiceComponentState extends State<ServiceComponent> {
                 ],
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                8.height,
-                Marquee(
-                  directionMarguee: DirectionMarguee.oneDirection,
-                  child: Text(widget.serviceData!.name.validate(),
-                          style: boldTextStyle())
-                      .paddingSymmetric(horizontal: 16),
-                ),
-                8.height,
-                // Row(
-                //   children: [
-                //     ImageBorder(
-                //         src: widget.serviceData!.providerImage.validate(),
-                //         height: 30),
-                //     8.width,
-                //     if (widget.serviceData!.providerName.validate().isNotEmpty)
-                //       Text(
-                //         widget.serviceData!.providerName.validate(),
-                //         style: secondaryTextStyle(
-                //             size: 12,
-                //             color: appStore.isDarkMode
-                //                 ? Colors.white
-                //                 : appTextSecondaryColor),
-                //         maxLines: 2,
-                //         overflow: TextOverflow.ellipsis,
-                //       ).expand()
-                //   ],
-                // ).onTap(() async {
-                //   if (widget.serviceData!.providerId !=
-                //       appStore.userId.validate()) {
-                //     await ProviderInfoScreen(
-                //             providerId:
-                //                 widget.serviceData!.providerId.validate())
-                //         .launch(context);
-                //     setStatusBarColor(Colors.transparent);
-                //   } else {
-                //     //
-                //   }
-                // }).paddingSymmetric(horizontal: 16),
-                16.height,
-              ],
+            // Column(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     8.height,
+            //     Marquee(
+            //       child: Text(widget.serviceData!.name.validate(),
+            //               style: boldTextStyle())
+            //           .paddingSymmetric(horizontal: 16),
+            //     ),
+            //     8.height,
+            //     16.height,
+            //   ],
+            // ),
+            Text(
+              '${widget.serviceData!.name.validate()}',
+              textAlign: TextAlign.center,
+              style: primaryTextStyle(
+                  size: 12, color: appStore.isDarkMode ? white : black),
             ),
           ],
         ),
