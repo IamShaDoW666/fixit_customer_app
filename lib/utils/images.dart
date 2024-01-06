@@ -12,6 +12,7 @@ const walk_Img1 = 'assets/images/walkthrough_1.png';
 const walk_Img2 = 'assets/images/walkthrough_2.png';
 const walk_Img3 = 'assets/images/walkthrough_3.png';
 const walk_Img4 = 'assets/images/walkthrough_4.png';
+const walk_Img5 = 'assets/images/walkthrough_5.png';
 //endregion
 
 //region Icons
