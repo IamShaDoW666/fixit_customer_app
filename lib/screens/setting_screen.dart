@@ -35,19 +35,19 @@ class _SettingScreenState extends State<SettingScreen> {
               });
             },
           ),
-          SettingItemWidget(
-            leading: ic_dark_mode.iconImage(size: 22),
-            title: language.appTheme,
-            paddingAfterLeading: 12,
-            trailing: trailing,
-            onTap: () async {
-              await showInDialog(
-                context,
-                builder: (context) => ThemeSelectionDaiLog(),
-                contentPadding: EdgeInsets.zero,
-              );
-            },
-          ),
+          // SettingItemWidget(
+          //   leading: ic_dark_mode.iconImage(size: 22),
+          //   title: language.appTheme,
+          //   paddingAfterLeading: 12,
+          //   trailing: trailing,
+          //   onTap: () async {
+          //     await showInDialog(
+          //       context,
+          //       builder: (context) => ThemeSelectionDaiLog(),
+          //       contentPadding: EdgeInsets.zero,
+          //     );
+          //   },
+          // ),
           SettingItemWidget(
             leading: ic_slider_status.iconImage(size: SETTING_ICON_SIZE),
             title: language.lblAutoSliderStatus,

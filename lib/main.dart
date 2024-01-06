@@ -97,13 +97,14 @@ void main() async {
 
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
 
-  int themeModeIndex =
-      getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
-  if (themeModeIndex == THEME_MODE_LIGHT) {
-    appStore.setDarkMode(false);
-  } else if (themeModeIndex == THEME_MODE_DARK) {
-    appStore.setDarkMode(true);
-  }
+  // int themeModeIndex =
+  //     getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
+  // if (themeModeIndex == THEME_MODE_LIGHT) {
+  //   appStore.setDarkMode(false);
+  // } else if (themeModeIndex == THEME_MODE_DARK) {
+  //   appStore.setDarkMode(true);
+  // }
+  appStore.setDarkMode(false);
 
   await appStore.setUseMaterialYouTheme(getBoolAsync(USE_MATERIAL_YOU_THEME),
       isInitializing: true);
