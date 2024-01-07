@@ -19,6 +19,9 @@ class LanguageFr extends BaseLanguage {
   String get getStarted => "Commencer";
 
   @override
+  String get categories => 'All Categories';
+
+  @override
   String get signIn => "S'identifier";
 
   @override

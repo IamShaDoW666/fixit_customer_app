@@ -165,10 +165,10 @@ class LanguageEn extends BaseLanguage {
   String get done => "Done";
 
   @override
-  String get inclusions => "Inclusions";
+  String get inclusions => "Service Include";
 
   @override
-  String get exclusions => "Exclusions";
+  String get exclusions => "Service Exclude";
 
   @override
   String get totalAmount => 'Total Amount';
@@ -183,7 +183,10 @@ class LanguageEn extends BaseLanguage {
   String get home => 'Home';
 
   @override
-  String get category => 'Categories';
+  String get categories => 'Categories';
+
+  @override
+  String get category => 'All Categories';
 
   @override
   String get booking => 'Bookings';
@@ -198,7 +201,7 @@ class LanguageEn extends BaseLanguage {
   String get serviceName => 'Service Name';
 
   @override
-  String get service => 'Services';
+  String get service => 'All Services';
 
   @override
   String get lblCancelReason => 'Please give reason for canceling this Booking';
@@ -265,7 +268,7 @@ class LanguageEn extends BaseLanguage {
   String get btnNext => "Next";
 
   @override
-  String get lblViewAll => "View All";
+  String get lblViewAll => "See All";
 
   @override
   String get notAvailable => "not Available";
@@ -491,7 +494,7 @@ class LanguageEn extends BaseLanguage {
   String get lblSeeYourRatings => "See Your Ratings";
 
   @override
-  String get lblFeatured => "Featured";
+  String get lblFeatured => "Most Booked";
 
   @override
   String get lblNoServicesFound => "No services Found";
@@ -564,7 +567,7 @@ class LanguageEn extends BaseLanguage {
   String get lblAvailableAt => "Available At";
 
   @override
-  String get lblRelatedServices => "Related Services";
+  String get lblRelatedServices => "Similar Services";
 
   @override
   String get lblBookNow => "Book Now";
