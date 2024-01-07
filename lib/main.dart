@@ -98,14 +98,14 @@ void main() async {
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
 
   // int themeModeIndex =
-  //     getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
+  //     getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_LIGHT);
   // if (themeModeIndex == THEME_MODE_LIGHT) {
   //   appStore.setDarkMode(false);
   // } else if (themeModeIndex == THEME_MODE_DARK) {
-  //   appStore.setDarkMode(true);
+  //   appStore.setDarkMode(false);
   // }
+  setValue(THEME_MODE_INDEX, 0);
   appStore.setDarkMode(false);
-
   await appStore.setUseMaterialYouTheme(getBoolAsync(USE_MATERIAL_YOU_THEME),
       isInitializing: true);
 
@@ -180,7 +180,7 @@ class _MyAppState extends State<MyApp> {
                 navigatorKey: navigatorKey,
                 home: SplashScreen(),
                 theme: AppTheme.lightTheme(color: snap.data),
-                darkTheme: AppTheme.darkTheme(color: snap.data),
+                // darkTheme: AppTheme.darkTheme(color: snap.data),
                 themeMode:
                     appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 title: APP_NAME,
