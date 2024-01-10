@@ -226,11 +226,14 @@ class ServiceComponentState extends State<ServiceComponent> {
             //     16.height,
             //   ],
             // ),
-            Text(
-              '${widget.serviceData!.name.validate()}',
-              textAlign: TextAlign.center,
-              style: primaryTextStyle(
-                  size: 12, color: appStore.isDarkMode ? white : black),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Text(
+                '${widget.serviceData!.name.validate()}',
+                textAlign: TextAlign.center,
+                style: primaryTextStyle(
+                    size: 12, color: appStore.isDarkMode ? white : black),
+              ),
             ),
           ],
         ),

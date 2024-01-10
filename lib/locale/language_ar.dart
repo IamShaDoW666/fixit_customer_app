@@ -776,6 +776,9 @@ class LanguageAr extends BaseLanguage {
   String get noCategoryFound => "لم يتم العثور على فئة";
 
   @override
+  String get categories => 'All Categories';
+
+  @override
   String get noProviderFound => "لم يتم العثور على مزود";
 
   @override

@@ -728,6 +728,8 @@ abstract class BaseLanguage {
 
   String get noBlogsFound;
 
+  String get categories;
+
   String get requestInvoice;
 
   String get invoiceSubTitle;
