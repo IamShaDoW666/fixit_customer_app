@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 const APP_NAME = 'YallaKhedma';
 const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
 var defaultPrimaryColor = Color.fromARGB(255, 181, 93, 31);
-const DOMAIN_URL = 'https://yallakhedma.com';
+// const DOMAIN_URL = 'https://yallakhedma.com';
+const DOMAIN_URL = 'http://192.168.18.38:8000';
 const BASE_URL = '$DOMAIN_URL/api/';
 const DEFAULT_LANGUAGE = 'en';
 
@@ -28,7 +29,7 @@ const INQUIRY_SUPPORT_EMAIL = 'support@yallakhedma.com';
 const HELP_LINE_NUMBER = '+971565002940';
 
 /// STRIPE PAYMENT DETAIL
-const STRIPE_MERCHANT_COUNTRY_CODE = 'UAE';
+const STRIPE_MERCHANT_COUNTRY_CODE = 'AE';
 const STRIPE_CURRENCY_CODE = 'DHS';
 DateTime todayDate = DateTime(2022, 8, 24);
 
@@ -39,7 +40,7 @@ const SADAD_PAY_URL = "https://d.sadad.qa";
 Country defaultCountry() {
   return Country(
     phoneCode: '971',
-    countryCode: 'UAE',
+    countryCode: 'AE',
     e164Sc: 971,
     geographic: true,
     level: 1,

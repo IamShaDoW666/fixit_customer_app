@@ -148,20 +148,15 @@ class _MultiOptionState extends State<MultiOption> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Marquee(
-                          animationDuration: Duration(seconds: 1),
-                          pauseDuration: Duration(seconds: 2),
-                          backDuration: Duration(seconds: 1),
-                          child: Text(
-                            widget.option.variants![idx].name.validate(),
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: checkSelected(widget
-                                        .option.variants![idx].id
-                                        .validate())
-                                    ? Colors.white // Change to selected color
-                                    : primaryColor),
-                          ),
+                        Text(
+                          widget.option.variants![idx].name.validate(),
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: checkSelected(widget
+                                      .option.variants![idx].id
+                                      .validate())
+                                  ? Colors.white // Change to selected color
+                                  : primaryColor),
                         ),
                         SizedBox(height: 16),
                         if (checkSelected(
@@ -171,7 +166,10 @@ class _MultiOptionState extends State<MultiOption> {
                             child: SingleChildScrollView(
                               child: Html(
                                 data: widget.option.variants![idx].description,
-                                style: {'p': Style(color: white)},
+                                style: {
+                                  'p': Style(color: white),
+                                  'h1': Style(color: white)
+                                },
                                 // Apply styles or configurations if needed
                               ),
                             ),

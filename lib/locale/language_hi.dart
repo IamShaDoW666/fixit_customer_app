@@ -20,6 +20,9 @@ class LanguageHi extends BaseLanguage {
   String get getStarted => 'शुरू हो जाओ';
 
   @override
+  String get categories => 'All Categories';
+
+  @override
   String get signIn => 'साइन इन करें';
 
   @override

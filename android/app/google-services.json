@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "482957258448-934rk6g3h2h5ojr8vr7o47qln0m3i95r.apps.googleusercontent.com",
+          "client_id": "482957258448-t64e01qn858prd42gjqrkjeargtcq7jq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.marsvisiongroup.yk",
-            "certificate_hash": "66fa04a29cbcfe00e1f4291b90e23b002ce1d495"
+            "certificate_hash": "f6cd50f3d4f9727b93544c4dff5d66875312a1f2"
           }
         },
         {
@@ -37,43 +37,14 @@
             {
               "client_id": "482957258448-4rcjn9dut5ndgk1g5kjkkt5ruf78l49q.apps.googleusercontent.com",
               "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:482957258448:android:9b709ae584de55e99038d5",
-        "android_client_info": {
-          "package_name": "com.yallakhedma.fixit"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "482957258448-gvrke5gqikc14o1529ohlingt57un4o8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.yallakhedma.fixit",
-            "certificate_hash": "66fa04a29cbcfe00e1f4291b90e23b002ce1d495"
-          }
-        },
-        {
-          "client_id": "482957258448-6orkdbsb7bvti49p95vgic6ckg16taom.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBeqv1J0x0DL5NmsVABukHN9_blcMrFwKQ"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
+            },
             {
-              "client_id": "482957258448-4rcjn9dut5ndgk1g5kjkkt5ruf78l49q.apps.googleusercontent.com",
-              "client_type": 3
+              "client_id": "482957258448-aa0vdtgba3kn22nmabi2486fem98ttek.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.marsvisiongroup.yk",
+                "app_store_id": "6475085221"
+              }
             }
           ]
         }
@@ -103,6 +74,14 @@
             {
               "client_id": "482957258448-4rcjn9dut5ndgk1g5kjkkt5ruf78l49q.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "482957258448-aa0vdtgba3kn22nmabi2486fem98ttek.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.marsvisiongroup.yk",
+                "app_store_id": "6475085221"
+              }
             }
           ]
         }

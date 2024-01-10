@@ -9,19 +9,20 @@ import '../model/package_data_model.dart';
 import '../model/service_detail_response.dart';
 import 'constant.dart';
 
-BookingAmountModel finalCalculations({
-  num servicePrice = 0,
-  int durationDiff = 0,
-  int quantity = 1,
-  List<TaxData>? taxes,
-  List<Map<String, dynamic>>? options,
-  CouponData? appliedCouponData,
-  List<ExtraChargesModel>? extraCharges,
-  BookingPackage? selectedPackage,
-  num discount = 0,
-  String serviceType = SERVICE_TYPE_FIXED,
-  String bookingType = BOOKING_TYPE_SERVICE,
-}) {
+BookingAmountModel finalCalculations(
+    {num servicePrice = 0,
+    int durationDiff = 0,
+    int quantity = 1,
+    List<TaxData>? taxes,
+    List<Map<String, dynamic>>? options,
+    CouponData? appliedCouponData,
+    List<ExtraChargesModel>? extraCharges,
+    BookingPackage? selectedPackage,
+    num discount = 0,
+    String serviceType = SERVICE_TYPE_FIXED,
+    String bookingType = BOOKING_TYPE_SERVICE,
+    bool isCash = false,
+    num cashHandlingCharge = 0}) {
   if (quantity == 0) quantity = 1;
   BookingAmountModel data = BookingAmountModel();
 
@@ -69,11 +70,19 @@ BookingAmountModel finalCalculations({
 
   data.finalTotalTax =
       calculateTotalTaxAmount(taxes, data.finalSubTotal + totalExtraCharges);
-
-  data.finalGrandTotalAmount =
-      (data.finalSubTotal + data.finalTotalTax + totalExtraCharges)
-          .toStringAsFixed(DECIMAL_POINT)
-          .toDouble();
+  if (isCash) {
+    data.finalGrandTotalAmount = (data.finalSubTotal +
+            data.finalTotalTax +
+            totalExtraCharges +
+            cashHandlingCharge)
+        .toStringAsFixed(DECIMAL_POINT)
+        .toDouble();
+  } else {
+    data.finalGrandTotalAmount =
+        (data.finalSubTotal + data.finalTotalTax + totalExtraCharges)
+            .toStringAsFixed(DECIMAL_POINT)
+            .toDouble();
+  }
 
   return data;
 }

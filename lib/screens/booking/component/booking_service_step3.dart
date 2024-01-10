@@ -61,7 +61,9 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
         taxes: bookingStore.taxes,
         quantity: itemCount,
         selectedPackage: widget.selectedPackage,
-        options: bookingStore.selectedOptions);
+        options: bookingStore.selectedOptions,
+        isCash: paymentMode == 'cod',
+        cashHandlingCharge: widget.data.cashHandlingCharge ?? 0);
 
     advancePaymentAmount = (bookingAmountModel.finalGrandTotalAmount *
         (widget.data.serviceDetail!.advancePaymentPercentage.validate() / 100)
@@ -268,42 +270,68 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                   ),
 
               /// Tax Amount Applied on Price
-              Column(
-                children: [
-                  Divider(height: 26, color: context.dividerColor),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Text(language.lblTax,
-                                  style: secondaryTextStyle(size: 14))
-                              .expand(),
-                          Icon(Icons.info_outline_rounded,
-                                  size: 20, color: context.primaryColor)
-                              .onTap(
-                            () {
-                              showModalBottomSheet(
-                                context: context,
-                                builder: (_) {
-                                  return AppliedTaxListBottomSheet(
-                                      taxes: bookingStore.taxes,
-                                      subTotal:
-                                          bookingAmountModel.finalSubTotal);
-                                },
-                              );
-                            },
-                          ),
-                        ],
-                      ).expand(),
-                      16.width,
-                      PriceWidget(
-                          price: bookingAmountModel.finalTotalTax,
-                          color: Colors.red,
-                          isBoldText: true),
-                    ],
-                  ),
-                ],
-              ),
+              if (bookingStore.taxes.length != 0)
+                Column(
+                  children: [
+                    Divider(height: 26, color: context.dividerColor),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text(language.lblTax,
+                                    style: secondaryTextStyle(size: 14))
+                                .expand(),
+                            Icon(Icons.info_outline_rounded,
+                                    size: 20, color: context.primaryColor)
+                                .onTap(
+                              () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (_) {
+                                    return AppliedTaxListBottomSheet(
+                                        taxes: bookingStore.taxes,
+                                        subTotal:
+                                            bookingAmountModel.finalSubTotal);
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ).expand(),
+                        16.width,
+                        PriceWidget(
+                            price: bookingAmountModel.finalTotalTax,
+                            color: Colors.red,
+                            isBoldText: true),
+                      ],
+                    ),
+                  ],
+                ),
+
+              //Cash handling charge
+              if (paymentMode == 'cod' &&
+                  widget.data.cashHandlingCharge.validate() > 0)
+                Column(
+                  children: [
+                    Divider(height: 26, color: context.dividerColor),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text("Cash Handling Charge",
+                                    style: secondaryTextStyle(size: 14))
+                                .expand(),
+                          ],
+                        ).expand(),
+                        16.width,
+                        PriceWidget(
+                            price: widget.data.cashHandlingCharge.validate(),
+                            color: Colors.red,
+                            isBoldText: true),
+                      ],
+                    ),
+                  ],
+                ),
 
               /// Final Amount
               Column(
@@ -597,6 +625,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       onChanged: (val) {
                         setState(() {});
                         paymentMode = val.validate();
+                        setPrice();
                       }),
                   RadioListTile(
                       value: 'card',
@@ -608,6 +637,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       onChanged: (val) {
                         setState(() {});
                         paymentMode = val.validate();
+                        setPrice();
                       }),
                   Observer(builder: (context) {
                     return WalletBalanceComponent().visible(
@@ -654,15 +684,17 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                           paymentMode: paymentMode,
                           couponCode: appliedCouponData?.code,
                           bookingAmountModel: BookingAmountModel(
-                            finalCouponDiscountAmount:
-                                bookingAmountModel.finalCouponDiscountAmount,
-                            finalDiscountAmount:
-                                bookingAmountModel.finalDiscountAmount,
-                            finalSubTotal: bookingAmountModel.finalSubTotal,
-                            finalTotalServicePrice:
-                                bookingAmountModel.finalTotalServicePrice,
-                            finalTotalTax: bookingAmountModel.finalTotalTax,
-                          ),
+                              finalCouponDiscountAmount:
+                                  bookingAmountModel.finalCouponDiscountAmount,
+                              finalDiscountAmount:
+                                  bookingAmountModel.finalDiscountAmount,
+                              finalSubTotal: bookingAmountModel.finalSubTotal,
+                              finalTotalServicePrice:
+                                  bookingAmountModel.finalTotalServicePrice,
+                              finalTotalTax: bookingAmountModel.finalTotalTax,
+                              cashHandlingCharge: (paymentMode == 'cod')
+                                  ? widget.data.cashHandlingCharge.validate()
+                                  : 0),
                         );
                       },
                     );

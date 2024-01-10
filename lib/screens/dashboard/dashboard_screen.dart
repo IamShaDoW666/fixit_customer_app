@@ -144,7 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   icon: ic_category.iconImage(color: appTextSecondaryColor),
                   selectedIcon:
                       ic_category.iconImage(color: context.primaryColor),
-                  label: language.category,
+                  label: language.categories,
                 ),
                 NavigationDestination(
                   icon: ic_chat.iconImage(color: appTextSecondaryColor),
