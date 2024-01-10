@@ -5,6 +5,7 @@ class BookingAmountModel {
   num finalDiscountAmount;
   num finalCouponDiscountAmount;
   num finalGrandTotalAmount;
+  num cashHandlingCharge;
 
   BookingAmountModel({
     this.finalTotalServicePrice = 0,
@@ -13,6 +14,7 @@ class BookingAmountModel {
     this.finalDiscountAmount = 0,
     this.finalCouponDiscountAmount = 0,
     this.finalGrandTotalAmount = 0,
+    this.cashHandlingCharge = 0,
   });
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class BookingAmountModel {
     data['final_sub_total'] = this.finalSubTotal;
     data['final_discount_amount'] = this.finalDiscountAmount;
     data['final_coupon_discount_amount'] = this.finalCouponDiscountAmount;
+    data['cash_handling_charge'] = this.cashHandlingCharge;
     return data;
   }
 
@@ -32,6 +35,7 @@ class BookingAmountModel {
     data['final_sub_total'] = this.finalSubTotal;
     data['final_discount_amount'] = this.finalDiscountAmount;
     data['final_coupon_discount_amount'] = this.finalCouponDiscountAmount;
+    data['cash_handling_charge'] = this.cashHandlingCharge;
     data['total_amount'] = this.finalGrandTotalAmount;
     return data;
   }

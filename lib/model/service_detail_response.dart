@@ -11,6 +11,7 @@ class ServiceDetailResponse {
   List<ServiceData>? relatedService;
   List<ServiceFaq>? serviceFaq;
   List<File>? imageList;
+  num? cashHandlingCharge;
 
   ServiceDetailResponse(
       {this.couponData,
@@ -19,42 +20,43 @@ class ServiceDetailResponse {
       this.serviceDetail,
       this.taxes,
       this.relatedService,
-      this.serviceFaq});
+      this.serviceFaq,
+      this.cashHandlingCharge});
 
   factory ServiceDetailResponse.fromJson(Map<String, dynamic> json) {
     return ServiceDetailResponse(
-      couponData: json['coupon_data'] != null
-          ? (json['coupon_data'] as List)
-              .map((i) => CouponData.fromJson(i))
-              .toList()
-          : null,
-      providers: json['providers'] != null
-          ? (json['providers'] as List)
-              .map((i) => UserData.fromJson(i))
-              .toList()
-          : null,
-      ratingData: json['rating_data'] != null
-          ? (json['rating_data'] as List)
-              .map((i) => RatingData.fromJson(i))
-              .toList()
-          : null,
-      serviceDetail: json['service_detail'] != null
-          ? ServiceData.fromJson(json['service_detail'])
-          : null,
-      taxes: json['taxes'] != null
-          ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList()
-          : null,
-      relatedService: json['related_service'] != null
-          ? (json['related_service'] as List)
-              .map((i) => ServiceData.fromJson(i))
-              .toList()
-          : null,
-      serviceFaq: json['service_faq'] != null
-          ? (json['service_faq'] as List)
-              .map((i) => ServiceFaq.fromJson(i))
-              .toList()
-          : null,
-    );
+        couponData: json['coupon_data'] != null
+            ? (json['coupon_data'] as List)
+                .map((i) => CouponData.fromJson(i))
+                .toList()
+            : null,
+        providers: json['providers'] != null
+            ? (json['providers'] as List)
+                .map((i) => UserData.fromJson(i))
+                .toList()
+            : null,
+        ratingData: json['rating_data'] != null
+            ? (json['rating_data'] as List)
+                .map((i) => RatingData.fromJson(i))
+                .toList()
+            : null,
+        serviceDetail: json['service_detail'] != null
+            ? ServiceData.fromJson(json['service_detail'])
+            : null,
+        taxes: json['taxes'] != null
+            ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList()
+            : null,
+        relatedService: json['related_service'] != null
+            ? (json['related_service'] as List)
+                .map((i) => ServiceData.fromJson(i))
+                .toList()
+            : null,
+        serviceFaq: json['service_faq'] != null
+            ? (json['service_faq'] as List)
+                .map((i) => ServiceFaq.fromJson(i))
+                .toList()
+            : null,
+        cashHandlingCharge: json['cash_handling_charge'] ?? null);
   }
 
   Map<String, dynamic> toJson() {
@@ -80,6 +82,9 @@ class ServiceDetailResponse {
     }
     if (this.serviceFaq != null) {
       data['service_faq'] = this.serviceFaq!.map((v) => v.toJson()).toList();
+    }
+    if (this.cashHandlingCharge != null) {
+      data['service_faq'] = this.cashHandlingCharge;
     }
     return data;
   }

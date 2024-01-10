@@ -848,27 +848,6 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
         decoration: BoxDecoration(color: context.cardColor),
         child: Text('Work in progress', style: boldTextStyle()).center(),
       );
-      return Row(
-        children: [
-          AppButton(
-            text: language.lblHold,
-            textColor: Colors.white,
-            color: hold,
-            onTap: () {
-              _handleHoldClick(status: bookingResponse);
-            },
-          ).expand(),
-          16.width,
-          AppButton(
-            text: language.done,
-            textColor: Colors.white,
-            color: primaryColor,
-            onTap: () {
-              _handleDoneClick(status: bookingResponse);
-            },
-          ).expand(),
-        ],
-      ).paddingOnly(left: 16, right: 16, bottom: 16);
     } else if (bookingResponse.bookingDetail!.status ==
         BookingStatusKeys.hold) {
       return Container(
