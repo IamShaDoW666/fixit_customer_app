@@ -5,7 +5,7 @@ const APP_NAME = 'YallaKhedma';
 const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
 var defaultPrimaryColor = Color.fromARGB(255, 181, 93, 31);
 // const DOMAIN_URL = 'https://yallakhedma.com';
-const DOMAIN_URL = 'http://192.168.18.38:8000';
+const DOMAIN_URL = 'https://yallakhedma.com';
 const BASE_URL = '$DOMAIN_URL/api/';
 const DEFAULT_LANGUAGE = 'en';
 
@@ -13,11 +13,9 @@ const DEFAULT_LANGUAGE = 'en';
 /// This will be used in Registered As Partner in Sign In Screen where your users can redirect to the Play/App Store for Provider App
 /// You can specify in Admin Panel, These will be used if you don't specify in Admin Panel
 const PROVIDER_PACKAGE_NAME = 'com.yallakhedma.provider';
-const IOS_LINK_FOR_PARTNER =
-    "https://apps.apple.com/in/app/handyman-provider-app/id1596025324";
+const IOS_LINK_FOR_PARTNER = "";
 
-const IOS_LINK_FOR_USER =
-    'https://apps.apple.com/us/app/handyman-service-user/id1591427211';
+const IOS_LINK_FOR_USER = '';
 
 const DASHBOARD_AUTO_SLIDER_SECOND = 5;
 
