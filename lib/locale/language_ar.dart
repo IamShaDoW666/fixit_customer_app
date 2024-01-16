@@ -182,7 +182,7 @@ class LanguageAr extends BaseLanguage {
   String get home => 'الصفحة الرئيسية';
 
   @override
-  String get category => 'فئة';
+  String get categories => 'فئة';
 
   @override
   String get booking => 'الحجز';
@@ -773,10 +773,15 @@ class LanguageAr extends BaseLanguage {
   String get myReviews => "تقييماتي";
 
   @override
+  String get selectProvider => 'حدد مقدم الخدمة';
+  @override
+  String get selectedProvider => 'المزود المختار:';
+
+  @override
   String get noCategoryFound => "لم يتم العثور على فئة";
 
   @override
-  String get categories => 'All Categories';
+  String get category => 'فئات';
 
   @override
   String get noProviderFound => "لم يتم العثور على مزود";

@@ -181,6 +181,11 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get home => 'Home';
+  @override
+  String get selectProvider => 'Select Provider';
+
+  @override
+  String get selectedProvider => 'Selected Provider:';
 
   @override
   String get categories => 'Categories';

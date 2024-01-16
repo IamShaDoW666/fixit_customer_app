@@ -9,6 +9,8 @@ class LanguageFr extends BaseLanguage {
 
   @override
   String get walkTitle3 => "Passerelle de paiement";
+  @override
+  String get selectedProvider => 'Selected Provider:';
 
   @override
   String get inclusions => "inclusions";
@@ -17,6 +19,8 @@ class LanguageFr extends BaseLanguage {
 
   @override
   String get getStarted => "Commencer";
+  @override
+  String get selectProvider => 'Select Provider';
 
   @override
   String get categories => 'All Categories';

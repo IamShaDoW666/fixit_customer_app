@@ -50,6 +50,9 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
   }
 
   void init() async {
+    if (widget.data.serviceDetail!.isAdvancePayment) {
+      paymentMode = 'card';
+    }
     setPrice();
   }
 

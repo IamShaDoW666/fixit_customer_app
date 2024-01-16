@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 const APP_NAME = 'YallaKhedma';
 const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
-var defaultPrimaryColor = Color.fromARGB(255, 181, 93, 31);
+const APP_DEVELOPER_NAME = 'Developed by Digiimpact';
+var defaultPrimaryColor = Color.fromARGB(255, 4, 116, 186);
 // const DOMAIN_URL = 'https://yallakhedma.com';
 const DOMAIN_URL = 'https://yallakhedma.com';
 const BASE_URL = '$DOMAIN_URL/api/';
@@ -19,8 +20,8 @@ const IOS_LINK_FOR_USER = '';
 
 const DASHBOARD_AUTO_SLIDER_SECOND = 5;
 
-const TERMS_CONDITION_URL = 'https://yallakhedma.com';
-const PRIVACY_POLICY_URL = 'https://yallakhedma.com';
+const TERMS_CONDITION_URL = 'https://yallakhedma.com/term-conditions';
+const PRIVACY_POLICY_URL = 'https://yallakhedma.com/privacy-policy';
 const INQUIRY_SUPPORT_EMAIL = 'support@yallakhedma.com';
 
 /// You can add help line number here for contact. It's demo number

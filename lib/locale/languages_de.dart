@@ -12,9 +12,14 @@ class LanguageDe extends BaseLanguage {
 
   @override
   String get walkTitle3 => "Zahlungs-Gateways";
-
+  
+@override
+  String get selectedProvider => 'Selected Provider:';
   @override
   String get inclusions => "inclusions";
+  @override
+  String get selectProvider => 'Select Provider';
+
   @override
   String get exclusions => "exclusions";
 

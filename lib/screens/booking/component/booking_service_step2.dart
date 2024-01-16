@@ -97,6 +97,12 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                 date.year, date.month, date.day, time.hour, time.minute);
 
             DateTime now = DateTime.now().subtract(1.minutes);
+            DateTime after4Hours = DateTime.now().add(4.hours);
+            if (date.isToday &&
+                finalDate!.millisecondsSinceEpoch <
+                    after4Hours.millisecondsSinceEpoch) {
+              return toast("Please select Time after 4hours");
+            }
             if (date.isToday &&
                 finalDate!.millisecondsSinceEpoch <
                     now.millisecondsSinceEpoch) {
@@ -272,9 +278,20 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                         ),
                         16.height,
                         BookingServiceImage(data: widget.data),
-                        Text("${language.hintDescription}:",
-                            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                        8.height,
+                        Row(
+                          children: [
+                            Text(language.selectedProvider,
+                                style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                            SizedBox(width: 8.0),
+                            Observer(
+                                    builder: (_) => Text(
+                                        bookingStore.providerName.validate()))
+                                .expand(),
+                          ],
+                        ),
+                        // Text("${language.hintDescription}:",
+                        //     style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                        12.height,
                         AppTextField(
                           textFieldType: TextFieldType.MULTILINE,
                           controller: descriptionCont,
@@ -295,116 +312,126 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                     ),
                   ),
                 ),
-                16.height,
+                20.height,
               ],
             ),
           ),
           Positioned(
-            bottom: 16,
+            bottom: 8,
             left: 16,
             right: 16,
             child: Column(
               children: [
-                if (widget.data.providers!.length > 1)
-                  Observer(
-                    builder: (_) => AppButton(
-                      width: context.width(),
-                      shapeBorder: RoundedRectangleBorder(
-                          borderRadius: radius(),
-                          side: BorderSide(color: context.primaryColor)),
-                      onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: Colors.transparent,
-                          context: context,
-                          isScrollControlled: true,
-                          isDismissible: true,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: radiusOnly(
-                                  topLeft: defaultRadius,
-                                  topRight: defaultRadius)),
-                          builder: (_) {
-                            return DraggableScrollableSheet(
-                                initialChildSize: 0.50,
-                                minChildSize: 0.2,
-                                maxChildSize: 1,
-                                builder: (_, scrollController) =>
-                                    ProviderSelect(
-                                      serviceData: widget.data.serviceDetail,
-                                      scrollController: scrollController,
-                                    ));
-                          },
-                        );
-                      },
-                      text: bookingStore.providerSelected
-                          ? bookingStore.providerName
-                          : 'Select Provider',
-                      textColor: textPrimaryColorGlobal,
-                    ),
-                  ),
-                16.height,
+                // Observer(
+                //     builder: (_) => Text(bookingStore.providerName.validate())),
                 Row(
                   children: [
-                    if (!widget.isSlotAvailable.validate())
-                      AppButton(
-                        shapeBorder: RoundedRectangleBorder(
-                            borderRadius: radius(),
-                            side: BorderSide(color: context.primaryColor)),
-                        onTap: () {
-                          customStepperController.previousPage(
-                              duration: 200.milliseconds,
-                              curve: Curves.easeInOut);
-                        },
-                        text: language.lblPrevious,
-                        textColor: textPrimaryColorGlobal,
-                      ).expand(),
-                    if (!widget.isSlotAvailable.validate()) 16.width,
-                    AppButton(
-                      onTap: () {
-                        if (bookingStore.providerId != 0) {
-                          hideKeyboard(context);
-                          if (formKey.currentState!.validate()) {
-                            formKey.currentState!.save();
-                            widget.data.serviceDetail!.bookingDescription =
-                                descriptionCont.text;
-                            widget.data.serviceDetail!.address =
-                                addressCont.text;
-                            customStepperController.nextPage(
-                                duration: 200.milliseconds,
-                                curve: Curves.easeOut);
-                          }
-                        } else {
-                          if (widget.data.providers!.length == 1) {
-                            bookingStore.providerId =
-                                widget.data.providers![0].id.validate();
-                            if (formKey.currentState!.validate()) {
-                              formKey.currentState!.save();
-                              widget.data.serviceDetail!.bookingDescription =
-                                  descriptionCont.text;
-                              widget.data.serviceDetail!.address =
-                                  addressCont.text;
-                              customStepperController.nextPage(
+                    if (widget.data.providers!.length > 0)
+                      Observer(
+                          builder: (_) => AppButton(
+                                width: (context.width() - 40) * 0.5,
+                                shapeBorder: RoundedRectangleBorder(
+                                    borderRadius: radius(),
+                                    side: BorderSide(
+                                        color: context.primaryColor)),
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    isScrollControlled: true,
+                                    isDismissible: true,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: radiusOnly(
+                                            topLeft: defaultRadius,
+                                            topRight: defaultRadius)),
+                                    builder: (_) {
+                                      return DraggableScrollableSheet(
+                                          initialChildSize: 0.50,
+                                          minChildSize: 0.2,
+                                          maxChildSize: 1,
+                                          builder: (_, scrollController) =>
+                                              ProviderSelect(
+                                                serviceData:
+                                                    widget.data.serviceDetail,
+                                                scrollController:
+                                                    scrollController,
+                                              ));
+                                    },
+                                  );
+                                },
+                                text: "select",
+                                textColor: textPrimaryColorGlobal,
+                              )),
+                    8.width,
+                    16.height,
+                    Row(
+                      children: [
+                        if (!widget.isSlotAvailable.validate())
+                          AppButton(
+                            width: (context.width() - 40) * 0.5,
+                            shapeBorder: RoundedRectangleBorder(
+                                borderRadius: radius(),
+                                side: BorderSide(color: context.primaryColor)),
+                            onTap: () {
+                              customStepperController.previousPage(
                                   duration: 200.milliseconds,
-                                  curve: Curves.easeOut);
+                                  curve: Curves.easeInOut);
+                            },
+                            text: language.lblPrevious,
+                            textColor: textPrimaryColorGlobal,
+                          ),
+                        if (!widget.isSlotAvailable.validate()) 16.width,
+                        AppButton(
+                          onTap: () {
+                            if (bookingStore.providerId != 0) {
+                              hideKeyboard(context);
+                              if (formKey.currentState!.validate()) {
+                                formKey.currentState!.save();
+                                widget.data.serviceDetail!.bookingDescription =
+                                    descriptionCont.text;
+                                widget.data.serviceDetail!.address =
+                                    addressCont.text;
+                                customStepperController.nextPage(
+                                    duration: 200.milliseconds,
+                                    curve: Curves.easeOut);
+                              }
+                            } else {
+                              if (widget.data.providers!.length == 1) {
+                                bookingStore.providerId =
+                                    widget.data.providers![0].id.validate();
+
+                                if (formKey.currentState!.validate()) {
+                                  formKey.currentState!.save();
+                                  widget.data.serviceDetail!
+                                          .bookingDescription =
+                                      descriptionCont.text;
+                                  widget.data.serviceDetail!.address =
+                                      addressCont.text;
+                                  customStepperController.nextPage(
+                                      duration: 200.milliseconds,
+                                      curve: Curves.easeOut);
+                                }
+                              }
+                              hideKeyboard(context);
+                              snackBar(
+                                context,
+                                title: language.selectProvider,
+                                elevation: 8,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: radius(30)),
+                                duration: Duration(seconds: 3),
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 128, horizontal: 8),
+                              );
                             }
-                          }
-                          hideKeyboard(context);
-                          snackBar(
-                            context,
-                            title: "Please select provider",
-                            elevation: 8,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: radius(30)),
-                            duration: Duration(seconds: 3),
-                            margin: EdgeInsets.symmetric(
-                                vertical: 128, horizontal: 8),
-                          );
-                        }
-                      },
-                      text: language.btnNext,
-                      textColor: Colors.white,
-                      width: context.width(),
-                      color: context.primaryColor,
-                    ).expand(),
+                          },
+                          text: language.btnNext,
+                          textColor: Colors.white,
+                          width: (context.width() - 40) * 0.5,
+                          color: context.primaryColor,
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ],

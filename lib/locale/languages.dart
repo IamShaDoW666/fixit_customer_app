@@ -124,7 +124,11 @@ abstract class BaseLanguage {
 
   String get category;
 
+  String get selectedProvider;
+
   String get booking;
+
+  String get selectProvider;
 
   String get profile;
 

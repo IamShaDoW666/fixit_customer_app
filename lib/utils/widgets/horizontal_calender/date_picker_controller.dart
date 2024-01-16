@@ -25,7 +25,8 @@ class DatePickerController {
   ///check date within the start and end date range
   bool isWithinRange(DateTime dateTime) {
     if (startDate != null && endDate != null) {
-      return dateTime.compareTo(startDate!) >= 0 && dateTime.compareTo(endDate!) <= 0;
+      return dateTime.compareTo(startDate!) >= 0 &&
+          dateTime.compareTo(endDate!) <= 0;
     } else {
       return false;
     }
@@ -47,10 +48,12 @@ class DatePickerController {
 
   ///[index]  listview index
   ///[isEnableAnimation] default set as true, jump with animation
-  void _scrollToSpecificDateByIndex(int index, [bool isEnableAnimation = true]) {
+  void _scrollToSpecificDateByIndex(int index,
+      [bool isEnableAnimation = true]) {
     var diff = index - shift;
     if (isEnableAnimation) {
-      scrollController?.animateTo(diff * itemWidth, duration: const Duration(milliseconds: 300), curve: Curves.linear);
+      scrollController?.animateTo(diff * itemWidth,
+          duration: const Duration(milliseconds: 300), curve: Curves.linear);
     } else {
       scrollController?.jumpTo(diff * itemWidth);
     }
