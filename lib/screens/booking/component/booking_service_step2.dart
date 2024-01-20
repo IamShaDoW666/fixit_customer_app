@@ -58,6 +58,13 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
       }
       addressCont.text = widget.data.serviceDetail!.address.validate();
     }
+
+    if (widget.data.providers!.isNotEmpty) {
+      bookingStore.providerId = widget.data.providers![0].id.validate();
+      bookingStore.providerName =
+          widget.data.providers![0].displayName.validate();
+      bookingStore.getTaxes(widget.data.providers![0].id.validate());
+    }
   }
 
   void selectDateAndTime(BuildContext context) async {
@@ -284,9 +291,10 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                 style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                             SizedBox(width: 8.0),
                             Observer(
-                                    builder: (_) => Text(
-                                        bookingStore.providerName.validate()))
-                                .expand(),
+                                builder: (_) => Text(
+                                      bookingStore.providerName.validate(),
+                                      style: boldTextStyle(color: primaryColor),
+                                    )).expand(),
                           ],
                         ),
                         // Text("${language.hintDescription}:",
