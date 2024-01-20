@@ -317,7 +317,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
             ),
           ),
           Positioned(
-            bottom: 8,
+            bottom: isIOS ? 32 : 8,
             left: 16,
             right: 16,
             child: Column(

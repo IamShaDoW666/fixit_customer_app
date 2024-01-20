@@ -434,7 +434,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                   ),
                 )),
             Positioned(
-              bottom: 16,
+              bottom: isIOS ? 32 : 16,
               left: 16,
               right: 16,
               child: AppButton(
