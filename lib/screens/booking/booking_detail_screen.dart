@@ -1304,97 +1304,95 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: [
-          FutureBuilder<BookingDetailResponse>(
-            future: future,
-            initialData: cachedBookingDetailList
-                .firstWhere(
-                    (element) => element?.$1 == widget.bookingId.validate(),
-                    orElse: () => null)
-                ?.$2,
-            builder: (context, snap) {
-              if (snap.hasData) {
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    init();
-                    setState(() {});
+    return Stack(
+      children: [
+        FutureBuilder<BookingDetailResponse>(
+          future: future,
+          initialData: cachedBookingDetailList
+              .firstWhere(
+                  (element) => element?.$1 == widget.bookingId.validate(),
+                  orElse: () => null)
+              ?.$2,
+          builder: (context, snap) {
+            if (snap.hasData) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  init();
+                  setState(() {});
 
-                    return await 2.seconds.delay;
-                  },
-                  child: Scaffold(
-                    appBar: appBarWidget(
-                      snap.hasData
-                          ? snap.data!.bookingDetail!.status
-                              .validate()
-                              .toBookingStatus()
-                          : "",
-                      color: context.primaryColor,
-                      textColor: Colors.white,
-                      showBack: true,
-                      backWidget: BackWidget(),
-                      actions: [
-                        if (snap.hasData)
-                          TextButton(
-                            child: Text(language.lblCheckStatus,
-                                style: primaryTextStyle(color: Colors.white)),
-                            onPressed: () {
-                              showModalBottomSheet(
-                                backgroundColor: Colors.transparent,
-                                context: context,
-                                isScrollControlled: true,
-                                isDismissible: true,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: radiusOnly(
-                                        topLeft: defaultRadius,
-                                        topRight: defaultRadius)),
-                                builder: (_) {
-                                  return DraggableScrollableSheet(
-                                    initialChildSize: 0.50,
-                                    minChildSize: 0.2,
-                                    maxChildSize: 1,
-                                    builder: (context, scrollController) =>
-                                        BookingHistoryComponent(
-                                            data: snap
-                                                .data!.bookingActivity!.reversed
-                                                .toList(),
-                                            scrollController: scrollController),
-                                  );
-                                },
-                              );
-                            },
-                          ).paddingRight(16)
-                      ],
-                    ),
-                    body: buildBodyWidget(snap),
+                  return await 2.seconds.delay;
+                },
+                child: Scaffold(
+                  appBar: appBarWidget(
+                    snap.hasData
+                        ? snap.data!.bookingDetail!.status
+                            .validate()
+                            .toBookingStatus()
+                        : "",
+                    color: context.primaryColor,
+                    textColor: Colors.white,
+                    showBack: true,
+                    backWidget: BackWidget(),
+                    actions: [
+                      if (snap.hasData)
+                        TextButton(
+                          child: Text(language.lblCheckStatus,
+                              style: primaryTextStyle(color: Colors.white)),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              isScrollControlled: true,
+                              isDismissible: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: radiusOnly(
+                                      topLeft: defaultRadius,
+                                      topRight: defaultRadius)),
+                              builder: (_) {
+                                return DraggableScrollableSheet(
+                                  initialChildSize: 0.50,
+                                  minChildSize: 0.2,
+                                  maxChildSize: 1,
+                                  builder: (context, scrollController) =>
+                                      BookingHistoryComponent(
+                                          data: snap
+                                              .data!.bookingActivity!.reversed
+                                              .toList(),
+                                          scrollController: scrollController),
+                                );
+                              },
+                            );
+                          },
+                        ).paddingRight(16)
+                    ],
                   ),
-                );
-              }
-
-              return Scaffold(
-                body: snapWidgetHelper(
-                  snap,
-                  errorBuilder: (error) {
-                    return NoDataWidget(
-                      title: error,
-                      imageWidget: ErrorStateWidget(),
-                      retryText: language.reload,
-                      onRetry: () {
-                        init();
-                        setState(() {});
-                      },
-                    );
-                  },
-                  loadingWidget: BookingDetailShimmer(),
+                  body: buildBodyWidget(snap),
                 ),
               );
-            },
-          ),
-          Observer(
-              builder: (context) => LoaderWidget().visible(appStore.isLoading)),
-        ],
-      ),
+            }
+
+            return Scaffold(
+              body: snapWidgetHelper(
+                snap,
+                errorBuilder: (error) {
+                  return NoDataWidget(
+                    title: error,
+                    imageWidget: ErrorStateWidget(),
+                    retryText: language.reload,
+                    onRetry: () {
+                      init();
+                      setState(() {});
+                    },
+                  );
+                },
+                loadingWidget: BookingDetailShimmer(),
+              ),
+            );
+          },
+        ),
+        Observer(
+            builder: (context) => LoaderWidget().visible(appStore.isLoading)),
+      ],
     );
   }
 }

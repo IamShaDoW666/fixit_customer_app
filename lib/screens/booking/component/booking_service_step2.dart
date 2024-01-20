@@ -359,7 +359,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                     },
                                   );
                                 },
-                                text: "select",
+                                text: "Select Provider",
                                 textColor: textPrimaryColorGlobal,
                               )),
                     8.width,
