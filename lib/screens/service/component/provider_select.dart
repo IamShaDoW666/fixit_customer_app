@@ -12,10 +12,12 @@ import 'package:nb_utils/nb_utils.dart';
 class ProviderSelect extends StatelessWidget {
   final ScrollController scrollController;
   final ServiceData? serviceData;
+  final List<UserData>? providers;
   ProviderSelect({
     super.key,
     required this.scrollController,
     this.serviceData,
+    this.providers,
   });
 
   @override
@@ -49,10 +51,8 @@ class ProviderSelect extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
-              children: List.generate(
-                  serviceData!.providers!.length,
-                  (index) =>
-                      ProviderWidget(data: serviceData!.providers![index])),
+              children: List.generate(serviceData!.providers!.length,
+                  (index) => ProviderWidget(data: providers![index])),
             )
           ],
         ),

@@ -361,13 +361,15 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                               ProviderSelect(
                                                 serviceData:
                                                     widget.data.serviceDetail,
+                                                providers:
+                                                    widget.data.providers,
                                                 scrollController:
                                                     scrollController,
                                               ));
                                     },
                                   );
                                 },
-                                text: "Select Provider",
+                                text: "Change Provider",
                                 textColor: textPrimaryColorGlobal,
                               )),
                     8.width,
