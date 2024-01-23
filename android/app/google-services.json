@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "482957258448-934rk6g3h2h5ojr8vr7o47qln0m3i95r.apps.googleusercontent.com",
+          "client_id": "482957258448-t64e01qn858prd42gjqrkjeargtcq7jq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.marsvisiongroup.yk",
-            "certificate_hash": "66fa04a29cbcfe00e1f4291b90e23b002ce1d495"
+            "certificate_hash": "f6cd50f3d4f9727b93544c4dff5d66875312a1f2"
           }
         },
         {
