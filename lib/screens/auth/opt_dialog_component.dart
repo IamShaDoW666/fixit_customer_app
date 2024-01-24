@@ -45,7 +45,10 @@ class _OtpDialogComponentState extends State<OtpDialogComponent> {
         textSize: APP_BAR_TEXT_SIZE,
         elevation: 0,
         color: context.scaffoldBackgroundColor,
-        systemUiOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark, statusBarColor: context.scaffoldBackgroundColor),
+        systemUiOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                appStore.isDarkMode ? Brightness.light : Brightness.dark,
+            statusBarColor: context.scaffoldBackgroundColor),
       ),
       body: Stack(
         children: [
@@ -56,7 +59,9 @@ class _OtpDialogComponentState extends State<OtpDialogComponent> {
                 32.height,
                 OTPTextField(
                   pinLength: 6,
-                  decoration: inputDecoration(context),
+                  decoration: inputDecoration(context).copyWith(
+                    counter: Offstage(),
+                  ),
                   onChanged: (s) {
                     otpCode = s;
                     log(otpCode);
