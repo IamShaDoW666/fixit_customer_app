@@ -21,7 +21,7 @@ const unFavouriteColor = Colors.grey;
 //Status Color
 const pending = Color(0xFFEA2F2F);
 const accept = Color(0xFF00968A);
-const on_going = Color(0xFFFD6922);
+const on_going = Color(0xFFF17720);
 const in_progress = Color(0xFFB953C0);
 const hold = Color(0xFFFFBD49);
 const cancelled = Color(0xffFF0303);

@@ -1,7 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
-const APP_NAME = 'YallaKhedma';
+const APP_NAME = 'Yalla Khedma';
 const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
 const APP_DEVELOPER_NAME = 'Developed by Digiimpact';
 var defaultPrimaryColor = Color.fromARGB(255, 241, 119, 32);
