@@ -24,11 +24,12 @@ class SignInScreen extends StatefulWidget {
   final bool returnExpected;
   final bool isRegeneratingToken;
 
-  SignInScreen(
-      {this.isFromDashboard,
-      this.isFromServiceBooking,
-      this.returnExpected = false,
-      this.isRegeneratingToken = false});
+  SignInScreen({
+    this.isFromDashboard,
+    this.isFromServiceBooking,
+    this.returnExpected = false,
+    this.isRegeneratingToken = false,
+  });
 
   @override
   _SignInScreenState createState() => _SignInScreenState();

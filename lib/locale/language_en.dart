@@ -686,10 +686,10 @@ class LanguageEn extends BaseLanguage {
   String get lblHr => "hr";
 
   @override
-  String get lblSignInWithGoogle => "Sign In With Google";
+  String get lblSignInWithGoogle => "Sign Up With Google";
 
   @override
-  String get lblSignInWithOTP => "Sign In With OTP";
+  String get lblSignInWithOTP => "Sign Up With OTP";
 
   @override
   String get lblDangerZone => "Danger Zone";

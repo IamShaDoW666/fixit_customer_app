@@ -17,7 +17,9 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:booking_system_flutter/screens/auth/otp_login_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,13 +28,21 @@ class SignUpScreen extends StatefulWidget {
   final String? countryCode;
   final bool isOTPLogin;
   final String? uid;
+  final bool? isFromDashboard;
+  final bool? isFromServiceBooking;
+  final bool returnExpected;
+  final bool isRegeneratingToken;
 
   SignUpScreen(
       {Key? key,
       this.phoneNumber,
-      this.isOTPLogin = false,
+      this.isOTPLogin = true,
       this.countryCode,
-      this.uid})
+      this.uid,
+      this.isFromDashboard,
+      this.isFromServiceBooking,
+      this.returnExpected = false,
+      this.isRegeneratingToken = false})
       : super(key: key);
 
   @override
@@ -56,7 +66,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   FocusNode userNameFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
-
   bool isAcceptedTc = false;
 
   @override
@@ -77,6 +86,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
       userNameCont.text =
           widget.phoneNumber != null ? widget.phoneNumber.toString() : "";
     }
+  }
+
+  void googleSignIn() async {
+    if (!isAcceptedTc) {
+      toast("Please accept terms and conditions");
+    } else {
+      appStore.setLoading(true);
+
+      await authService.signInWithGoogle(context).then((value) async {
+        appStore.setLoading(false);
+        saveDataToPreference(context,
+            userData: value!.userData!,
+            isSocialLogin: true, onRedirectionClick: () {
+          onLoginSuccessRedirection();
+        });
+      }).catchError((e) {
+        appStore.setLoading(false);
+        toast(e.toString());
+      });
+    }
+  }
+
+  void otpSignIn() async {
+    hideKeyboard(context);
+
+    OTPLoginScreen().launch(context);
+  }
+
+  void onLoginSuccessRedirection() {
+    TextInput.finishAutofillContext();
+    if (widget.isFromServiceBooking.validate() ||
+        widget.isFromDashboard.validate() ||
+        widget.returnExpected.validate()) {
+      if (widget.isFromDashboard.validate()) {
+        setStatusBarColor(context.primaryColor);
+      }
+
+      finish(context, true);
+    } else {
+      DashboardScreen().launch(context,
+          isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+    }
+
+    appStore.setLoading(false);
   }
 
   @override
@@ -397,20 +450,83 @@ class _SignUpScreenState extends State<SignUpScreen> {
         16.height,
         RichTextWidget(
           list: [
-            TextSpan(
-                text: "${language.alreadyHaveAccountTxt} ? ",
-                style: secondaryTextStyle()),
-            TextSpan(
-              text: language.signIn,
-              style: boldTextStyle(color: primaryColor, size: 14),
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  finish(context);
-                },
-            ),
+            // TextSpan(
+            //     text: "${language.alreadyHaveAccountTxt} ? ",
+            //     style: secondaryTextStyle()),
+            // TextSpan(
+            //   text: language.signIn,
+            //   style: boldTextStyle(color: primaryColor, size: 14),
+            //   recognizer: TapGestureRecognizer()
+            //     ..onTap = () {
+            //       //finish(context);
+            //       SignInScreen().launch(context);
+            //     },
+            // ),
           ],
         ),
-        30.height,
+        Row(
+          children: [
+            Divider(color: context.dividerColor, thickness: 2).expand(),
+            16.width,
+            Text(language.lblOrContinueWith, style: secondaryTextStyle()),
+            16.width,
+            Divider(color: context.dividerColor, thickness: 2).expand(),
+          ],
+        ),
+        26.height,
+        AppButton(
+          text: '',
+          color: primaryColor,
+          padding: EdgeInsets.all(8),
+          textStyle: boldTextStyle(),
+          width: context.width() - context.navigationBarHeight,
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: boxDecorationWithRoundedCorners(
+                  backgroundColor: primaryColor.withOpacity(0.1),
+                  boxShape: BoxShape.circle,
+                ),
+                child: GoogleLogoWidget(size: 16),
+              ),
+              Text(language.lblSignInWithGoogle,
+                      style: boldTextStyle(size: 12),
+                      selectionColor: Colors.white,
+                      textAlign: TextAlign.center)
+                  .expand(),
+            ],
+          ),
+          onTap: googleSignIn,
+        ),
+        26.height,
+        AppButton(
+          text: '',
+          color: primaryColor,
+          padding: EdgeInsets.all(8),
+          textStyle: boldTextStyle(),
+          width: context.width() - context.navigationBarHeight,
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(8),
+                decoration: boxDecorationWithRoundedCorners(
+                  backgroundColor: primaryColor.withOpacity(0.1),
+                  boxShape: BoxShape.circle,
+                ),
+                child: ic_calling
+                    .iconImage(size: 18, color: primaryColor)
+                    .paddingAll(4),
+              ),
+              Text(language.lblSignInWithOTP,
+                      style: boldTextStyle(size: 12),
+                      selectionColor: white,
+                      textAlign: TextAlign.center)
+                  .expand(),
+            ],
+          ),
+          onTap: otpSignIn,
+        ),
       ],
     );
   }
@@ -447,6 +563,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     _buildFormWidget(),
                     8.height,
                     _buildFooterWidget(),
+                    16.height
                   ],
                 ),
               ),

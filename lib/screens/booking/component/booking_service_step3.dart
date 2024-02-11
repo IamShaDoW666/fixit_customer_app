@@ -91,7 +91,6 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
         );
       },
     );
-
     if (value != null) {
       if (value is bool && !value) {
         appliedCouponData = null;
