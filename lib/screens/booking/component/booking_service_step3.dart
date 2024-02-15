@@ -182,7 +182,8 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                 ),
 
               /// Coupon Discount on Base Price
-              if (widget.selectedPackage == null)
+              if (widget.selectedPackage == null &&
+                  widget.data.couponData!.isNotEmpty)
                 Column(
                   children: [
                     Divider(height: 26, color: context.dividerColor),

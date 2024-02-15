@@ -49,7 +49,7 @@ class _CouponWidgetState extends State<CouponWidget> {
       decoration: boxDecorationDefault(color: context.cardColor),
       child: Column(
         children: [
-          if (widget.couponData.isNotEmpty)
+          if (!isUpdate)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -155,9 +155,29 @@ class _CouponWidgetState extends State<CouponWidget> {
               ],
             )
           else
-            Text(language.lblNoCouponsAvailable, style: secondaryTextStyle())
-                .center()
-                .paddingSymmetric(vertical: 50),
+            Column(
+              children: [
+                if (widget.appliedCouponData != null)
+                  Text(widget.appliedCouponData!.code.validate(),
+                          style: secondaryTextStyle(size: 30))
+                      .center(),
+                if (widget.appliedCouponData != null)
+                  Text('${widget.appliedCouponData!.discount.toString()}%',
+                          style: secondaryTextStyle(size: 28, color: completed))
+                      .center(),
+                TextIcon(
+                  text: language.lblRemoveCoupon,
+                  textStyle: boldTextStyle(color: Colors.red),
+                  onTap: () {
+                    couponCode = '';
+                    selectedIndex = null;
+                    setState(() {});
+                    finish(context, false);
+                  },
+                  edgeInsets: EdgeInsets.symmetric(vertical: 16),
+                )
+              ],
+            ).paddingSymmetric(vertical: 20),
           16.height,
           Row(
             children: [

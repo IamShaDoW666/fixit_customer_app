@@ -17,7 +17,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:booking_system_flutter/screens/auth/otp_login_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -36,7 +35,7 @@ class SignUpScreen extends StatefulWidget {
   SignUpScreen(
       {Key? key,
       this.phoneNumber,
-      this.isOTPLogin = true,
+      this.isOTPLogin = false,
       this.countryCode,
       this.uid,
       this.isFromDashboard,
@@ -110,7 +109,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void otpSignIn() async {
     hideKeyboard(context);
-
     OTPLoginScreen().launch(context);
   }
 
@@ -319,7 +317,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           controller: userNameCont,
           focus: userNameFocus,
           nextFocus: emailFocus,
-          readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
           errorThisFieldRequired: language.requiredText,
           decoration:
               inputDecoration(context, labelText: language.hintUserNameTxt),
@@ -370,7 +367,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           textFieldType: TextFieldType.PASSWORD,
           controller: passwordCont,
           focus: passwordFocus,
-          readOnly: widget.isOTPLogin.validate() ? widget.isOTPLogin : false,
           suffixPasswordVisibleWidget:
               ic_show.iconImage(size: 10).paddingAll(14),
           suffixPasswordInvisibleWidget:

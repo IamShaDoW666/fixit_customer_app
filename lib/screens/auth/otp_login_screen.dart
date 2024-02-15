@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:booking_system_flutter/component/back_widget.dart';
 import 'package:booking_system_flutter/component/base_scaffold_body.dart';
 import 'package:booking_system_flutter/main.dart';
@@ -9,7 +8,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import '../../utils/configs.dart';
 
 class OTPLoginScreen extends StatefulWidget {
@@ -53,7 +51,8 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
           ),
         ),
       ),
-      showPhoneCode: true, // optional. Shows phone code before the country name.
+      showPhoneCode:
+          true, // optional. Shows phone code before the country name.
       onSelect: (Country country) {
         selectedCountry = country;
         log(jsonEncode(selectedCountry.toJson()));
@@ -66,17 +65,18 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       hideKeyboard(context);
-
       appStore.setLoading(true);
-
       toast(language.sendingOTP);
-
-      await authService.loginWithOTP(context, phoneNumber: numberController.text.trim(), countryCode: selectedCountry.phoneCode, countryISOCode: selectedCountry.countryCode).then((value) {
+      await authService
+          .loginWithOTP(context,
+              phoneNumber: numberController.text.trim(),
+              countryCode: selectedCountry.phoneCode,
+              countryISOCode: selectedCountry.countryCode)
+          .then((value) {
         //
       }).catchError(
         (e) {
           appStore.setLoading(false);
-
           toast(e.toString(), print: true);
         },
       );
@@ -142,9 +142,14 @@ class _OTPLoginScreenState extends State<OTPLoginScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: context.scaffoldBackgroundColor,
-        leading: Navigator.of(context).canPop() ? BackWidget(iconColor: context.iconColor) : null,
+        leading: Navigator.of(context).canPop()
+            ? BackWidget(iconColor: context.iconColor)
+            : null,
         scrolledUnderElevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark, statusBarColor: context.scaffoldBackgroundColor),
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                appStore.isDarkMode ? Brightness.light : Brightness.dark,
+            statusBarColor: context.scaffoldBackgroundColor),
       ),
       body: Body(
         child: Container(
