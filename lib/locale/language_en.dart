@@ -1428,7 +1428,7 @@ class LanguageEn extends BaseLanguage {
   String get at => 'at';
 
   @override
-  String get appliedTaxes => 'Applied Taxes';
+  String get appliedTaxes => 'Applied Extra Charges';
 
   @override
   String get accessDeniedContactYourAdmin =>

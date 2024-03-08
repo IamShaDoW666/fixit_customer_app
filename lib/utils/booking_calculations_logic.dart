@@ -22,6 +22,7 @@ BookingAmountModel finalCalculations(
     String serviceType = SERVICE_TYPE_FIXED,
     String bookingType = BOOKING_TYPE_SERVICE,
     bool isCash = false,
+    num uaevat = 0,
     num cashHandlingCharge = 0}) {
   if (quantity == 0) quantity = 1;
   BookingAmountModel data = BookingAmountModel();
@@ -70,18 +71,24 @@ BookingAmountModel finalCalculations(
 
   data.finalTotalTax =
       calculateTotalTaxAmount(taxes, data.finalSubTotal + totalExtraCharges);
+  if (uaevat > 0) {
+    data.vatAmount = data.finalSubTotal * (uaevat / 100);
+  }
   if (isCash) {
     data.finalGrandTotalAmount = (data.finalSubTotal +
             data.finalTotalTax +
             totalExtraCharges +
-            cashHandlingCharge)
+            cashHandlingCharge +
+            data.vatAmount)
         .toStringAsFixed(DECIMAL_POINT)
         .toDouble();
   } else {
-    data.finalGrandTotalAmount =
-        (data.finalSubTotal + data.finalTotalTax + totalExtraCharges)
-            .toStringAsFixed(DECIMAL_POINT)
-            .toDouble();
+    data.finalGrandTotalAmount = (data.finalSubTotal +
+            data.finalTotalTax +
+            totalExtraCharges +
+            data.vatAmount)
+        .toStringAsFixed(DECIMAL_POINT)
+        .toDouble();
   }
 
   return data;

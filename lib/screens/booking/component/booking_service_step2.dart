@@ -115,6 +115,9 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                     now.millisecondsSinceEpoch) {
               return toast(language.selectedOtherBookingTime);
             }
+            if (time.hour >= 21 || time.hour < 8) {
+              return toast("Booking unavailable between 8 AM to 9 PM");
+            }
 
             selectedDate = date;
             pickedTime = time;

@@ -12,6 +12,7 @@ class ServiceDetailResponse {
   List<ServiceFaq>? serviceFaq;
   List<File>? imageList;
   num? cashHandlingCharge;
+  num? uaevat;
 
   ServiceDetailResponse(
       {this.couponData,
@@ -21,6 +22,7 @@ class ServiceDetailResponse {
       this.taxes,
       this.relatedService,
       this.serviceFaq,
+      this.uaevat,
       this.cashHandlingCharge});
 
   factory ServiceDetailResponse.fromJson(Map<String, dynamic> json) {
@@ -56,6 +58,7 @@ class ServiceDetailResponse {
                 .map((i) => ServiceFaq.fromJson(i))
                 .toList()
             : null,
+        uaevat: json['uae_vat'] ?? null,
         cashHandlingCharge: json['cash_handling_charge'] ?? null);
   }
 
@@ -85,6 +88,9 @@ class ServiceDetailResponse {
     }
     if (this.cashHandlingCharge != null) {
       data['service_faq'] = this.cashHandlingCharge;
+    }
+    if (this.uaevat != null) {
+      data['service_faq'] = this.uaevat;
     }
     return data;
   }

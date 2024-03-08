@@ -66,6 +66,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
         selectedPackage: widget.selectedPackage,
         options: bookingStore.selectedOptions,
         isCash: paymentMode == 'cod',
+        uaevat: widget.data.uaevat ?? 0,
         cashHandlingCharge: widget.data.cashHandlingCharge ?? 0);
 
     advancePaymentAmount = (bookingAmountModel.finalGrandTotalAmount *
@@ -312,6 +313,28 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                 ),
 
               //Cash handling charge
+              if (widget.data.uaevat.validate() > 0)
+                Column(
+                  children: [
+                    Divider(height: 26, color: context.dividerColor),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text("VAT(5%)", style: secondaryTextStyle(size: 14))
+                                .expand(),
+                          ],
+                        ).expand(),
+                        16.width,
+                        PriceWidget(
+                            price: bookingAmountModel.vatAmount.validate(),
+                            color: Colors.red,
+                            isBoldText: true),
+                      ],
+                    ),
+                  ],
+                ),
+
               if (paymentMode == 'cod' &&
                   widget.data.cashHandlingCharge.validate() > 0)
                 Column(
@@ -321,7 +344,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       children: [
                         Row(
                           children: [
-                            Text("Cash Handling Charge",
+                            Text("Cash Handling Charges",
                                     style: secondaryTextStyle(size: 14))
                                 .expand(),
                           ],

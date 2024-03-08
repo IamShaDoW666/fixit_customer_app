@@ -32,6 +32,7 @@ class BookingData {
   num? amount;
   num? paidAmount;
   num? cashHandlingCharge;
+  num? uaevat;
 
   CouponData? couponData;
   List<Handyman>? handyman;
@@ -132,6 +133,7 @@ class BookingData {
       this.finalCouponDiscountAmount,
       this.txnId,
       this.bookingAttachments,
+      this.uaevat,
       this.cashHandlingCharge});
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
@@ -198,6 +200,7 @@ class BookingData {
         finalDiscountAmount: json['final_discount_amount'],
         finalCouponDiscountAmount: json['final_coupon_discount_amount'],
         txnId: json['txn_id'],
+        uaevat: json['uae_vat'],
         cashHandlingCharge: json['cash_handling_charge']);
   }
 
@@ -242,6 +245,9 @@ class BookingData {
     data['txn_id'] = this.txnId;
     data['cash_handling_charge'] = this.cashHandlingCharge;
 
+    if (this.uaevat != null) {
+      data['uae_vat'] = this.uaevat;
+    }
     if (this.couponData != null) {
       data['coupon_data'] = this.couponData!.toJson();
     }

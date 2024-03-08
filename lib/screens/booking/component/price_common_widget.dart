@@ -308,6 +308,7 @@ class PriceCommonWidget extends StatelessWidget {
                     ],
                   ),
                 //Cash Handling Charge
+
                 if (bookingDetail.cashHandlingCharge! > 0)
                   Column(
                     children: [
@@ -328,6 +329,34 @@ class PriceCommonWidget extends StatelessWidget {
                                 PriceWidget(
                                     price: bookingDetail.cashHandlingCharge
                                         .validate(),
+                                    color: primaryColor)
+                              ],
+                            ),
+                          ).flexible(flex: 3),
+                        ],
+                      ),
+                      Divider(height: 26, color: context.dividerColor)
+                    ],
+                  ),
+                if (bookingDetail.uaevat.validate() > 0)
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextIcon(
+                            text: 'VAT 5%',
+                            textStyle: secondaryTextStyle(size: 14),
+                            edgeInsets: EdgeInsets.zero,
+                            expandedText: true,
+                            maxLine: 2,
+                          ).expand(flex: 2),
+                          Marquee(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                PriceWidget(
+                                    price: bookingDetail.uaevat.validate(),
                                     color: primaryColor)
                               ],
                             ),

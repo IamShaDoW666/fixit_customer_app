@@ -16,26 +16,19 @@ const double SUBCATEGORY_ICON_SIZE = 45;
 const APP_BAR_TEXT_SIZE = 18;
 const MARK_AS_READ = 'markas_read';
 const PERMISSION_STATUS = 'permissionStatus';
-
 const ONESIGNAL_TAG_KEY = 'appType';
 const ONESIGNAL_TAG_VALUE = 'userApp';
 const PER_PAGE_CHAT_LIST_COUNT = 50;
-
 const USER_NOT_CREATED = "User not created";
 const USER_CANNOT_LOGIN = "User can't login";
 const USER_NOT_FOUND = "User not found";
-
 const BOOKING_TYPE_ALL = 'all';
 const CATEGORY_LIST_ALL = "all";
-
 const BOOKING_TYPE_USER_POST_JOB = 'user_post_job';
 const BOOKING_TYPE_SERVICE = 'service';
-
 const DONE = 'Done';
 const SERVICE = 'service';
-
 const PAYMENT_STATUS_PAID = 'paid';
-
 const NOTIFICATION_TYPE_BOOKING = 'booking';
 const NOTIFICATION_TYPE_POST_JOB = 'post_Job';
 //endregion
@@ -51,8 +44,8 @@ const LIVESTREAM_UPDATE_BIDER = 'updateBiderData';
 //endregion
 
 //region default USER login
-const DEFAULT_EMAIL = 'demo@user.com';
-const DEFAULT_PASS = '12345678';
+const DEFAULT_EMAIL = '';
+const DEFAULT_PASS = '';
 //endregion
 
 //region THEME MODE TYPE

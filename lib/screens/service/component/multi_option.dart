@@ -92,19 +92,50 @@ class _MultiOptionState extends State<MultiOption> {
                                   : primaryColor),
                         ),
                         SizedBox(height: 16),
+                        // if (checkSelected(
+                        //     widget.option.variants![idx].id.validate()))
+                        //   Container(
+                        //     width: MediaQuery.of(context).size.width,
+                        //     child: SingleChildScrollView(
+                        //       child: Html(
+                        //         data: widget.option.variants![idx].description,
+                        //         style: {
+                        //           'p': Style(color: black),
+                        //           'h1': Style(color: white)
+                        //         },
+                        //         // Apply styles or configurations if needed
+                        //       ),
+                        //     ),
+                        //   ),
                         if (checkSelected(
                             widget.option.variants![idx].id.validate()))
                           Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: SingleChildScrollView(
-                              child: Html(
-                                data: widget.option.variants![idx].description,
-                                style: {
-                                  'p': Style(color: black),
-                                  'h1': Style(color: white)
-                                },
-                                // Apply styles or configurations if needed
-                              ),
+                            // width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SingleChildScrollView(
+                                  child: Html(
+                                    data: widget
+                                        .option.variants![idx].description,
+                                    style: {
+                                      'p': Style(color: black),
+                                      'h1': Style(color: white)
+                                    },
+                                    // Apply styles or configurations if needed
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: IconButton(
+                                    icon: Icon(Icons.check_circle,
+                                        color: Colors.green),
+                                    onPressed: () {
+                                      // Add your onPressed action here
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                       ],
@@ -126,7 +157,7 @@ class _MultiOptionState extends State<MultiOption> {
             // Other ElevatedButton properties
           ).paddingSymmetric(vertical: 6),
         ),
-      )
+      ),
     ]);
   }
 }
