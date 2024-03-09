@@ -6,7 +6,7 @@ const APP_NAME_TAG_LINE = 'Ouality Services Beyond Expectations';
 const APP_DEVELOPER_NAME = 'Developed by Digiimpact';
 var defaultPrimaryColor = Color.fromARGB(255, 241, 119, 32);
 // const DOMAIN_URL = 'https://yallakhedma.com';
-const DOMAIN_URL = 'http://192.168.18.38:8000';
+const DOMAIN_URL = 'https://yallakhedma.com';
 const BASE_URL = '$DOMAIN_URL/api/';
 const DEFAULT_LANGUAGE = 'en';
 

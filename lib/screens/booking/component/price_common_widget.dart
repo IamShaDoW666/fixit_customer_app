@@ -263,10 +263,7 @@ class PriceCommonWidget extends StatelessWidget {
                       Divider(height: 26, color: context.dividerColor),
                     ],
                   ),
-
-                if (bookingDetail.finalTotalTax.validate() != 0 &&
-                    bookingDetail.bookingType.validate() ==
-                        BOOKING_TYPE_SERVICE)
+                if (bookingDetail.finalTotalTax.validate() != 0)
                   Column(
                     children: [
                       Row(

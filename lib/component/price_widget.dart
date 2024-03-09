@@ -63,7 +63,7 @@ class PriceWidget extends StatelessWidget {
               Text(language.lblFree, style: _textStyle())
             else if (price > 0)
               Text(
-                "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${price.validate().toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
+                "${isCurrencyPositionLeft ? appStore.currencySymbol : ''}${price.validate().toStringAsFixed(DECIMAL_POINT_DISPLAY).formatNumberWithComma()}${isCurrencyPositionRight ? appStore.currencySymbol : ''}",
                 style: _textStyle(),
               ),
             if (isHourlyService)
