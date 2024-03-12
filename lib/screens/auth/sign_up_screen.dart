@@ -338,6 +338,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           textFieldType: isAndroid ? TextFieldType.PHONE : TextFieldType.NAME,
           controller: mobileCont,
           focus: mobileFocus,
+          isValidationRequired: false,
           buildCounter: (_,
               {required int currentLength,
               required bool isFocused,
@@ -350,7 +351,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
             );
           },
-          errorThisFieldRequired: language.requiredText,
           nextFocus: passwordFocus,
           decoration: inputDecoration(context,
                   labelText: "${language.hintContactNumberTxt}")
@@ -558,7 +558,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     _buildTopWidget(),
                     _buildFormWidget(),
                     8.height,
-                    _buildFooterWidget(),
+                    // _buildFooterWidget(),
                     16.height
                   ],
                 ),
