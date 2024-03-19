@@ -379,21 +379,21 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                     16.height,
                     Row(
                       children: [
-                        if (!widget.isSlotAvailable.validate())
-                          AppButton(
-                            width: (context.width() - 40) * 0.5,
-                            shapeBorder: RoundedRectangleBorder(
-                                borderRadius: radius(),
-                                side: BorderSide(color: context.primaryColor)),
-                            onTap: () {
-                              customStepperController.previousPage(
-                                  duration: 200.milliseconds,
-                                  curve: Curves.easeInOut);
-                            },
-                            text: language.lblPrevious,
-                            textColor: textPrimaryColorGlobal,
-                          ),
-                        if (!widget.isSlotAvailable.validate()) 16.width,
+                        // if (!widget.isSlotAvailable.validate())
+                        //   AppButton(
+                        //     width: (context.width() - 40) * 0.5,
+                        //     shapeBorder: RoundedRectangleBorder(
+                        //         borderRadius: radius(),
+                        //         side: BorderSide(color: context.primaryColor)),
+                        //     onTap: () {
+                        //       customStepperController.previousPage(
+                        //           duration: 200.milliseconds,
+                        //           curve: Curves.easeInOut);
+                        //     },
+                        //     text: language.lblPrevious,
+                        //     textColor: textPrimaryColorGlobal,
+                        //   ),
+                        // if (!widget.isSlotAvailable.validate()) 16.width,
                         AppButton(
                           onTap: () {
                             if (bookingStore.providerId != 0) {

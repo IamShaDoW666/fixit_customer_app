@@ -527,7 +527,7 @@ class _OptionsWidgetState extends State<OptionsWidget> {
                       widget.options[index], widget.service!, bookingStore)
                   : widget.options[index].typeInt == 3
                       ? MultiplyOption(widget.options[index])
-                      : QuantityOption(widget.options[index])),
+                      : QuantityOption(widget.options[index], bookingStore)),
     ]);
   }
 }

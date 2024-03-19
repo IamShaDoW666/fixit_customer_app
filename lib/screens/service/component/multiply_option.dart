@@ -38,13 +38,20 @@ class _MultiplyOptionState extends State<MultiplyOption> {
     return Observer(
         builder: (_) => Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6), color: primaryColor),
+                borderRadius: BorderRadius.circular(6),
+                color: white,
+                border: Border.all(
+                  color: primaryColor, // Change the color to your desired color
+                  width: 1.0, // Change the width to your desired thickness
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     widget.option.name.validate(),
-                    style: boldTextStyle(size: LABEL_TEXT_SIZE, color: white),
+                    style: boldTextStyle(
+                        size: LABEL_TEXT_SIZE, color: primaryColor),
                   ),
                   8.height,
                   // Row(
@@ -69,7 +76,7 @@ class _MultiplyOptionState extends State<MultiplyOption> {
                         GestureDetector(
                           child: FaIcon(
                             FontAwesomeIcons.minus,
-                            color: white,
+                            color: primaryColor,
                           ),
                           onTap: decrement,
                         ),
@@ -79,13 +86,13 @@ class _MultiplyOptionState extends State<MultiplyOption> {
                               .getOption(
                                   widget.option.id.validate())['quantity']
                               .toString(),
-                          style: boldTextStyle(size: 18, color: white),
+                          style: boldTextStyle(size: 18, color: primaryColor),
                         ),
                         8.width,
                         GestureDetector(
                           child: FaIcon(
                             FontAwesomeIcons.plus,
-                            color: white,
+                            color: primaryColor,
                           ),
                           onTap: increment,
                         )

@@ -253,6 +253,7 @@ class Option {
   int? unitPrice;
   int? area;
   bool? customizable;
+  String? description;
   List<Variant>? variants;
   int? multiplyOption;
 
@@ -266,7 +267,8 @@ class Option {
       this.area,
       this.customizable,
       this.variants,
-      this.multiplyOption});
+      this.multiplyOption,
+      this.description});
 
   factory Option.fromJson(Map<String, dynamic> json) {
     return Option(
@@ -276,6 +278,7 @@ class Option {
         type: json['type'],
         typeInt: json['type_int'],
         unitPrice: json['unit_price'],
+        description: json['description'],
         area: json['area'],
         customizable: json['customizable'],
         multiplyOption: json['multiply_option'],
@@ -294,6 +297,7 @@ class Option {
     data['type'] = this.type;
     data['type_int'] = this.typeInt;
     data['unit_price'] = this.unitPrice;
+    data['description'] = this.description;
     data['area'] = this.area;
     data['customizable'] = this.customizable;
     data['multiply_option'] = this.multiplyOption;

@@ -7,7 +7,7 @@ var appPackageName =
 //region Common Configs
 const DEFAULT_FIREBASE_PASSWORD = '12345678';
 const DECIMAL_POINT = 2;
-const DECIMAL_POINT_DISPLAY = 0;
+const DECIMAL_POINT_DISPLAY = 2;
 const PER_PAGE_ITEM = 20;
 const PER_PAGE_CATEGORY_ITEM = 50;
 const LABEL_TEXT_SIZE = 14;
