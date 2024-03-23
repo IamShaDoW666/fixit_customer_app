@@ -32,6 +32,18 @@ abstract class _BookingStore with Store {
   @observable
   List<TaxData> taxes = List.empty();
 
+  @observable
+  String addressType = '';
+
+  @observable
+  String city = '';
+
+  @observable
+  String apartment = '';
+
+  @observable
+  String building = '';
+
   @action
   void initQuantities(List<Option> options, num pricePerSqft) {
     Iterable<Option> quantityOptions =

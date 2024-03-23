@@ -118,7 +118,10 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.pricePerSqft: widget.data.serviceDetail!.pricePerSqft,
       BookingServiceKeys.mobile: true,
       BookingServiceKeys.providerId: bookingStore.providerId,
-      BookingServiceKeys.paymentMode: widget.paymentMode
+      BookingServiceKeys.paymentMode: widget.paymentMode,
+      BookingServiceKeys.apartment: bookingStore.apartment,
+      BookingServiceKeys.city: bookingStore.city,
+      BookingServiceKeys.building: bookingStore.building
     };
     log("req: ${[request]}");
     if (widget.bookingAmountModel != null) {

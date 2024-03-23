@@ -5,6 +5,7 @@ import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/screens/booking/component/booking_service_image.dart';
 import 'package:booking_system_flutter/screens/map/map_screen.dart';
+import 'package:booking_system_flutter/screens/service/component/address_select.dart';
 import 'package:booking_system_flutter/screens/service/component/provider_select.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/services/location_service.dart';
@@ -283,6 +284,31 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                   style: boldTextStyle(
                                       color: primaryColor, size: 13),
                                   textAlign: TextAlign.right),
+                            ).flexible(),
+                            AppButton(
+                              onTap: () {
+                                showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: radiusOnly(
+                                          topLeft: defaultRadius,
+                                          topRight: defaultRadius)),
+                                  builder: (_) {
+                                    return DraggableScrollableSheet(
+                                        initialChildSize: 0.8,
+                                        minChildSize: 0.2,
+                                        maxChildSize: 0.8,
+                                        builder: (_, scrollController) =>
+                                            AddressForm(
+                                                scrollController:
+                                                    scrollController));
+                                  },
+                                );
+                              },
+                              text: "Address Detail",
+                              textColor: primaryColor,
                             ).flexible(),
                           ],
                         ),

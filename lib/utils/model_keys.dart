@@ -53,6 +53,9 @@ class BookingServiceKeys {
   static String mobile = 'mobile';
   static String providerId = 'provider_id';
   static String paymentMode = 'payment_mode';
+  static String apartment = 'apartment';
+  static String building = 'building';
+  static String city = 'city';
 }
 
 class CouponKeys {
