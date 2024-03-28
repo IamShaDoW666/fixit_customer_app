@@ -47,6 +47,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController lNameCont = TextEditingController();
   TextEditingController emailCont = TextEditingController();
   TextEditingController userNameCont = TextEditingController();
+  TextEditingController oldPasswordCont = TextEditingController();
+  TextEditingController newPasswordCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
   TextEditingController addressCont = TextEditingController();
 
@@ -54,6 +56,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   FocusNode lNameFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
   FocusNode userNameFocus = FocusNode();
+  FocusNode oldPasswordFocus = FocusNode();
+  FocusNode newPasswordFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
 
   int countryId = 0;
@@ -152,11 +156,18 @@ class EditProfileScreenState extends State<EditProfileScreen> {
   Future<void> update() async {
     hideKeyboard(context);
 
-    MultipartRequest multiPartRequest = await getMultiPartRequest('update-profile');
+    MultipartRequest multiPartRequest =
+        await getMultiPartRequest('update-profile');
     multiPartRequest.fields[UserKeys.id] = appStore.userId.toString();
     multiPartRequest.fields[UserKeys.firstName] = fNameCont.text;
     multiPartRequest.fields[UserKeys.lastName] = lNameCont.text;
     multiPartRequest.fields[UserKeys.userName] = userNameCont.text;
+    if (!oldPasswordCont.text.isEmptyOrNull) {
+      multiPartRequest.fields[UserKeys.oldPassword] = oldPasswordCont.text;
+    }
+    if (!newPasswordCont.text.isEmptyOrNull) {
+      multiPartRequest.fields[UserKeys.newPassword] = newPasswordCont.text;
+    }
     multiPartRequest.fields[UserKeys.userType] = LOGIN_TYPE_USER;
     multiPartRequest.fields[UserKeys.contactNumber] = mobileCont.text;
     multiPartRequest.fields[UserKeys.email] = emailCont.text;
@@ -164,9 +175,11 @@ class EditProfileScreenState extends State<EditProfileScreen> {
     multiPartRequest.fields[UserKeys.stateId] = stateId.toString();
     multiPartRequest.fields[UserKeys.cityId] = cityId.toString();
     multiPartRequest.fields[CommonKeys.address] = addressCont.text;
-    multiPartRequest.fields[UserKeys.displayName] = '${fNameCont.text.validate() + " " + lNameCont.text.validate()}';
+    multiPartRequest.fields[UserKeys.displayName] =
+        '${fNameCont.text.validate() + " " + lNameCont.text.validate()}';
     if (imageFile != null) {
-      multiPartRequest.files.add(await MultipartFile.fromPath(UserKeys.profileImage, imageFile!.path));
+      multiPartRequest.files.add(
+          await MultipartFile.fromPath(UserKeys.profileImage, imageFile!.path));
     } else {
       Image.asset(ic_home, fit: BoxFit.cover);
     }
@@ -282,7 +295,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 children: [
                   Container(
                     decoration: boxDecorationDefault(
-                      border: Border.all(color: context.scaffoldBackgroundColor, width: 4),
+                      border: Border.all(
+                          color: context.scaffoldBackgroundColor, width: 4),
                       shape: BoxShape.circle,
                     ),
                     child: imageFile != null
@@ -312,7 +326,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                         backgroundColor: primaryColor,
                         border: Border.all(color: Colors.white),
                       ),
-                      child: Icon(AntDesign.camera, color: Colors.white, size: 12),
+                      child:
+                          Icon(AntDesign.camera, color: Colors.white, size: 12),
                     ).onTap(() async {
                       _showBottomSheet(context);
                     }),
@@ -327,7 +342,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 errorThisFieldRequired: language.requiredText,
                 nextFocus: lNameFocus,
                 enabled: !isLoginTypeApple,
-                decoration: inputDecoration(context, labelText: language.hintFirstNameTxt),
+                decoration: inputDecoration(context,
+                    labelText: language.hintFirstNameTxt),
                 suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
               ),
               16.height,
@@ -338,7 +354,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 errorThisFieldRequired: language.requiredText,
                 nextFocus: userNameFocus,
                 enabled: !isLoginTypeApple,
-                decoration: inputDecoration(context, labelText: language.hintLastNameTxt),
+                decoration: inputDecoration(context,
+                    labelText: language.hintLastNameTxt),
                 suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
               ),
               16.height,
@@ -348,8 +365,33 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 focus: userNameFocus,
                 enabled: false,
                 errorThisFieldRequired: language.requiredText,
+                nextFocus: oldPasswordFocus,
+                decoration: inputDecoration(context,
+                    labelText: language.hintUserNameTxt),
+                suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
+              ),
+              16.height,
+              AppTextField(
+                textFieldType: TextFieldType.PASSWORD,
+                controller: oldPasswordCont,
+                focus: oldPasswordFocus,
+                enabled: true,
+                isValidationRequired: false,
+                nextFocus: newPasswordFocus,
+                decoration: inputDecoration(context,
+                    labelText: language.hintOldPasswordTxt),
+                suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
+              ),
+              16.height,
+              AppTextField(
+                textFieldType: TextFieldType.PASSWORD,
+                controller: newPasswordCont,
+                focus: newPasswordFocus,
+                enabled: true,
+                isValidationRequired: false,
                 nextFocus: emailFocus,
-                decoration: inputDecoration(context, labelText: language.hintUserNameTxt),
+                decoration: inputDecoration(context,
+                    labelText: language.hintNewPasswordTxt),
                 suffix: ic_profile2.iconImage(size: 10).paddingAll(14),
               ),
               16.height,
@@ -360,28 +402,37 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 focus: emailFocus,
                 enabled: false,
                 nextFocus: mobileFocus,
-                decoration: inputDecoration(context, labelText: language.hintEmailTxt),
+                decoration:
+                    inputDecoration(context, labelText: language.hintEmailTxt),
                 suffix: ic_message.iconImage(size: 10).paddingAll(14),
               ),
               16.height,
               AppTextField(
-                textFieldType: isAndroid ? TextFieldType.PHONE : TextFieldType.NAME,
+                textFieldType:
+                    isAndroid ? TextFieldType.PHONE : TextFieldType.NAME,
                 controller: mobileCont,
                 focus: mobileFocus,
                 maxLength: 15,
-                buildCounter: (_, {required int currentLength, required bool isFocused, required int? maxLength}) {
+                buildCounter: (_,
+                    {required int currentLength,
+                    required bool isFocused,
+                    required int? maxLength}) {
                   return Offstage();
                 },
                 enabled: !isLoginTypeOTP,
                 errorThisFieldRequired: language.requiredText,
-                decoration: inputDecoration(context, labelText: language.hintContactNumberTxt),
+                decoration: inputDecoration(context,
+                    labelText: language.hintContactNumberTxt),
                 suffix: ic_calling.iconImage(size: 10).paddingAll(14),
                 validator: (mobileCont) {
                   if (mobileCont!.isEmpty) return language.phnRequiredText;
-                  if (isIOS && !RegExp(r"^([0-9]{1,5})-([0-9]{1,10})$").hasMatch(mobileCont)) {
+                  if (isIOS &&
+                      !RegExp(r"^([0-9]{1,5})-([0-9]{1,10})$")
+                          .hasMatch(mobileCont)) {
                     return language.inputMustBeNumberOrDigit;
                   }
-                  if (!mobileCont.trim().contains('-')) return '"-" ${language.requiredAfterCountryCode}';
+                  if (!mobileCont.trim().contains('-'))
+                    return '"-" ${language.requiredAfterCountryCode}';
                   return null;
                 },
               ),
@@ -394,7 +445,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
               Row(
                 children: [
                   DropdownButtonFormField<CountryListResponse>(
-                    decoration: inputDecoration(context, labelText: language.selectCountry),
+                    decoration: inputDecoration(context,
+                        labelText: language.selectCountry),
                     isExpanded: true,
                     value: selectedCountry,
                     dropdownColor: context.cardColor,
@@ -423,7 +475,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                   8.width.visible(stateList.isNotEmpty),
                   if (stateList.isNotEmpty)
                     DropdownButtonFormField<StateListResponse>(
-                      decoration: inputDecoration(context, labelText: language.selectState),
+                      decoration: inputDecoration(context,
+                          labelText: language.selectState),
                       isExpanded: true,
                       dropdownColor: context.cardColor,
                       value: selectedState,
@@ -452,14 +505,18 @@ class EditProfileScreenState extends State<EditProfileScreen> {
               16.height,
               if (cityList.isNotEmpty)
                 DropdownButtonFormField<CityListResponse>(
-                  decoration: inputDecoration(context, labelText: language.selectCity),
+                  decoration:
+                      inputDecoration(context, labelText: language.selectCity),
                   isExpanded: true,
                   value: selectedCity,
                   dropdownColor: context.cardColor,
                   items: cityList.map((CityListResponse e) {
                     return DropdownMenuItem<CityListResponse>(
                       value: e,
-                      child: Text(e.name!, style: primaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
+                      child: Text(e.name!,
+                          style: primaryTextStyle(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis),
                     );
                   }).toList(),
                   onChanged: (CityListResponse? value) async {
@@ -474,7 +531,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                 controller: addressCont,
                 textFieldType: TextFieldType.MULTILINE,
                 maxLines: 5,
-                decoration: inputDecoration(context, labelText: language.hintAddress),
+                decoration:
+                    inputDecoration(context, labelText: language.hintAddress),
                 suffix: ic_location.iconImage(size: 10).paddingAll(14),
                 isValidationRequired: false,
               ),

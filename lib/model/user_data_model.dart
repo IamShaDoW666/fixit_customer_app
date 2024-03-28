@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:booking_system_flutter/model/slot_data.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../utils/constant.dart';
@@ -49,6 +50,7 @@ class UserData {
   int? isUserExist;
   String? password;
   num? isFavourite;
+  List<SlotData>? slots;
 
   String? verificationId;
   String? otpCode;
@@ -87,53 +89,53 @@ class UserData {
     return array;
   }
 
-  UserData({
-    this.address,
-    this.apiToken,
-    this.cityId,
-    this.contactNumber,
-    this.countryId,
-    this.createdAt,
-    this.displayName,
-    this.socialImage,
-    this.email,
-    this.emailVerifiedAt,
-    this.firstName,
-    this.id,
-    this.isFeatured,
-    this.lastName,
-    this.playerId,
-    this.description,
-    this.knownLanguages,
-    this.skills,
-    this.providerType,
-    this.cityName,
-    this.providerId,
-    this.providerTypeId,
-    this.stateId,
-    this.status,
-    this.updatedAt,
-    this.userRole,
-    this.userType,
-    this.username,
-    this.profileImage,
-    this.uid,
-    this.handymanRating,
-    this.handymanReview,
-    this.lastNotificationSeen,
-    this.loginType,
-    this.providersServiceRating,
-    this.serviceAddressId,
-    this.timeZone,
-    this.isOnline,
-    this.isVerifyProvider,
-    this.isUserExist,
-    this.password,
-    this.isFavourite,
-    this.designation,
-    this.verificationId,
-    this.otpCode,
-  });
+  UserData(
+      {this.address,
+      this.apiToken,
+      this.cityId,
+      this.contactNumber,
+      this.countryId,
+      this.createdAt,
+      this.displayName,
+      this.socialImage,
+      this.email,
+      this.emailVerifiedAt,
+      this.firstName,
+      this.id,
+      this.isFeatured,
+      this.lastName,
+      this.playerId,
+      this.description,
+      this.knownLanguages,
+      this.skills,
+      this.providerType,
+      this.cityName,
+      this.providerId,
+      this.providerTypeId,
+      this.stateId,
+      this.status,
+      this.updatedAt,
+      this.userRole,
+      this.userType,
+      this.username,
+      this.profileImage,
+      this.uid,
+      this.handymanRating,
+      this.handymanReview,
+      this.lastNotificationSeen,
+      this.loginType,
+      this.providersServiceRating,
+      this.serviceAddressId,
+      this.timeZone,
+      this.isOnline,
+      this.isVerifyProvider,
+      this.isUserExist,
+      this.password,
+      this.isFavourite,
+      this.designation,
+      this.verificationId,
+      this.otpCode,
+      this.slots});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
@@ -186,6 +188,9 @@ class UserData {
       verificationId: json['verificationId'],
       designation: json['designation'],
       otpCode: json['otpCode'],
+      slots: json['slots'] != null
+          ? (json['slots'] as List).map((i) => SlotData.fromJson(i)).toList()
+          : null,
     );
   }
 
@@ -248,6 +253,9 @@ class UserData {
     }
     if (this.userRole != null) {
       data['user_role'] = this.userRole;
+    }
+    if (this.slots != null) {
+      data['slots'] = this.slots;
     }
     return data;
   }

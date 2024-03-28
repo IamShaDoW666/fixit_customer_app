@@ -26,6 +26,10 @@ abstract class BaseLanguage {
 
   String get hintUserNameTxt;
 
+  String get hintOldPasswordTxt;
+
+  String get hintNewPasswordTxt;
+
   String get hintPasswordTxt;
 
   String get hintReenterPasswordTxt;
@@ -64,6 +68,8 @@ abstract class BaseLanguage {
 
   String get inclusions;
 
+  String get notes;
+
   String get exclusions;
 
   String get about;
@@ -85,10 +91,6 @@ abstract class BaseLanguage {
   String get passwordNotMatch;
 
   String get doNotHaveAccount;
-
-  String get hintOldPasswordTxt;
-
-  String get hintNewPasswordTxt;
 
   String get hintAddress;
 

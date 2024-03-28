@@ -242,9 +242,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
 
       /// Calling Login API
-      await loginCurrentUsers(context,
-              req: request, isSocialLogin: widget.isOTPLogin)
-          .then((res) async {
+      await loginCurrentUsers(
+        context,
+        req: request,
+        isSocialLogin: widget.isOTPLogin,
+      ).then((res) async {
         saveDataToPreference(context,
             userData: res.userData!,
             isSocialLogin: widget.isOTPLogin, onRedirectionClick: () {

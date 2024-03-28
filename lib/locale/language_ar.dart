@@ -771,6 +771,8 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get myReviews => "تقييماتي";
+  @override
+  String get notes => "Notes";
 
   @override
   String get selectProvider => 'حدد مقدم الخدمة';

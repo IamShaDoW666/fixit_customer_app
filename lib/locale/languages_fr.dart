@@ -21,6 +21,8 @@ class LanguageFr extends BaseLanguage {
   String get getStarted => "Commencer";
   @override
   String get selectProvider => 'Select Provider';
+  @override
+  String get notes => "Notes";
 
   @override
   String get categories => 'All Categories';

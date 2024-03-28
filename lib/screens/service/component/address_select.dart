@@ -1,4 +1,5 @@
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
+import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -42,6 +43,7 @@ class _AddressFormState extends State<AddressForm> {
                           "Select Address Type",
                           style: TextStyle(fontSize: 16.0),
                         ),
+                        SizedBox(height: 15.0),
                         Row(
                           children: <Widget>[
                             Radio(
@@ -76,7 +78,8 @@ class _AddressFormState extends State<AddressForm> {
                             Text('Other'),
                           ],
                         ),
-                        SizedBox(height: 10.0),
+
+                        SizedBox(height: 15.0),
                         // Text(
                         //   'Enter Address:',
                         //   style: TextStyle(fontSize: 16.0),
@@ -91,7 +94,7 @@ class _AddressFormState extends State<AddressForm> {
                             hintText: 'City',
                           ),
                         ),
-                        SizedBox(height: 10.0),
+                        SizedBox(height: 15.0),
 
                         TextFormField(
                           // controller: selectedAddressType == 'Other'
@@ -110,6 +113,7 @@ class _AddressFormState extends State<AddressForm> {
                             hintText: 'Building/Street Name',
                           ),
                         ),
+                        SizedBox(height: 15.0),
                         TextFormField(
                           controller: apartmentController,
                           onChanged: (value) {
@@ -125,6 +129,27 @@ class _AddressFormState extends State<AddressForm> {
                           //             : TextEditingController(),
                           decoration: InputDecoration(
                             hintText: 'Apartment/Villa Number',
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25.0,
+                        ),
+
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Close the modal
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              'Save',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+
+                              // Background color
+                            ),
                           ),
                         ),
                       ],

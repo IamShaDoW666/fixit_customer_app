@@ -1,6 +1,7 @@
 import 'package:booking_system_flutter/component/disabled_rating_bar_widget.dart';
 import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
+import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
@@ -13,11 +14,15 @@ class ProviderSelect extends StatelessWidget {
   final ScrollController scrollController;
   final ServiceData? serviceData;
   final List<UserData>? providers;
+  final ServiceDetailResponse? data;
+  final Function? bookNow;
   ProviderSelect({
     super.key,
     required this.scrollController,
     this.serviceData,
     this.providers,
+    this.bookNow,
+    this.data,
   });
 
   @override
@@ -51,8 +56,14 @@ class ProviderSelect extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
-              children: List.generate(serviceData!.providers!.length,
-                  (index) => ProviderWidget(data: providers![index])),
+              children: List.generate(
+                  serviceData!.providers!.length,
+                  (index) => ProviderWidget(
+                        data: providers![index],
+                        serviceData: serviceData,
+                        bookNow: bookNow,
+                        serviceDetailResponse: data,
+                      )),
             )
           ],
         ),
@@ -63,7 +74,16 @@ class ProviderSelect extends StatelessWidget {
 
 class ProviderWidget extends StatefulWidget {
   final UserData data;
-  const ProviderWidget({Key? key, required this.data}) : super(key: key);
+  final ServiceData? serviceData;
+  final ServiceDetailResponse? serviceDetailResponse;
+  final Function? bookNow;
+  const ProviderWidget({
+    Key? key,
+    required this.data,
+    this.serviceData,
+    this.bookNow,
+    this.serviceDetailResponse,
+  }) : super(key: key);
 
   @override
   _ProviderSelectState createState() => _ProviderSelectState();
@@ -85,7 +105,11 @@ class _ProviderSelectState extends State<ProviderWidget> {
           bookingStore.providerName = widget.data.displayName.validate();
           bookingStore.getTaxes(widget.data.id.validate());
         });
-        finish(context);
+        if (widget.serviceData!.isSlotAvailable) {
+          widget.bookNow!(widget.serviceDetailResponse);
+        } else {
+          finish(context);
+        }
       },
       child: Container(
         color: cardColor,

@@ -16,6 +16,8 @@ class LanguageHi extends BaseLanguage {
   String get selectedProvider => 'Selected Provider:';
   @override
   String get selectProvider => 'Select Provider';
+  @override
+  String get notes => "Notes";
 
   @override
   String get exclusions => "Exclusions";

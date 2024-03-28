@@ -14,6 +14,7 @@ import 'package:booking_system_flutter/screens/review/components/review_widget.d
 import 'package:booking_system_flutter/screens/review/rating_view_all_screen.dart';
 import 'package:booking_system_flutter/screens/service/component/multiply_option.dart';
 import 'package:booking_system_flutter/screens/service/component/package_option.dart';
+import 'package:booking_system_flutter/screens/service/component/provider_select.dart';
 import 'package:booking_system_flutter/screens/service/component/service_component.dart';
 import 'package:booking_system_flutter/screens/service/component/service_detail_header_component.dart';
 import 'package:booking_system_flutter/screens/service/component/service_faq_widget.dart';
@@ -338,10 +339,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                         snap.data!.serviceDetail)
                     .paddingAll(16),
 
-                slotsAvailable(
-                    data: snap.data!.serviceDetail!.bookingSlots.validate(),
-                    isSlotAvailable: snap.data!.serviceDetail!.isSlotAvailable),
-                availableWidget(data: snap.data!.serviceDetail!),
+                // slotsAvailable(
+                //     data: snap.data!.serviceDetail!.bookingSlots.validate(),
+                //     isSlotAvailable: snap.data!.serviceDetail!.isSlotAvailable),
+                // availableWidget(data: snap.data!.serviceDetail!),
                 // providerWidget(data: snap.data!.provider!),
 
                 Column(
@@ -360,6 +361,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                             style: secondaryTextStyle()),
                   ],
                 ).paddingAll(16),
+
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -371,6 +373,24 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
                         ? Html(
                             data:
                                 snap.data!.serviceDetail!.exclusions.validate(),
+                            // style: secondaryTextStyle(),
+                            // colorClickableText: context.primaryColor,
+                            // textAlign: TextAlign.justify,
+                          )
+                        : Text(language.lblNotDescription,
+                            style: secondaryTextStyle()),
+                  ],
+                ).paddingAll(16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    8.height,
+                    Text(language.notes,
+                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                    8.height,
+                    snap.data!.serviceDetail!.notes.validate().isNotEmpty
+                        ? Html(
+                            data: snap.data!.serviceDetail!.notes.validate(),
                             // style: secondaryTextStyle(),
                             // colorClickableText: context.primaryColor,
                             // textAlign: TextAlign.justify,
@@ -439,7 +459,32 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
               right: 16,
               child: AppButton(
                 onTap: () {
-                  bookNow(snap.data!);
+                  if (snap.data!.serviceDetail!.isSlotAvailable.validate()) {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: radiusOnly(
+                              topLeft: defaultRadius, topRight: defaultRadius)),
+                      builder: (_) {
+                        return DraggableScrollableSheet(
+                            initialChildSize: 0.50,
+                            minChildSize: 0.2,
+                            maxChildSize: 1,
+                            builder: (_, scrollController) => ProviderSelect(
+                                  serviceData: snap.data!.serviceDetail,
+                                  data: snap.data!,
+                                  providers: snap.data!.providers,
+                                  scrollController: scrollController,
+                                  bookNow: bookNow,
+                                ));
+                      },
+                    );
+                  } else {
+                    bookNow(snap.data!);
+                  }
                 },
                 color: context.primaryColor,
                 child: Text(language.lblBookNow,

@@ -36,6 +36,12 @@ class LanguageEn extends BaseLanguage {
   String get hintUserNameTxt => 'User Name';
 
   @override
+  String get hintOldPasswordTxt => 'Old Password';
+
+  @override
+  String get hintNewPasswordTxt => 'New Password';
+
+  @override
   String get hintPasswordTxt => 'Password';
 
   @override
@@ -117,12 +123,6 @@ class LanguageEn extends BaseLanguage {
   String get doNotHaveAccount => "Don't have an account?";
 
   @override
-  String get hintNewPasswordTxt => "New Password";
-
-  @override
-  String get hintOldPasswordTxt => "Old Password";
-
-  @override
   String get hintAddress => 'Address';
 
   @override
@@ -166,6 +166,9 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get inclusions => "Service Include";
+
+  @override
+  String get notes => "Notes";
 
   @override
   String get exclusions => "Service Exclude";

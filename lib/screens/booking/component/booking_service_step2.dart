@@ -285,7 +285,45 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                       color: primaryColor, size: 13),
                                   textAlign: TextAlign.right),
                             ).flexible(),
+                            // TextButton(
+                            //   onPressed: () {
+                            //     showModalBottomSheet(
+                            //       backgroundColor: Colors.transparent,
+                            //       context: context,
+                            //       isScrollControlled: true,
+                            //       shape: RoundedRectangleBorder(
+                            //           borderRadius: radiusOnly(
+                            //               topLeft: defaultRadius,
+                            //               topRight: defaultRadius)),
+                            //       builder: (_) {
+                            //         return DraggableScrollableSheet(
+                            //             initialChildSize: 0.8,
+                            //             minChildSize: 0.2,
+                            //             maxChildSize: 0.8,
+                            //             builder: (_, scrollController) =>
+                            //                 AddressForm(
+                            //                     scrollController:
+                            //                         scrollController));
+                            //       },
+                            //     );
+                            //   },
+                            //   child: Text(
+                            //     "Address Detail",
+                            //     style: boldTextStyle(
+                            //         color: primaryColor, size: 13),
+                            //     textAlign: TextAlign.right,
+                            //   ),
+                            // ).flexible(),
+                          ],
+                        ),
+                        Row(
+                          children: [
                             AppButton(
+                              width: (context.width() - 40) * 1,
+                              shapeBorder: RoundedRectangleBorder(
+                                  borderRadius: radius(),
+                                  side:
+                                      BorderSide(color: context.primaryColor)),
                               onTap: () {
                                 showModalBottomSheet(
                                   backgroundColor: Colors.transparent,
@@ -307,11 +345,18 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                   },
                                 );
                               },
-                              text: "Address Detail",
-                              textColor: primaryColor,
+                              text: "Address Details",
+                              textColor: textPrimaryColorGlobal,
+                              // child: Text(
+                              //   "Address Detail",
+                              //   style: boldTextStyle(
+                              //       color: primaryColor, size: 13),
+                              //   textAlign: TextAlign.right,
+                              // ),
                             ).flexible(),
                           ],
                         ),
+
                         16.height,
                         BookingServiceImage(data: widget.data),
                         Row(
@@ -363,7 +408,8 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                 //     builder: (_) => Text(bookingStore.providerName.validate())),
                 Row(
                   children: [
-                    if (widget.data.providers!.length > 0)
+                    if (widget.data.providers!.length > 0 &&
+                        widget.isSlotAvailable.validate())
                       Observer(
                           builder: (_) => AppButton(
                                 width: (context.width() - 40) * 0.5,
@@ -401,6 +447,20 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                 text: "Change Provider",
                                 textColor: textPrimaryColorGlobal,
                               )),
+                    if (!widget.isSlotAvailable.validate())
+                      AppButton(
+                        width: (context.width() - 40) * 0.5,
+                        shapeBorder: RoundedRectangleBorder(
+                            borderRadius: radius(),
+                            side: BorderSide(color: context.primaryColor)),
+                        onTap: () {
+                          customStepperController.previousPage(
+                              duration: 200.milliseconds,
+                              curve: Curves.easeInOut);
+                        },
+                        text: language.lblPrevious,
+                        textColor: textPrimaryColorGlobal,
+                      ),
                     8.width,
                     16.height,
                     Row(

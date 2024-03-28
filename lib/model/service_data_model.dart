@@ -27,6 +27,7 @@ class ServiceData {
   String? description;
   String? inclusions;
   String? exclusions;
+  String? notes;
   String? providerName;
   String? categoryName;
   String? subCategoryName;
@@ -77,6 +78,7 @@ class ServiceData {
       this.description,
       this.inclusions,
       this.exclusions,
+      this.notes,
       this.bookingDay,
       this.discount,
       this.duration,
@@ -132,6 +134,7 @@ class ServiceData {
       description: json['description'],
       inclusions: json['inclusions'],
       exclusions: json['exclusions'],
+      notes: json['notes'],
       isFeatured: json['is_featured'],
       providerName: json['provider_name'],
       categoryName: json['category_name'],
@@ -186,6 +189,7 @@ class ServiceData {
     data['description'] = this.description;
     data['inclusions'] = this.inclusions;
     data['exclusions'] = this.exclusions;
+    data['notes'] = this.notes;
     data['discount'] = this.discount;
     data['booking_date'] = this.bookingDate;
     data['booking_slot'] = this.bookingSlot;

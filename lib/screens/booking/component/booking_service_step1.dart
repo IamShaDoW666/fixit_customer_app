@@ -4,8 +4,10 @@ import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/booking_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/slot_data.dart';
+import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:booking_system_flutter/screens/booking/component/available_slots_component.dart';
+import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -53,7 +55,11 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
   }
 
   void init() async {
-    slotsList = widget.data!.serviceDetail!.bookingSlots.validate();
+    // slotsList = widget.data!.serviceDetail!.bookingSlots.validate();
+    UserData provider = widget.data!.providers!
+        .where((element) => element.id == bookingStore.providerId)
+        .first;
+    slotsList = provider.slots.validate();
     isUpdate = widget.bookingData != null;
 
     if (widget.data!.serviceDetail!.bookingDate != null) {
