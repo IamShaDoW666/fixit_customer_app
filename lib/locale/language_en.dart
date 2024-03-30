@@ -126,6 +126,9 @@ class LanguageEn extends BaseLanguage {
   String get hintAddress => 'Address';
 
   @override
+  String get addressdetail => 'Address Details';
+
+  @override
   String get lblGallery => "Gallery";
 
   @override
@@ -157,6 +160,15 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get payment => "Payment";
+
+  @override
+  String get cash => "Cash";
+
+  @override
+  String get card => "Card";
+
+  @override
+  String get cashHandling => "Cash Handling Charges";
 
   @override
   String get paymentMode => "Payment Mode";
@@ -198,6 +210,12 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get booking => 'Bookings';
+
+  @override
+  String get uploadimage => 'Kindly upload images related to the service';
+
+  @override
+  String get uploadimg => 'Upload Images';
 
   @override
   String get profile => 'Profile';
@@ -408,6 +426,9 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get textProvider => "Provider";
+
+  @override
+  String get changeProvider => "Change Provider";
 
   @override
   String get lblConfirmBooking => "Confirm Booking";

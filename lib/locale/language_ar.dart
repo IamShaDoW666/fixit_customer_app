@@ -11,6 +11,9 @@ class LanguageAr extends BaseLanguage {
   String get exclusions => "الاستثناءات";
 
   @override
+  String get cashHandling => 'رسوم التعامل مع النقد';
+
+  @override
   String get walkTitle2 => 'حجز موعد';
 
   @override
@@ -59,7 +62,13 @@ class LanguageAr extends BaseLanguage {
   String get alreadyHaveAccountTxt => 'هل لديك حساب';
 
   @override
-  String get paymentMode => "Payment Mode";
+  String get paymentMode => 'طريقة الدفع';
+
+  @override
+  String get cash => 'نقدي';
+
+  @override
+  String get card => 'بطاقة';
 
   @override
   String get rememberMe => 'تذكرنى';
@@ -772,10 +781,23 @@ class LanguageAr extends BaseLanguage {
   @override
   String get myReviews => "تقييماتي";
   @override
+  String get uploadimage => 'يرجى تحميل الصور المتعلقة بالخدمة';
+
+  @override
+  String get uploadimg => 'تحميل الصور';
+
+  @override
   String get notes => "Notes";
 
   @override
   String get selectProvider => 'حدد مقدم الخدمة';
+
+  @override
+  String get changeProvider => 'حدد مقدم الخدمة';
+
+  @override
+  String get addressdetail => 'Address Details';
+
   @override
   String get selectedProvider => 'المزود المختار:';
 
@@ -948,7 +970,7 @@ class LanguageAr extends BaseLanguage {
   String get noTimeSlots => 'لا اوقات عمل زمنية';
 
   @override
-  String get bookingDateAndSlot => 'موعد Oofk و اوقات العمل';
+  String get bookingDateAndSlot => 'تاريخ الحجز وفتحة';
 
   @override
   String get extraCharges => 'رسوم إضافية';

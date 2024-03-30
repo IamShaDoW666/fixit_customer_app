@@ -60,10 +60,9 @@ class _BookingServiceImageState extends State<BookingServiceImage> {
     return Column(
       children: [
         8.height,
-        Text("Upload Images", style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+        Text(language.uploadimg, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
         20.height,
-        Text("Kindly upload images related to the service",
-            style: primaryTextStyle(size: 12)),
+        Text(language.uploadimage, style: primaryTextStyle(size: 12)),
         20.height,
         Padding(
             padding: EdgeInsets.all(16),

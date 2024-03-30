@@ -68,6 +68,10 @@ abstract class BaseLanguage {
 
   String get inclusions;
 
+  String get uploadimage => 'Kindly upload images related to the service';
+
+  String get uploadimg => 'Upload Images';
+
   String get notes;
 
   String get exclusions;
@@ -126,7 +130,17 @@ abstract class BaseLanguage {
 
   String get category;
 
+  String get cash => "Cash";
+
+  String get card => "Card";
+
   String get selectedProvider;
+
+  String get changeProvider => "Change Provider";
+
+  String get addressdetail => 'Address Details';
+
+  String get cashHandling => "Cash Handling Charges";
 
   String get booking;
 

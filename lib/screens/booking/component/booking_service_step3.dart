@@ -344,7 +344,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       children: [
                         Row(
                           children: [
-                            Text("Cash Handling Charges",
+                            Text(language.cashHandling,
                                     style: secondaryTextStyle(size: 14))
                                 .expand(),
                           ],
@@ -644,7 +644,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                   RadioListTile(
                       value: 'cod',
                       dense: true,
-                      title: Text('Cash'),
+                      title: Text(language.cash),
                       groupValue: paymentMode,
                       activeColor: primaryColor,
                       controlAffinity: ListTileControlAffinity.trailing,
@@ -655,7 +655,7 @@ class _BookingServiceStep3State extends State<BookingServiceStep3> {
                       }),
                   RadioListTile(
                       value: 'card',
-                      title: Text('Card'),
+                      title: Text(language.card),
                       dense: true,
                       activeColor: primaryColor,
                       controlAffinity: ListTileControlAffinity.trailing,

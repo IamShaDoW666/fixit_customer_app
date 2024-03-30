@@ -345,7 +345,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                   },
                                 );
                               },
-                              text: "Address Details",
+                              text: language.addressdetail,
                               textColor: textPrimaryColorGlobal,
                               // child: Text(
                               //   "Address Detail",
@@ -444,7 +444,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                     },
                                   );
                                 },
-                                text: "Change Provider",
+                                text: language.changeProvider,
                                 textColor: textPrimaryColorGlobal,
                               )),
                     if (!widget.isSlotAvailable.validate())
