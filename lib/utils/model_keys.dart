@@ -53,6 +53,7 @@ class BookingServiceKeys {
   static String mobile = 'mobile';
   static String providerId = 'provider_id';
   static String paymentMode = 'payment_mode';
+  static String paymentType = 'payment_type';
   static String apartment = 'apartment';
   static String building = 'building';
   static String city = 'city';

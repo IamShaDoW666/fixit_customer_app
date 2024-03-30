@@ -119,6 +119,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.mobile: true,
       BookingServiceKeys.providerId: bookingStore.providerId,
       BookingServiceKeys.paymentMode: widget.paymentMode,
+      BookingServiceKeys.paymentType: widget.paymentMode,
       BookingServiceKeys.apartment: bookingStore.apartment,
       BookingServiceKeys.city: bookingStore.city,
       BookingServiceKeys.building: bookingStore.building
