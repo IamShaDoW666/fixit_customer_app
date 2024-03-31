@@ -56,7 +56,7 @@ class BookingServiceKeys {
   static String paymentType = 'payment_type';
   static String apartment = 'apartment';
   static String building = 'building';
-  static String city = 'city';
+  static String city = 'home';
 }
 
 class CouponKeys {

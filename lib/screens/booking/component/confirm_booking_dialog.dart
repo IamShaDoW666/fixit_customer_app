@@ -121,7 +121,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       BookingServiceKeys.paymentMode: widget.paymentMode,
       BookingServiceKeys.paymentType: widget.paymentMode,
       BookingServiceKeys.apartment: bookingStore.apartment,
-      BookingServiceKeys.city: bookingStore.city,
+      BookingServiceKeys.city: bookingStore.home,
       BookingServiceKeys.building: bookingStore.building
     };
     log("req: ${[request]}");

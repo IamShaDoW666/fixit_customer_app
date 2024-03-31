@@ -10,8 +10,14 @@ class LanguageAr extends BaseLanguage {
   @override
   String get exclusions => "الاستثناءات";
 
+  String get selecttype => 'حدد نوع العنوان';
+
+  String get selectBuilding => 'اسم المبنى/الشارع';
+
   @override
   String get cashHandling => 'رسوم التعامل مع النقد';
+
+  String get selectApartment => 'رقم الشقة/الفيلا';
 
   @override
   String get walkTitle2 => 'حجز موعد';
@@ -300,6 +306,11 @@ class LanguageAr extends BaseLanguage {
 
   @override
   String get lblRateHandyman => "مكالمة";
+
+  @override
+  String get lbloffice => "مكتب";
+
+  String get lblother => 'آخر';
 
   @override
   String get msgForLocationOn => "معدل Handymanman.";
@@ -796,7 +807,7 @@ class LanguageAr extends BaseLanguage {
   String get changeProvider => 'حدد مقدم الخدمة';
 
   @override
-  String get addressdetail => 'Address Details';
+  String get addressdetail => 'تفاصيل العنوان';
 
   @override
   String get selectedProvider => 'المزود المختار:';
@@ -1184,10 +1195,10 @@ class LanguageAr extends BaseLanguage {
   String get failed => 'فشل';
 
   @override
-  String get completed => 'مكتمل';
+  String get completed => 'انتظار الدفع';
 
   @override
-  String get pendingApproval => 'ما زال يحتاج الموافقة';
+  String get pendingApproval => 'انتهى العمل';
 
   @override
   String get waiting => 'انتظار';

@@ -16,6 +16,14 @@ abstract class BaseLanguage {
 
   String get signUp;
 
+  String get lbloffice => 'Office';
+
+  String get selecttype => 'Select Address Type';
+
+  String get selectBuilding => 'Building/Street Name';
+
+  String get selectApartment => 'Apartment/Villa Number';
+
   String get hintFirstNameTxt;
 
   String get hintLastNameTxt;
@@ -575,6 +583,8 @@ abstract class BaseLanguage {
   String get requiredAfterCountryCode;
 
   String get selectedOtherBookingTime;
+
+  String get lblother => 'Other';
 
   String get myServices;
 

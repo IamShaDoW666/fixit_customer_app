@@ -1,5 +1,6 @@
 import 'package:booking_system_flutter/component/disabled_rating_bar_widget.dart';
 import 'package:booking_system_flutter/component/image_border_component.dart';
+import 'package:booking_system_flutter/main.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
@@ -46,7 +47,7 @@ class ProviderSelect extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("Select Provider",
+                Text(language.selectProvider,
                     style: boldTextStyle(size: LABEL_TEXT_SIZE)),
               ],
             ),

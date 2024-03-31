@@ -174,6 +174,15 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
     });
   }
 
+  bool checkAddressFilled() {
+    if (bookingStore.home.isNotEmpty &&
+        bookingStore.apartment.isNotEmpty &&
+        bookingStore.building.isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
@@ -340,13 +349,15 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                         maxChildSize: 0.8,
                                         builder: (_, scrollController) =>
                                             AddressForm(
-                                                scrollController:
-                                                    scrollController));
+                                              scrollController:
+                                                  scrollController,
+                                            ));
                                   },
                                 );
                               },
                               text: language.addressdetail,
                               textColor: textPrimaryColorGlobal,
+
                               // child: Text(
                               //   "Address Detail",
                               //   style: boldTextStyle(
@@ -483,16 +494,31 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                         AppButton(
                           onTap: () {
                             if (bookingStore.providerId != 0) {
-                              hideKeyboard(context);
-                              if (formKey.currentState!.validate()) {
-                                formKey.currentState!.save();
-                                widget.data.serviceDetail!.bookingDescription =
-                                    descriptionCont.text;
-                                widget.data.serviceDetail!.address =
-                                    addressCont.text;
-                                customStepperController.nextPage(
-                                    duration: 200.milliseconds,
-                                    curve: Curves.easeOut);
+                              if (checkAddressFilled()) {
+                                hideKeyboard(context);
+                                if (formKey.currentState!.validate()) {
+                                  formKey.currentState!.save();
+                                  widget.data.serviceDetail!
+                                          .bookingDescription =
+                                      descriptionCont.text;
+                                  widget.data.serviceDetail!.address =
+                                      addressCont.text;
+                                  customStepperController.nextPage(
+                                      duration: 200.milliseconds,
+                                      curve: Curves.easeOut);
+                                }
+                              } else {
+                                hideKeyboard(context);
+                                snackBar(
+                                  context,
+                                  title: language.addressdetail,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: radius(30)),
+                                  duration: Duration(seconds: 3),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 128, horizontal: 8),
+                                );
                               }
                             } else {
                               if (widget.data.providers!.length == 1) {
@@ -510,18 +536,19 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                                       duration: 200.milliseconds,
                                       curve: Curves.easeOut);
                                 }
+                              } else {
+                                hideKeyboard(context);
+                                snackBar(
+                                  context,
+                                  title: language.selectProvider,
+                                  elevation: 8,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: radius(30)),
+                                  duration: Duration(seconds: 3),
+                                  margin: EdgeInsets.symmetric(
+                                      vertical: 128, horizontal: 8),
+                                );
                               }
-                              hideKeyboard(context);
-                              snackBar(
-                                context,
-                                title: language.selectProvider,
-                                elevation: 8,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: radius(30)),
-                                duration: Duration(seconds: 3),
-                                margin: EdgeInsets.symmetric(
-                                    vertical: 128, horizontal: 8),
-                              );
                             }
                           },
                           text: language.btnNext,

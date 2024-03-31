@@ -36,7 +36,7 @@ abstract class _BookingStore with Store {
   String addressType = '';
 
   @observable
-  String city = '';
+  String home = '';
 
   @observable
   String apartment = '';

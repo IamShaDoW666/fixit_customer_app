@@ -108,10 +108,28 @@ class LanguageEn extends BaseLanguage {
   String get selectCountry => 'Select Country';
 
   @override
+  String get addressdetail => 'Enter Address Details';
+
+  @override
   String get selectState => 'Select State';
 
   @override
+  String get lbloffice => 'Office';
+
+  @override
+  String get lblother => 'Other';
+
+  @override
+  String get selecttype => 'Select Address Type';
+
+  @override
   String get selectCity => 'Select City';
+
+  @override
+  String get selectBuilding => 'Building/Street Name';
+
+  @override
+  String get selectApartment => 'Apartment/Villa Number';
 
   @override
   String get changePassword => 'Change Password';
@@ -124,9 +142,6 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get hintAddress => 'Address';
-
-  @override
-  String get addressdetail => 'Address Details';
 
   @override
   String get lblGallery => "Gallery";
@@ -1185,7 +1200,7 @@ class LanguageEn extends BaseLanguage {
   String get accepted => 'Accepted';
 
   @override
-  String get onGoing => 'On Going';
+  String get onGoing => 'On the Way';
 
   @override
   String get inProgress => 'In Progress';
@@ -1200,10 +1215,10 @@ class LanguageEn extends BaseLanguage {
   String get failed => 'Failed';
 
   @override
-  String get completed => 'Completed';
+  String get completed => 'Payment Pending';
 
   @override
-  String get pendingApproval => 'Pending Approval';
+  String get pendingApproval => 'Work Completed';
 
   @override
   String get waiting => 'Waiting';
