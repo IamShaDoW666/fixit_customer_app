@@ -60,11 +60,14 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
       addressCont.text = widget.data.serviceDetail!.address.validate();
     }
 
-    if (widget.data.providers!.isNotEmpty) {
+    if (widget.data.providers!.isNotEmpty &&
+        widget.data.serviceDetail!.isSlot == 0) {
       bookingStore.providerId = widget.data.providers![0].id.validate();
       bookingStore.providerName =
           widget.data.providers![0].displayName.validate();
       bookingStore.getTaxes(widget.data.providers![0].id.validate());
+    } else {
+      bookingStore.getTaxes(bookingStore.providerId);
     }
   }
 

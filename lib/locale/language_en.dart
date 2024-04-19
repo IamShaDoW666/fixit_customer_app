@@ -204,7 +204,7 @@ class LanguageEn extends BaseLanguage {
   String get totalAmount => 'Total Amount';
 
   @override
-  String get applyCoupon => 'Apply Coupon';
+  String get applyCoupon => 'Apply Promo Code';
 
   @override
   String get priceDetail => 'Price Detail';
@@ -425,13 +425,13 @@ class LanguageEn extends BaseLanguage {
   String get lblDiscount => "Discount";
 
   @override
-  String get lblAvailableCoupons => "Available Coupons";
+  String get lblAvailableCoupons => "Available Promo Code";
 
   @override
   String get lblPrevious => "Previous";
 
   @override
-  String get lblCoupon => "Coupon";
+  String get lblCoupon => "Promo Code";
 
   @override
   String get lblEditYourReview => "Edit Your Review";
@@ -458,10 +458,10 @@ class LanguageEn extends BaseLanguage {
   String get lblExpiryDate => "Expiry Date :";
 
   @override
-  String get lblRemoveCoupon => "Remove Coupon";
+  String get lblRemoveCoupon => "Remove Promo Code";
 
   @override
-  String get lblNoCouponsAvailable => "No Coupons available";
+  String get lblNoCouponsAvailable => "No Promo Code available";
 
   @override
   String get lblStep1 => "Step 1";
@@ -658,10 +658,10 @@ class LanguageEn extends BaseLanguage {
   String get lblOnBase => "On basis of";
 
   @override
-  String get lblInvalidCoupon => "Coupon code is invalid";
+  String get lblInvalidCoupon => "Promo Code is invalid";
 
   @override
-  String get lblSelectCode => "Please Select Coupon code";
+  String get lblSelectCode => "Please Select Promo Code";
 
   @override
   String get lblBackPressMsg => "Press back again to exit app";
@@ -1362,7 +1362,7 @@ class LanguageEn extends BaseLanguage {
   String get help => 'Help';
 
   @override
-  String get couponCantApplied => "This coupon can't be applied";
+  String get couponCantApplied => "This Promo Code can't be applied";
 
   @override
   String get priceAmountValidationMessage =>

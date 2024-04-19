@@ -1,6 +1,7 @@
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/store/booking_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -54,7 +55,12 @@ class _SingleOptionState extends State<SingleOption> {
             children: List.generate(
                 widget.option.variants!.length,
                 (idx) => ChoiceChip(
-                      label: Text(widget.option.variants![idx].name.validate()),
+                      label: Text(
+                        widget.option.variants![idx].name.validate(),
+                        overflow: TextOverflow.visible,
+                        maxLines: 3,
+                        softWrap: true,
+                      ),
                       labelStyle: boldTextStyle(
                           color: checkSelected(
                                   widget.option.variants![idx].id.validate())
@@ -69,7 +75,7 @@ class _SingleOptionState extends State<SingleOption> {
                         selectVariant(
                             widget.option.variants![idx].id.validate());
                       },
-                    ).paddingAll(8)))
+                    ).paddingAll(8).expand()))
       ]),
     );
   }

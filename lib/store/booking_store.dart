@@ -1,8 +1,6 @@
 import 'package:booking_system_flutter/model/service_detail_response.dart';
-import 'package:booking_system_flutter/model/tax_detail_model.dart';
 import 'package:booking_system_flutter/network/rest_apis.dart';
 import 'package:mobx/mobx.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '../model/service_data_model.dart';
 part 'booking_store.g.dart';

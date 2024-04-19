@@ -148,7 +148,6 @@ class _BookingServiceStep1State extends State<BookingServiceStep1> {
       widget.bookingData!.date =
           formatDate(selectedHorizontalDate.toString(), format: DATE_FORMAT_7);
       widget.bookingData!.bookingSlot = widget.data!.serviceDetail!.bookingSlot;
-
       toast(language.lblDateTimeUpdated);
       LiveStream().emit(LIVESTREAM_UPDATE_BOOKING_LIST);
       finish(context);

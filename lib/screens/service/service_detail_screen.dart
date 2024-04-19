@@ -301,25 +301,28 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
               children: [
                 ServiceDetailHeaderComponent(
                     serviceDetail: snap.data!.serviceDetail!),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    8.height,
-                    Text(language.hintDescription,
-                        style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                    8.height,
-                    snap.data!.serviceDetail!.description.validate().isNotEmpty
-                        ? Html(
-                            data: snap.data!.serviceDetail!.description
-                                .validate(),
-                            // style: secondaryTextStyle(),
-                            // colorClickableText: context.primaryColor,
-                            // textAlign: TextAlign.justify,
-                          )
-                        : Text(language.lblNotDescription,
-                            style: secondaryTextStyle()),
-                  ],
-                ).paddingAll(16),
+                if (snap.data!.serviceDetail!.description.validate().isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      8.height,
+                      Text(language.hintDescription,
+                          style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                      8.height,
+                      snap.data!.serviceDetail!.description
+                              .validate()
+                              .isNotEmpty
+                          ? Html(
+                              data: snap.data!.serviceDetail!.description
+                                  .validate(),
+                              // style: secondaryTextStyle(),
+                              // colorClickableText: context.primaryColor,
+                              // textAlign: TextAlign.justify,
+                            )
+                          : Text(language.lblNotDescription,
+                              style: secondaryTextStyle()),
+                    ],
+                  ).paddingAll(16),
                 if (snap.data!.serviceDetail!.options != null &&
                     snap.data!.serviceDetail!.options!
                         .any((element) => element.area! > 0))
@@ -459,6 +462,10 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen>
               right: 16,
               child: AppButton(
                 onTap: () {
+                  if (bookingStore.subTotal <= 0) {
+                    toast("Please select an Item");
+                    return;
+                  }
                   if (snap.data!.serviceDetail!.isSlotAvailable.validate()) {
                     showModalBottomSheet(
                       backgroundColor: Colors.transparent,

@@ -13,6 +13,7 @@ dependencies:
 
   # COMMON
   nb_utils: ^6.0.2
+  flutter_facebook_auth: ^3.5.0
   google_fonts: ^5.1.0
   html: ^0.15.4
   http: ^1.1.0

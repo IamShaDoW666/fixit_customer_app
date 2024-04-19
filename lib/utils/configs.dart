@@ -9,10 +9,6 @@ const DOMAIN_URL = 'https://yallakhedma.com';
 // const DOMAIN_URL = 'http://192.168.18.38:8000';
 const BASE_URL = '$DOMAIN_URL/api/';
 const DEFAULT_LANGUAGE = 'en';
-
-/// You can change this to your Provider App package name
-/// This will be used in Registered As Partner in Sign In Screen where your users can redirect to the Play/App Store for Provider App
-/// You can specify in Admin Panel, These will be used if you don't specify in Admin Panel
 const PROVIDER_PACKAGE_NAME = 'com.yallakhedma.provider';
 const IOS_LINK_FOR_PARTNER = "";
 const IOS_LINK_FOR_USER = '';
