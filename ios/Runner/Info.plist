@@ -30,9 +30,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.482957258448-aa0vdtgba3kn22nmabi2486fem98ttek</string>
+				<string>fb335645139125070</string>
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>335645139125070</string>
+	<key>FacebookClientToken</key>
+	<string>62fef0687dc710eaeb93035230c89c14</string>
+	<key>FacebookDisplayName</key>
+	<string>yallakhedmauserapp</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
