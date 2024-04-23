@@ -75,7 +75,7 @@ class _SingleOptionState extends State<SingleOption> {
                         selectVariant(
                             widget.option.variants![idx].id.validate());
                       },
-                    ).paddingAll(8).expand()))
+                    ).paddingAll(8)))
       ]),
     );
   }
