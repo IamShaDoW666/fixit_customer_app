@@ -9,14 +9,12 @@ import 'package:booking_system_flutter/screens/auth/sign_up_screen.dart';
 import 'package:booking_system_flutter/screens/dashboard/dashboard_screen.dart';
 import 'package:booking_system_flutter/utils/colors.dart';
 import 'package:booking_system_flutter/utils/common.dart';
-import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:booking_system_flutter/utils/string_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SignInScreen extends StatefulWidget {
   final bool? isFromDashboard;

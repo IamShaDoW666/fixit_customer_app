@@ -1,9 +1,7 @@
 import 'package:booking_system_flutter/model/extra_charges_model.dart';
 import 'package:booking_system_flutter/model/service_data_model.dart';
-import 'package:booking_system_flutter/model/tax_detail_model.dart';
 import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import '../model/booking_amount_model.dart';
 import '../model/package_data_model.dart';
 import '../model/service_detail_response.dart';

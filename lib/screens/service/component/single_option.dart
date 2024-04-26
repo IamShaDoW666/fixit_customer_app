@@ -1,7 +1,6 @@
 import 'package:booking_system_flutter/model/service_data_model.dart';
 import 'package:booking_system_flutter/store/booking_store.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
@@ -60,6 +59,12 @@ class _SingleOptionState extends State<SingleOption> {
                         overflow: TextOverflow.visible,
                         maxLines: 3,
                         softWrap: true,
+                        style: boldTextStyle(
+                            size: 16,
+                            color: checkSelected(
+                                    widget.option.variants![idx].id.validate())
+                                ? Colors.white
+                                : primaryColor),
                       ),
                       labelStyle: boldTextStyle(
                           color: checkSelected(

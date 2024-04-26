@@ -10,15 +10,6 @@ def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
     throw new GradleException('Flutter SDK not found. Define location with flutter.sdk in the local.properties file.')
 }
-
-// plugins {
-//     id 'com.android.application'
-//     id 'kotlin-android'
-//     id 'com.google.gms.google-services'
-//     id 'flutter'
-// }
-
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -40,8 +31,8 @@ android {
         applicationId 'com.marsvisiongroup.yk'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 73
-        versionName '10.2.2'
+        versionCode 74
+        versionName '10.2.3'
     }
     signingConfigs {
        release {
@@ -70,4 +61,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'com.google.android.recaptcha:recaptcha:18.1.2'
+    implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
 }

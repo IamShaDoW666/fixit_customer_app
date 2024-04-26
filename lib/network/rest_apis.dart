@@ -23,7 +23,6 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/service_response.dart';
 import 'package:booking_system_flutter/model/service_review_response.dart';
 import 'package:booking_system_flutter/model/state_list_model.dart';
-import 'package:booking_system_flutter/model/tax_detail_model.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/model/verify_transaction_response.dart';
 import 'package:booking_system_flutter/network/network_utils.dart';
