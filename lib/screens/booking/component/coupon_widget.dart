@@ -32,8 +32,9 @@ class _CouponWidgetState extends State<CouponWidget> {
   void initState() {
     isUpdate = widget.appliedCouponData != null;
     if (isUpdate) {
-      selectedIndex = widget.couponData.indexWhere(
-          (element) => element.code == widget.appliedCouponData!.code);
+      selectedIndex = widget.couponData.indexWhere((element) =>
+          element.code!.toLowerCase() ==
+          widget.appliedCouponData!.code!.toLowerCase());
       couponCode = widget.appliedCouponData!.code.validate();
 
       setState(() {});
@@ -203,12 +204,14 @@ class _CouponWidgetState extends State<CouponWidget> {
                   color: primaryColor,
                   onTap: () {
                     if (couponController.text.isNotEmpty) {
-                      if (widget.couponData.any(
-                          (element) => element.code == couponController.text)) {
+                      if (widget.couponData.any((element) =>
+                          element.code!.toLowerCase() ==
+                          couponController.text.toLowerCase())) {
                         finish(
                             context,
                             widget.couponData.firstWhere((element) =>
-                                element.code == couponController.text));
+                                element.code!.toLowerCase() ==
+                                couponController.text.toLowerCase()));
                       } else {
                         toast(language.lblInvalidCoupon);
                       }
