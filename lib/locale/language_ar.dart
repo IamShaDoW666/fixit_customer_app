@@ -798,7 +798,7 @@ class LanguageAr extends BaseLanguage {
   String get uploadimg => 'تحميل الصور';
 
   @override
-  String get notes => "Notes";
+  String get notes => "ملحوظات";
 
   @override
   String get selectProvider => 'حدد مقدم الخدمة';
