@@ -1,4 +1,6 @@
 import 'package:booking_system_flutter/component/back_widget.dart';
+import 'package:booking_system_flutter/component/cached_image_widget.dart';
+import 'package:booking_system_flutter/component/image_border_component.dart';
 import 'package:booking_system_flutter/component/loader_widget.dart';
 import 'package:booking_system_flutter/component/user_info_widget.dart';
 import 'package:booking_system_flutter/component/view_all_label_component.dart';
@@ -131,6 +133,19 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (data.userData!.portfolio.validateURL())
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Portfolio",
+                                style: boldTextStyle(size: 16),
+                              ),
+                              ImageBorder(
+                                  src: data.userData!.portfolio.validate(),
+                                  height: 72),
+                            ],
+                          ),
                         if (data.userData!.knownLanguagesArray.isNotEmpty)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -160,7 +175,7 @@ class ProviderInfoScreenState extends State<ProviderInfoScreen> {
                               ),
                               16.height,
                             ],
-                          ),
+                          ).paddingAll(16),
                         if (data.userData!.skillsArray.isNotEmpty)
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

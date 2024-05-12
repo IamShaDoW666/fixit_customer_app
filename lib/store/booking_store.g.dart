@@ -164,6 +164,69 @@ mixin _$BookingStore on _BookingStore, Store {
     });
   }
 
+  late final _$addressTypeAtom =
+      Atom(name: '_BookingStore.addressType', context: context);
+
+  @override
+  String get addressType {
+    _$addressTypeAtom.reportRead();
+    return super.addressType;
+  }
+
+  @override
+  set addressType(String value) {
+    _$addressTypeAtom.reportWrite(value, super.addressType, () {
+      super.addressType = value;
+    });
+  }
+
+  late final _$homeAtom = Atom(name: '_BookingStore.home', context: context);
+
+  @override
+  String get home {
+    _$homeAtom.reportRead();
+    return super.home;
+  }
+
+  @override
+  set home(String value) {
+    _$homeAtom.reportWrite(value, super.home, () {
+      super.home = value;
+    });
+  }
+
+  late final _$apartmentAtom =
+      Atom(name: '_BookingStore.apartment', context: context);
+
+  @override
+  String get apartment {
+    _$apartmentAtom.reportRead();
+    return super.apartment;
+  }
+
+  @override
+  set apartment(String value) {
+    _$apartmentAtom.reportWrite(value, super.apartment, () {
+      super.apartment = value;
+    });
+  }
+
+  late final _$buildingAtom =
+      Atom(name: '_BookingStore.building', context: context);
+
+  @override
+  String get building {
+    _$buildingAtom.reportRead();
+    return super.building;
+  }
+
+  @override
+  set building(String value) {
+    _$buildingAtom.reportWrite(value, super.building, () {
+      super.building = value;
+    });
+  }
+
   late final _$getTaxesAsyncAction =
       AsyncAction('_BookingStore.getTaxes', context: context);
 
@@ -350,6 +413,10 @@ providerName: ${providerName},
 customize: ${customize},
 pricePerSqft: ${pricePerSqft},
 taxes: ${taxes},
+addressType: ${addressType},
+home: ${home},
+apartment: ${apartment},
+building: ${building},
 selectedOptions: ${selectedOptions},
 subTotal: ${subTotal},
 getApproximateArea: ${getApproximateArea},

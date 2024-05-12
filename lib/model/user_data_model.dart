@@ -32,6 +32,7 @@ class UserData {
   String? createdAt;
   String? updatedAt;
   String? profileImage;
+  String? portfolio;
   String? timeZone;
   String? lastNotificationSeen;
   String? uid;
@@ -135,7 +136,8 @@ class UserData {
       this.designation,
       this.verificationId,
       this.otpCode,
-      this.slots});
+      this.slots,
+      this.portfolio});
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
@@ -166,6 +168,7 @@ class UserData {
       username: json['username'],
       isOnline: json['isOnline'],
       profileImage: json['profile_image'],
+      portfolio: json['portfolio'],
       uid: json['uid'],
       password: json['password'],
       isFavourite: json['is_favourite'],
@@ -256,6 +259,9 @@ class UserData {
     }
     if (this.slots != null) {
       data['slots'] = this.slots;
+    }
+    if (this.portfolio != null) {
+      data['portfolio'] = this.portfolio;
     }
     return data;
   }
