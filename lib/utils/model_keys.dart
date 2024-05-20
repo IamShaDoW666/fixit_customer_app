@@ -41,6 +41,7 @@ class UserKeys {
 class BookingServiceKeys {
   static String description = 'description';
   static String couponId = 'coupon_id';
+  static String code = 'code';
   static String date = 'date';
   static String totalAmount = 'total_amount';
   static String userPostJob = 'user_post_job';

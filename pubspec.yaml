@@ -75,6 +75,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   font_awesome_flutter: ^10.5.0
+  go_router: ^14.1.1
 
 dev_dependencies:
   flutter_test:

@@ -413,7 +413,7 @@ class LanguageEn extends BaseLanguage {
   String get lblUseCurrentLocation => "Use Current Location";
 
   @override
-  String get lblEnterDescription => "Enter Description";
+  String get lblEnterDescription => "Additional instructions?";
 
   @override
   String get lblPrice => "Price";

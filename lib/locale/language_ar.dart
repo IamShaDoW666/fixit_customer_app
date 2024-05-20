@@ -5,10 +5,10 @@ class LanguageAr extends BaseLanguage {
   String get walkTitle1 => 'العثور على خدماتك';
 
   @override
-  String get inclusions => "الادراج";
+  String get inclusions => "الخدمة تشمل";
 
   @override
-  String get exclusions => "الاستثناءات";
+  String get exclusions => "لخدمة لا تشمل";
 
   String get selecttype => 'حدد نوع العنوان';
 
@@ -798,7 +798,7 @@ class LanguageAr extends BaseLanguage {
   String get uploadimg => 'تحميل الصور';
 
   @override
-  String get notes => "ملحوظات";
+  String get notes => "ملاحظات";
 
   @override
   String get selectProvider => 'حدد مقدم الخدمة';
@@ -816,7 +816,7 @@ class LanguageAr extends BaseLanguage {
   String get noCategoryFound => "لم يتم العثور على فئة";
 
   @override
-  String get category => 'فئات';
+  String get category => 'الفئة';
 
   @override
   String get noProviderFound => "لم يتم العثور على مزود";

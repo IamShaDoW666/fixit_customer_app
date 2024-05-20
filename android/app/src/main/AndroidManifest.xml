@@ -67,21 +67,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
 
             </intent-filter>
-        </activity>
-        <!--<activity
-            android:name="com.braintreepayments.api.BraintreeBrowserSwitchActivity"
-            android:exported="false"
-            android:launchMode="singleTask"
-            tools:ignore="AppLinkUrlError">
-            <intent-filter>
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="${applicationId}.braintree" />
+                <data android:scheme="http" android:host="yallakhedma.com" />
+                <data android:scheme="https" />
             </intent-filter>
-        </activity>-->
+        </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
         

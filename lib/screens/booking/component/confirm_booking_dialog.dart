@@ -97,6 +97,7 @@ class _ConfirmBookingDialogState extends State<ConfirmBookingDialog> {
       CommonKeys.date:
           widget.data.serviceDetail!.dateTimeVal.validate().toString(),
       BookingServiceKeys.couponId: widget.couponCode.validate(),
+      BookingServiceKeys.code: widget.couponCode.validate(),
       BookService.amount: bookingStore.subTotal > 0
           ? bookingStore.subTotal + widget.data.serviceDetail!.price.validate()
           : widget.data.serviceDetail!.price.validate(),

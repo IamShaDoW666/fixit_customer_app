@@ -13,6 +13,8 @@ import 'package:booking_system_flutter/model/service_detail_response.dart';
 import 'package:booking_system_flutter/model/user_data_model.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_detail_response.dart';
 import 'package:booking_system_flutter/screens/blog/model/blog_response_model.dart';
+import 'package:booking_system_flutter/screens/dashboard/dashboard_screen.dart';
+import 'package:booking_system_flutter/screens/service/service_detail_screen.dart';
 import 'package:booking_system_flutter/screens/splash_screen.dart';
 import 'package:booking_system_flutter/services/auth_services.dart';
 import 'package:booking_system_flutter/services/chat_services.dart';
@@ -28,6 +30,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'model/booking_data_model.dart';
 import 'model/booking_status_model.dart';
@@ -151,6 +154,22 @@ void main() async {
   runApp(MyApp());
 }
 
+final GoRouter _router = GoRouter(
+  initialLocation: '/',
+  routes: <RouteBase>[
+    GoRoute(
+        path: '/',
+        builder: (BuildContext context, GoRouterState state) {
+          return SplashScreen();
+        }),
+    GoRoute(path: '/home', builder: (context, state) => DashboardScreen()),
+    GoRoute(
+        path: '/service-detail/:id',
+        builder: (context, state) =>
+            ServiceDetailScreen(serviceId: state.pathParameters['id'].toInt()))
+  ],
+);
+
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -175,15 +194,16 @@ class _MyAppState extends State<MyApp> {
           future: getMaterialYouData(),
           builder: (_, snap) {
             return Observer(
-              builder: (_) => MaterialApp(
+              builder: (_) => MaterialApp.router(
                 debugShowCheckedModeBanner: false,
-                navigatorKey: navigatorKey,
-                home: SplashScreen(),
                 theme: AppTheme.lightTheme(color: snap.data),
                 // darkTheme: AppTheme.darkTheme(color: snap.data),
                 themeMode:
                     appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 title: APP_NAME,
+                // navigatorKey: navigatorKey,
+                // home: SplashScreen(),
+                routerConfig: _router,
                 supportedLocales: LanguageDataModel.languageLocales(),
                 localizationsDelegates: [
                   AppLocalizations(),

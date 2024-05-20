@@ -372,7 +372,7 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                         ),
 
                         16.height,
-                        BookingServiceImage(data: widget.data),
+                        // BookingServiceImage(data: widget.data),
                         Row(
                           children: [
                             Text(language.selectedProvider,
@@ -387,7 +387,8 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                         ),
                         // Text("${language.hintDescription}:",
                         //     style: boldTextStyle(size: LABEL_TEXT_SIZE)),
-                        12.height,
+
+                        18.height,
                         AppTextField(
                           textFieldType: TextFieldType.MULTILINE,
                           controller: descriptionCont,
@@ -404,11 +405,12 @@ class _BookingServiceStep2State extends State<BookingServiceStep2> {
                             hintStyle: secondaryTextStyle(),
                           ),
                         ),
+                        BookingServiceImage(data: widget.data),
                       ],
                     ),
                   ),
                 ),
-                20.height,
+                2.height,
               ],
             ),
           ),
