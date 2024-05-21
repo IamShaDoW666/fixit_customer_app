@@ -154,21 +154,21 @@ void main() async {
   runApp(MyApp());
 }
 
-final GoRouter _router = GoRouter(
-  initialLocation: '/',
-  routes: <RouteBase>[
-    GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return SplashScreen();
-        }),
-    GoRoute(path: '/home', builder: (context, state) => DashboardScreen()),
-    GoRoute(
-        path: '/service-detail/:id',
-        builder: (context, state) =>
-            ServiceDetailScreen(serviceId: state.pathParameters['id'].toInt()))
-  ],
-);
+// final GoRouter _router = GoRouter(
+//   initialLocation: '/',
+//   routes: <RouteBase>[
+//     GoRoute(
+//         path: '/',
+//         builder: (BuildContext context, GoRouterState state) {
+//           return SplashScreen();
+//         }),
+//     GoRoute(path: '/home', builder: (context, state) => DashboardScreen()),
+//     GoRoute(
+//         path: '/service-detail/:id',
+//         builder: (context, state) =>
+//             ServiceDetailScreen(serviceId: state.pathParameters['id'].toInt()))
+//   ],
+// );
 
 class MyApp extends StatefulWidget {
   @override
@@ -194,16 +194,16 @@ class _MyAppState extends State<MyApp> {
           future: getMaterialYouData(),
           builder: (_, snap) {
             return Observer(
-              builder: (_) => MaterialApp.router(
+              builder: (_) => MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme(color: snap.data),
                 // darkTheme: AppTheme.darkTheme(color: snap.data),
                 themeMode:
                     appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 title: APP_NAME,
-                // navigatorKey: navigatorKey,
-                // home: SplashScreen(),
-                routerConfig: _router,
+                navigatorKey: navigatorKey,
+                home: SplashScreen(),
+                // routerConfig: _router,
                 supportedLocales: LanguageDataModel.languageLocales(),
                 localizationsDelegates: [
                   AppLocalizations(),

@@ -49,7 +49,9 @@ class _SplashScreenState extends State<SplashScreen> {
           WalkThroughScreen().launch(context,
               isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
         } else {
-          context.go('/home');
+          DashboardScreen().launch(context,
+              isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          // context.go('/home');
         }
       }
     });
