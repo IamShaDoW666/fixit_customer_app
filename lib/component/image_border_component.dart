@@ -9,14 +9,22 @@ class ImageBorder extends StatelessWidget {
   final double? width;
   final Color? borderColor;
   final double borderWidth;
+  final bool allowView;
 
-  ImageBorder({required this.src, required this.height, this.width, this.borderColor, this.borderWidth = 1});
+  ImageBorder(
+      {required this.src,
+      required this.height,
+      this.width,
+      this.borderColor,
+      this.borderWidth = 1,
+      this.allowView = true});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: borderColor ?? context.dividerColor, width: borderWidth),
+        border: Border.all(
+            color: borderColor ?? context.dividerColor, width: borderWidth),
         shape: BoxShape.circle,
       ),
       child: CachedImageWidget(
@@ -26,7 +34,8 @@ class ImageBorder extends StatelessWidget {
         width: width,
         fit: BoxFit.cover,
       ).onTap(() {
-        if (src.isNotEmpty) ZoomImageScreen(galleryImages: [src], index: 0).launch(context);
+        if (src.isNotEmpty && allowView)
+          ZoomImageScreen(galleryImages: [src], index: 0).launch(context);
       }),
     );
   }

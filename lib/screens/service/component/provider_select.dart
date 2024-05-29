@@ -117,7 +117,11 @@ class _ProviderSelectState extends State<ProviderWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            ImageBorder(src: widget.data.profileImage.validate(), height: 70),
+            ImageBorder(
+              src: widget.data.profileImage.validate(),
+              height: 70,
+              allowView: false,
+            ),
             16.width,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

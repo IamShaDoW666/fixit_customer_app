@@ -99,14 +99,6 @@ void main() async {
   });
 
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
-
-  // int themeModeIndex =
-  //     getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_LIGHT);
-  // if (themeModeIndex == THEME_MODE_LIGHT) {
-  //   appStore.setDarkMode(false);
-  // } else if (themeModeIndex == THEME_MODE_DARK) {
-  //   appStore.setDarkMode(false);
-  // }
   setValue(THEME_MODE_INDEX, 0);
   appStore.setDarkMode(false);
   await appStore.setUseMaterialYouTheme(getBoolAsync(USE_MATERIAL_YOU_THEME),
@@ -154,22 +146,6 @@ void main() async {
   runApp(MyApp());
 }
 
-// final GoRouter _router = GoRouter(
-//   initialLocation: '/',
-//   routes: <RouteBase>[
-//     GoRoute(
-//         path: '/',
-//         builder: (BuildContext context, GoRouterState state) {
-//           return SplashScreen();
-//         }),
-//     GoRoute(path: '/home', builder: (context, state) => DashboardScreen()),
-//     GoRoute(
-//         path: '/service-detail/:id',
-//         builder: (context, state) =>
-//             ServiceDetailScreen(serviceId: state.pathParameters['id'].toInt()))
-//   ],
-// );
-
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -197,13 +173,11 @@ class _MyAppState extends State<MyApp> {
               builder: (_) => MaterialApp(
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.lightTheme(color: snap.data),
-                // darkTheme: AppTheme.darkTheme(color: snap.data),
                 themeMode:
                     appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 title: APP_NAME,
                 navigatorKey: navigatorKey,
                 home: SplashScreen(),
-                // routerConfig: _router,
                 supportedLocales: LanguageDataModel.languageLocales(),
                 localizationsDelegates: [
                   AppLocalizations(),
