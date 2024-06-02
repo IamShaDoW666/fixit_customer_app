@@ -23,7 +23,8 @@ class CinetPayServicesNew {
   final String transactionId = Random().nextInt(100000000).toString();
 
   Future<void> payWithCinetPay({required BuildContext context}) async {
-    await Navigator.push(getContext, MaterialPageRoute(builder: (_) => cinetPay()));
+    await Navigator.push(
+        getContext, MaterialPageRoute(builder: (_) => cinetPay()));
     appStore.setLoading(false);
   }
 

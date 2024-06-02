@@ -5,7 +5,6 @@ import 'package:booking_system_flutter/utils/configs.dart';
 import 'package:booking_system_flutter/utils/constant.dart';
 import 'package:booking_system_flutter/utils/images.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'walk_through_screen.dart';
